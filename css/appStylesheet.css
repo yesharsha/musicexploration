@@ -75,6 +75,7 @@ footer p{margin: 1% 0px;}
 footer p a{padding: 0px 20px; border-right: 1px solid white;}
 footer p a:last-child{border:none;}
 footer p:last-child a {border:none;}
+.small{display:none;}
 
 /* options */
 #notesON{background:yellow;}
@@ -150,3 +151,14 @@ float: left;}
 .indexButton a{text-decoration:none;}
 .oddLi{padding-top:12px;}
 .logoText a{text-decoration:none;}
+
+@media (max-width:1217px) and (min-width:320px) {
+#pianoWrapper{display:none;}
+.content{width:100%; margin: 74px 0 0 0;}
+.content > div{margin: 0px 3%;}
+}
+
+@media (max-width: 320px) {
+*{display:none;}
+.small{display:block;}
+}
