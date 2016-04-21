@@ -56,7 +56,7 @@ i{font-style: italic; margin-right: 4px;}
   background: #e30505; /* Gecko Browsers */
 }
 header{background:#002B5E; position: fixed; width: 100%; top:0px; }
-h1{font-family: 'Oswald', sans-serif; font-weight:400; font-size: 1.4em; margin: 1%; float: left; color:white; margin-left:3%;
+h1{font-family: 'Oswald', sans-serif; font-weight:400; font-size: 1.4em; margin: 15px; float: left; color:white; margin-left:3%;
 font-style: italic; letter-spacing: 0.01em; }
 h1 a{text-decoration:none;}
 h2 a{text-decoration:none;}
@@ -158,7 +158,13 @@ float: left;}
 .content > div{margin: 0px 3%;}
 }
 
-@media (max-width: 320px) {
+@media (max-width:819px) and (min-width:320px) {
+header h1{float:none; margin:20px; text-align:center;}
+.menu{display:none;}
+.logoClass{width:50%;}
+}
+
+@media (max-width: 319px) {
 *{display:none;}
 .small{display:block;}
 }
