@@ -162,6 +162,11 @@ float: left;}
 header h1{float:none; margin:20px; text-align:center;}
 .menu{display:none;}
 .logoClass{width:50%;}
+.indexMenu{padding:0px;}
+.logoText a {line-height:120%;}
+.indexMenu{margin-top:20px; margin-bottom:50px;}
+.indexButton {
+    padding: 4px 6px;
 }
 
 @media (max-width: 319px) {
