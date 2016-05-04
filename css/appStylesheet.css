@@ -97,7 +97,7 @@ footer p:last-child a {border:none;}
 #n2Key{margin-left:37px;}
 
 /* 12 note piano styles */
-.twelveNote{background: yellow;}
+.twelveNote{background: whitesmoke;}
 .firstRow li{float:left; padding: 10px 0px; background: black; color: white;}
 .secondRow li{float:left; text-align:center; width:73px; padding: 10px 0px;}
 .firstRow li:nth-child(1){margin-left:68px;}
@@ -159,14 +159,23 @@ float: left;}
 }
 
 @media (max-width:819px) and (min-width:320px) {
-header h1{float:none; margin:20px; text-align:center;}
-.menu{display:none;}
-.logoClass{width:50%;}
-.indexMenu{padding:0px;}
-.logoText a {line-height:120%;}
-.indexMenu{margin-top:20px; margin-bottom:50px;}
-.indexButton {
-    padding: 4px 6px;
+  header h1{float:none; margin:20px; text-align:center;}
+  .menu{display:none;}
+  .logoClass{width:50%;}
+  .indexMenu{padding:0px;}
+  .logoText a {line-height:120%;}
+  .indexMenu{margin-top:20px; margin-bottom:50px; float:left; width:100%;}
+  .indexButton {padding: 4px 6px;}
+  .indexMenu ul li {width: 100%; margin-bottom: 15px;}
+  .indexMenu ul li:last-child{padding-top:0px;}
+  .indexButton {padding: 10px;}
+  .search input{width:90%;}
+  .ragaName {font-size: 1em;padding: 7px 10px;}
+  footer p a {padding: 0px 20px; display: block; margin: 8px; border:0px;}
+  .footerLinks{background: white;padding: 5px;display: block;width: 90%;color: black;}
+  footer p{margin:1% 0px 20px 0px;}
+
+
 }
 
 @media (max-width: 319px) {
