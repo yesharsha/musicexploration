@@ -1,118 +1,135 @@
 <!doctype html>
 <html ng-app="ragaApp">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<meta name="description" content="Bleeding edge Carnatic music interactive exploration.">
-<meta name="keywords" content="carnatic,learn,tutorial,school,music,anugraha,anuradha,sreedhar">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Anugraha Sangeetha Shiksha</title>
-<link href="css/appStylesheet.css" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Bleeding edge Carnatic music interactive exploration.">
+    <meta name="keywords" content="carnatic,learn,tutorial,school,music,anugraha,anuradha,sreedhar">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Indianclassical.org</title>
+    <link href="css/appStylesheet.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <h1><a href="#/">Anugraha Sangeetha Shiksha</a></h1>
-	  <div class="menu">
-		<ul>
-			<li><a href="#swara">Swara-Raga course</a></li>
-			<li><a href="#/">Raga Database</a></li>
-			<li><a href="#composition">Composition</a></li>
-			<li><a href="#outroduction">Scope</a></li>
-			<li><a href="#glossary">Glossary</a></li>
-	  </div>
-      <div class="clear"></div>
-    </header>
-
-    <section ng-controller="mainController" class="control">
-      <div class="content">
-		<!-- All content goes here -->
-		<div ng-view>
-		</div>
-      </div>
-    </section>
-    <div id="pianoWrapper">
-      <div id="newPiano">
-            <p id="sKey" class="whiteKey"></p>
-            <p id="r2Key" class="whiteKey"></p>
-            <p id="g3Key" class="whiteKey"></p>
-            <p id="m1Key" class="whiteKey"></p>
-            <p id="pKey" class="whiteKey"></p>
-            <p id="d2Key" class="whiteKey"></p>
-            <p id="n3Key" class="whiteKey"></p>
-            <p id="saHighKey" class="whiteKey"></p>
-            <div class="clear"></div>
-            <div class="setOfBlackKeys">
-              <p id="r1Key" class="blackKey"></p>
-              <p id="g2Key" class="blackKey"></p>
-              <p id="m2Key" class="blackKey"></p>
-              <p id="d1Key" class="blackKey"></p>
-              <p id="n2Key" class="blackKey"></p>
+    <div class="wrapper">
+        <header>
+            <h1><a href="#/">INDIANCLASSICAL.ORG</a></h1>
+            <div class="menu">
+                <ul>
+                    <li><a href="#swara">COURSE</a></li>
+                    <li><a href="#/">RAGA DATABASE</a></li>
+                    <li><a href="#composition">COMPOSITION</a></li>
+                    <li><a href="#outroduction">SCOPE</a></li>
+                    <li><a href="#glossary">GLOSSARY</a></li>
             </div>
-        </div>
-        <div class="twelveNote noteHelp">
-          <ul class="firstRow">
-              <li>R1</li>
-              <li>R3 G2</li>
-              <li>M2</li>
-              <li>D1</li>
-              <li>D3 N2</li>
-          </ul>
-          <div class="clear"></div>
-          <ul class="secondRow">
-              <li><span>S</li>
-              <li><span>R2 G1</span></li>
-              <li><span>G3</span></li>
-              <li><span>M1</span></li>
-              <li><span>P</span></li>
-              <li><span>D2 N1</span></li>
-              <li><span>N3</span></li>
-              <li><span>Sa</span></li>
-          </ul>
-          <div class="clear"></div>
-        </div>
-        <div class="options">
-            <span id="shrutiON" class="buttonToggle">Shruti ON/OFF</span>
-            <span id="notesON" href="#" class="buttonToggle">Swara help ON/OFF</span>
+            <div class="clear"></div>
+        </header>
+
+        <section ng-controller="mainController" class="control">
+            <div class="content">
+                <!-- All content goes here -->
+                <div ng-view>
+                </div>
+            </div>
+        </section>
+        <div id="pianoWrapper">
+            <div id="newPiano">
+                <p id="sKey" class="whiteKey"></p>
+                <p id="r2Key" class="whiteKey"></p>
+                <p id="g3Key" class="whiteKey"></p>
+                <p id="m1Key" class="whiteKey"></p>
+                <p id="pKey" class="whiteKey"></p>
+                <p id="d2Key" class="whiteKey"></p>
+                <p id="n3Key" class="whiteKey"></p>
+                <p id="saHighKey" class="whiteKey"></p>
+                <div class="clear"></div>
+                <div class="setOfBlackKeys">
+                    <p id="r1Key" class="blackKey"></p>
+                    <p id="g2Key" class="blackKey"></p>
+                    <p id="m2Key" class="blackKey"></p>
+                    <p id="d1Key" class="blackKey"></p>
+                    <p id="n2Key" class="blackKey"></p>
+                </div>
+            </div>
+            <div class="twelveNote noteHelp">
+                <ul class="firstRow">
+                    <li>R1</li>
+                    <li>R3 G2</li>
+                    <li>M2</li>
+                    <li>D1</li>
+                    <li>D3 N2</li>
+                </ul>
+                <div class="clear"></div>
+                <ul class="secondRow">
+                    <li><span>S</li>
+                    <li><span>R2 G1</span></li>
+                    <li><span>G3</span></li>
+                    <li><span>M1</span></li>
+                    <li><span>P</span></li>
+                    <li><span>D2 N1</span></li>
+                    <li><span>N3</span></li>
+                    <li><span>Sa</span></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="options">
+                <span>TANPURA</span>
+                <label class="switch">
+                  <input type="checkbox" id="shrutiON">
+                  <span class="slider round"></span>
+                </label>
+                <span>SWARAS</span>
+                <label class="switch">
+                  <input type="checkbox" id="notesON">
+                  <span class="slider round"></span>
+                </label>
+            </div>
 
         </div>
+        <div class="clear"></div>
+
+        <footer>
+            <p>
+                <span class="footerLinks">Links:</span>
+                <a href="#swara">Introductory course</a>
+                <a href="#composition">Composition</a>
+                <a href="#outroduction">Scope</a>
+                <a href="#glossary">Glossary</a>
+                <a href="#exercise">Exercises</a>
+                <a href="mainRagaDatabase.json" target="_blank">Raga Database JSON Document</a>
+
+                <p><span class="footerLinks">Contact:</span><a href="mailto:indianclassicalorg@gmail.com"> indianclassicalorg@gmail.com</a></p>
+        </footer>
 
     </div>
-    <div class="clear"></div>
 
-    <footer>
-      <p>
-	  <span class="footerLinks">Links:</span>
-      <a href="#swara">Introductory course</a>
-      <a href="#composition">Composition</a>
-      <a href="#outroduction">Scope</a>
-      <a href="#glossary">Glossary</a>
-	  <a href="#exercise">Exercises</a>
-	  <a href="mainRagaDatabase.json" target="_blank">Raga Database JSON Document</a>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="js/buzz.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
+    <script src="js/appScript.js"></script>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    <p><span class="footerLinks">Contact:</span><a href="mailto:indianclassicalorg@gmail.com">indianclassicalorg at gmail</a></p>
-    </footer>
-
-  </div>
-
-<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-<script src="js/buzz.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-<script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
-<script src="js/appScript.js"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-55006211-3', 'auto');
-  ga('send', 'pageview');
-
-</script>
+        ga('create', 'UA-55006211-3', 'auto');
+        ga('send', 'pageview');
+    </script>
 </body>
 
 

@@ -1,9 +1,17 @@
-	
-  <h4><a href="#"><span class="backIcon"><</span> Back to Search</a></h4> 
-  <h3>{{name}}</h3>
-  <p><span class="textHeading">Arohanam:</span> <span id="arohanam">{{Arohanam}}</span></p>
-  <p><span class="textHeading">Avarohanam:</span> <span id="avarohanam">{{Avarohanam}}</span></p>
-  <button id="arohanamPlay" class="button"> Demo Arohanam </button>
-  <button id="avarohanamPlay" class="button"> Demo Avarohanam </button>
-  
-  
+<div class="breadcrumb">
+    <a href="#"><span class="backIcon">
+            < </span>BACK TO SEARCH</a>
+</div>
+<h2>{{name | uppercase}}</h2>
+<div class="clearfix">
+    <p><span class="textHeading">AROHANAM</span> <span id="arohanam">{{Arohanam}}</span></p>
+</div>
+<div class="clearfix">
+    <p><span class="textHeading">AVAROHANAM</span> <span id="avarohanam">{{Avarohanam}}</span></p>
+</div>
+<div class="clearfix">
+    <button id="arohanamPlay" class="button"> <span></span> AROHANAM </button>
+    <button id="avarohanamPlay" class="button"> AVAROHANAM </button>
+    <button id="randomizePlay" class="button"> RANDOM </button>
+    <button id="customSequencePlay" class="button"> CUSTOM </button>
+</div>

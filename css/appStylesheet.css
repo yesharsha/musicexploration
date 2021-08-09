@@ -1,186 +1,848 @@
 /* reset css */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
 }
+
 body {
-  line-height: 1;
+    line-height: 1;
 }
-ol, ul {
-  list-style: none;
+
+ol,
+ul {
+    list-style: none;
 }
-blockquote, q {
-  quotes: none;
+
+blockquote,
+q {
+    quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
 }
+
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
-a{color:inherit;}
+
+a {
+    color: inherit;
+}
+
 
 /* ---------------------------- */
-html, body {margin:0;padding:0;height:100%;}
-body{font-family: 'Oswald', sans-serif; background:url(../images/upfeathers.png); font-weight:300}
-.clear{clear:both;}
-i{font-style: italic; margin-right: 4px;}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    /* background: url(../images/upfeathers.png); */
+    font-weight: 300
+}
+
+.clear {
+    clear: both;
+}
+
+i {
+    font-style: italic;
+    margin-right: 4px;
+}
+
 ::selection {
-  background: #e30505; /* WebKit/Blink Browsers */
+    background: #ffe600;
+    /* WebKit/Blink Browsers */
 }
+
 ::-moz-selection {
-  background: #e30505; /* Gecko Browsers */
+    background: #ffe600;
+    /* Gecko Browsers */
 }
-header{background:#002B5E; position: fixed; width: 100%; top:0px; }
-h1{font-family: 'Oswald', sans-serif; font-weight:400; font-size: 1.4em; margin: 15px; float: left; color:white; margin-left:3%;
-font-style: italic; letter-spacing: 0.01em; }
-h1 a{text-decoration:none;}
-h2 a{text-decoration:none;}
-h2{font-size:1.6em; margin-bottom:40px; padding-bottom: 10px; border-bottom: 1px dotted green;}
-.content{margin:74px 0px 0px 3%; width: 42%; float:left; min-height: 400px;}
-.content h3{margin-top: 15px; font-size: 1.3em;}
-.content p{margin-top: 15px; font-size: 1.1em; line-height: 1.5em; background: #0A9642; color: white; padding: 2px; letter-spacing: 0.06em;}
-.button{padding:10px 20px; border:1px solid black; font-family: 'Oswald'; background:none; font-size: 1.3em;
-border-radius: 5px; color: black; margin-top: 30px; display: inline-block; text-decoration: none; cursor: pointer;}
-.buttonToggle{padding:10px 20px; border:1px solid black; font-family: 'Oswald'; background:none; font-size: 1em;
-border-radius: 5px; color: black; margin-top: 30px; display: inline-block; text-decoration: none; cursor:pointer;}
-.buttonToggle:hover{}
-.button:hover{background:#0A9642; color:white; border:1px solid white; opacity:0.7}
-footer{padding: 40px 0px 40px 3%; background: #0A9642; margin-top: 40px; color: white;}
-footer p{margin: 1% 0px;}
-footer p a{padding: 0px 20px; border-right: 1px solid white;}
-footer p a:last-child{border:none;}
-footer p:last-child a {border:none;}
-.small{display:none;}
+
+header {
+    background: #002B5E;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    padding: 7px 0px;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 1.4em;
+    margin: 15px;
+    float: left;
+    color: white;
+    margin-left: 3%;
+    font-style: italic;
+    letter-spacing: 0.05em;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+h2 a {
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 1.6em;
+    letter-spacing: 1.1px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted green;
+}
+
+.content {
+    margin: 74px 0px 0px 3%;
+    width: 42%;
+    float: left;
+    min-height: 400px;
+}
+
+.content h3 {
+    margin-top: 40px;
+    font-size: 1.3em;
+    letter-spacing: 0.06em;
+}
+
+.content p {
+    margin-top: 15px;
+    line-height: 1.8em;
+    padding: 2px;
+    letter-spacing: 0.01em;
+    font-family: 'Roboto Mono';
+}
+
+.breadcrumb {
+    font-size: 0.7em;
+    font-family: 'Roboto Mono';
+    margin-top: 29px;
+}
+
+.button {
+    padding: 10px 30px;
+    border: 1px solid #d0d0d0;
+    font-family: 'Oswald';
+    background: none;
+    font-size: 1em;
+    border-radius: 90px;
+    color: black;
+    margin: 30px 30px 0px 0px;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttonToggle {
+    padding: 10px 20px;
+    border: 1px solid black;
+    font-family: 'Oswald';
+    background: none;
+    font-size: 1em;
+    border-radius: 5px;
+    color: black;
+    margin-top: 30px;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #afafaf;
+    color: white;
+    border: 1px solid white;
+    opacity: 0.7
+}
+
+
+/* Footer styles */
+
+footer {
+    padding: 40px 0px 40px 3%;
+    border-top: 1px solid #e2e2e2;
+    margin-top: 40px;
+    color: #5d5d5d;
+    font-family: 'Roboto Mono';
+    font-size: 0.8em;
+}
+
+footer p {
+    margin: 1% 0px;
+}
+
+footer p a {
+    padding: 0px 20px;
+}
+
+footer p a:last-child {
+    border: none;
+}
+
+footer p:last-child a {
+    border: none;
+}
+
+.footerLinks {
+    width: 50px;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.small {
+    display: none;
+}
+
 
 /* options */
-#notesON{background:yellow;}
+
+#notesON {
+    background: yellow;
+}
+
+.options span {
+    font-family: 'Roboto Mono';
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
 
 /* Piano Styles*/
-#pianoWrapper{margin-top: 110px; position: fixed; left: 48%;}
-#newPiano{background:black; position:relative;padding-right: 3px;}
-.whiteKey{background:url(../images/whiteKey.png);width:73px;height:184px;}
-.whiteKeyPressed{background:url(../images/whiteKeyPressed.png);width:73px;height:184px;}
-#newPiano p{float:left; margin-top:0px; margin-bottom:0px; cursor:pointer;}
-.blackKey{background:url(../images/blackKey.png); width:36px; height:120px;}
-.blackKeyPressed{background:url(../images/blackKeyPressed.png); width:36px; height:120px;}
-.setOfBlackKeys{ position:absolute; float:left; top: 0px; left: 57px}
+
+#pianoWrapper {
+    margin-top: 110px;
+    position: fixed;
+    left: 48%;
+}
+
+#newPiano {
+    background: black;
+    position: relative;
+    padding-right: 3px;
+    border-radius: 5px;
+}
+
+.whiteKey {
+    background: url(../images/whiteKey.png);
+    width: 73px;
+    height: 184px;
+}
+
+.whiteKeyPressed {
+    background: url(../images/whiteKeyPressed.png);
+    width: 73px;
+    height: 184px;
+}
+
+#newPiano p {
+    float: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.blackKey {
+    background: url(../images/blackKey.png);
+    width: 36px;
+    height: 120px;
+}
+
+.blackKeyPressed {
+    background: url(../images/blackKeyPressed.png);
+    width: 36px;
+    height: 120px;
+}
+
+.setOfBlackKeys {
+    position: absolute;
+    float: left;
+    top: 0px;
+    left: 57px
+}
+
 
 /*Black key margin offset */
-#g2Key{margin-left:37px;}
-#m2Key{margin-left:109px;}
-#d1Key{margin-left:37px;}
-#n2Key{margin-left:37px;}
+
+#g2Key {
+    margin-left: 37px;
+}
+
+#m2Key {
+    margin-left: 109px;
+}
+
+#d1Key {
+    margin-left: 37px;
+}
+
+#n2Key {
+    margin-left: 37px;
+}
+
 
 /* 12 note piano styles */
-.twelveNote{background: whitesmoke;}
-.firstRow li{float:left; padding: 10px 0px; background: black; color: white;}
-.secondRow li{float:left; text-align:center; width:73px; padding: 10px 0px;}
-.firstRow li:nth-child(1){margin-left:68px;}
-.firstRow li:nth-child(2){margin-left: 50px;}
-.firstRow li:nth-child(3){margin-left: 120px;}
-.firstRow li:nth-child(4){margin-left: 58px;}
-.firstRow li:nth-child(5){margin-left: 50px;}
-.secondRow li span{background: white; padding: 6px;}
-.note{text-align: center;letter-spacing: 0.05em; padding: 15px;}
+
+.twelveNote {
+    margin-top: 20px;
+    font-size: 11px;
+    font-family: 'Roboto Mono';
+    display: none;
+}
+
+.firstRow li {
+    float: left;
+    padding: 10px 0px;
+    background: #dedede;
+    color: black;
+    width: 36px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.secondRow li {
+    float: left;
+    text-align: center;
+    width: 71px;
+    padding: 10px 0px;
+    background: white;
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
+}
+
+.firstRow li:nth-child(1) {
+    margin-left: 58px;
+}
+
+.firstRow li:nth-child(2) {
+    margin-left: 37px;
+}
+
+.firstRow li:nth-child(3) {
+    margin-left: 109px;
+}
+
+.firstRow li:nth-child(4) {
+    margin-left: 37px;
+}
+
+.firstRow li:nth-child(5) {
+    margin-left: 37px;
+}
+
+.secondRow li span {
+    background: white;
+    padding: 6px;
+}
+
+.note {
+    text-align: center;
+    letter-spacing: 0.05em;
+    padding: 15px;
+}
+
+
+/* Options styles */
+
+.options {
+    margin-top: 20px;
+}
+
+
+/* Toggle button styles*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+    margin: 0px 20px 0px 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 1px;
+    bottom: 1px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #ffe600;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #ffe600;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
 
 /* Exercises styles */
-.headingHighlight{background: #F2C43D; padding: 8px; margin-top:40px !important}
-.paraHighlight{background: #005378 !important; padding: 10px !important; font-size: 25px !important;}
-.paraBlueHighlight{background: #005378 !important;}
+
+.headingHighlight {
+    background: #F2C43D;
+    padding: 8px;
+    margin-top: 40px !important
+}
+
+.paraHighlight {
+    background: #005378 !important;
+    padding: 10px !important;
+    font-size: 25px !important;
+}
+
+.paraBlueHighlight {
+    background: #005378 !important;
+}
+
 
 /*Search terms */
-.searchterms span{color: black !important;}
-.searchterms  span{background: #F2C43D; margin-left: 10px; border-radius:3px; display: inline-block; margin-top: 5px;}
-.searchNotes{margin-top: 10px; letter-spacing: 1px; font-size: 14px; line-height: 18px;}
+
+.searchterms span {
+    color: black !important;
+}
+
+.searchterms span {
+    background: #F2C43D;
+    margin-left: 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.searchNotes {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: #797979;
+    font-size: 11px;
+    line-height: 18px;
+    font-family: monospace;
+}
+
 
 /* Search */
-.search{margin:20px 0px;}
-.search input{height: 50px; width: 50%; border-radius: 5px; border: 1px solid black; background: none;
-font-size: 1.4em; padding: 0px 0px 0px 24px; color: black;}
-textarea:focus, input:focus{ outline: 0;}
-.ragaName{display: inline-block; font-size: 1.2em; padding: 10px 20px; background: yellow; margin: 5px 10px 0px 0px; 
-float: left;}
+
+.search {
+    margin: 20px 0px;
+}
+
+.search input {
+    height: 50px;
+    width: 75%;
+    font-size: 1.2em;
+    font-family: 'Roboto Mono';
+    letter-spacing: 0.03em;
+    font-weight: 200;
+    border-radius: 5px;
+    border: 1px solid #cecece;
+    background: none;
+    padding: 0px 0px 0px 24px;
+    color: black;
+}
+
+textarea:focus,
+input:focus {
+    outline: 0;
+}
+
+.ragaName {
+    font-size: 16px;
+    padding: 10px 20px;
+    background: #f5f5f5;
+    color: #4e4e4e;
+    margin: 5px 10px 0px 0px;
+    float: left;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+}
+
 
 /* menu */
-.menu{float:right; margin: 20px 40px 0px 40px;}
-.menu ul li{float:left; color:white; margin-right: 20px;}
-.menu ul li a{text-decoration:none;}
 
-#arohanam{padding: 10px; font-size: 29px; letter-spacing: 5px;}
-#avarohanam{padding: 10px; font-size: 29px; letter-spacing: 5px;}
-.textHeading{width: 120px; display: block; float: left; padding-left: 10px;}
-.beta{margin-left: 7px; font-size: 11px;}
-.footerLinks{width: 50px; display: inline-block;}
+.menu {
+    float: right;
+    margin: 20px 40px 0px 40px;
+    letter-spacing: 1.07px;
+}
+
+.menu ul li {
+    float: left;
+    color: white;
+    margin-right: 20px;
+}
+
+.menu ul li:hover {
+    text-decoration: underline;
+    text-underline-offset: 7px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+}
+
+#arohanam {
+    padding: 0px 0px 10px 0px;
+    font-size: 22px;
+    letter-spacing: 2px;
+    float: left;
+}
+
+#avarohanam {
+    padding: 0px 0px 10px 0px;
+    font-size: 22px;
+    letter-spacing: 2px;
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.textHeading {
+    width: 120px;
+    display: block;
+    float: left;
+}
+
+.beta {
+    margin-left: 7px;
+    font-size: 11px;
+}
 
 
 /* Home page styles */
-.page-1{padding-top:54px; width:100%;}
-.logoClass{padding-top: 80px; margin: 0 auto; width: 20%;}
-.logoClass img{width:100%;}
-.logoText{text-align: center; padding: 20px; font-weight: 400; font-size: 286%;}
-.siteDescription{text-align:center; font-size: 20px;}
-.indexMenu{padding: 70px; width: 75%; margin: 0 auto;}
-.indexMenu ul li{width: 33.3333%; float: left; text-align:center;}
-.indexButton{padding:10px 20px; border:1px solid black; font-family: 'Oswald'; font-size: 1.3em; border-radius: 5px; color: black; display: inline-block; text-decoration: none; cursor: pointer; letter-spacing: 1px;}
-.indexButton:hover{background:black; color:white; opacity:0.8;}
-.indexButton a{text-decoration:none;}
-.oddLi{padding-top:12px;}
-.logoText a{text-decoration:none;}
+
+.page-1 {
+    padding-top: 54px;
+    width: 100%;
+}
+
+.logoClass {
+    padding-top: 80px;
+    margin: 0 auto;
+    width: 20%;
+}
+
+.logoClass img {
+    width: 100%;
+}
+
+.logoText {
+    text-align: center;
+    padding: 20px;
+    font-weight: 400;
+    font-size: 286%;
+}
+
+.siteDescription {
+    text-align: center;
+    font-size: 20px;
+}
+
+.indexMenu {
+    padding: 70px;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.indexMenu ul li {
+    width: 33.3333%;
+    float: left;
+    text-align: center;
+}
+
+.indexButton {
+    padding: 10px 20px;
+    border: 1px solid black;
+    font-family: 'Oswald';
+    font-size: 1.3em;
+    border-radius: 5px;
+    color: black;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.indexButton:hover {
+    background: black;
+    color: white;
+    opacity: 0.8;
+}
+
+.indexButton a {
+    text-decoration: none;
+}
+
+.oddLi {
+    padding-top: 12px;
+}
+
+.logoText a {
+    text-decoration: none;
+}
+
+b {
+    font-weight: bold;
+}
+
+#help {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#helpText {
+    display: none;
+}
 
 @media (max-width:1217px) and (min-width:320px) {
-#pianoWrapper{display:none;}
-.content{width:100%; margin: 74px 0 0 0;}
-.content > div{margin: 0px 3%;}
+    #pianoWrapper {
+        display: none;
+    }
+    .content {
+        width: 100%;
+        margin: 74px 0 0 0;
+    }
+    .content>div {
+        margin: 0px 3%;
+    }
 }
 
 @media (max-width:819px) and (min-width:320px) {
-  header h1{float:none; margin:20px; text-align:center;}
-  .menu{display:none;}
-  .logoClass{width:50%;}
-  .indexMenu{padding:0px;}
-  .logoText a {line-height:120%;}
-  .indexMenu{margin-top:20px; margin-bottom:50px; float:left; width:100%;}
-  .indexButton {padding: 4px 6px;}
-  .indexMenu ul li {width: 100%; margin-bottom: 15px;}
-  .indexMenu ul li:last-child{padding-top:0px;}
-  .indexButton {padding: 10px;}
-  .search input{width:90%;}
-  .ragaName {font-size: 1em;padding: 7px 10px;}
-  footer p a {padding: 0px 20px; display: block; margin: 8px; border:0px;}
-  .footerLinks{background: white;padding: 5px;display: block;width: 90%;color: black;}
-  footer p{margin:1% 0px 20px 0px;}
-  span.textHeading{float:none;}
-  #arohanam{display:block; font-size:20px; line-height: 30px;}
-  #avarohanam{display:block; font-size:20px; line-height: 30px;}
-
+    header h1 {
+        float: none;
+        margin: 20px;
+        text-align: center;
+    }
+    .menu {
+        display: none;
+    }
+    .logoClass {
+        width: 50%;
+    }
+    .indexMenu {
+        padding: 0px;
+    }
+    .logoText a {
+        line-height: 120%;
+    }
+    .indexMenu {
+        margin-top: 20px;
+        margin-bottom: 50px;
+        float: left;
+        width: 100%;
+    }
+    .indexButton {
+        padding: 4px 6px;
+    }
+    .indexMenu ul li {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .indexMenu ul li:last-child {
+        padding-top: 0px;
+    }
+    .indexButton {
+        padding: 10px;
+    }
+    .search input {
+        width: 90%;
+    }
+    .ragaName {
+        font-size: 1em;
+        padding: 7px 10px;
+    }
+    footer p a {
+        padding: 0px 20px;
+        display: block;
+        margin: 8px;
+        border: 0px;
+    }
+    .footerLinks {
+        background: white;
+        padding: 5px;
+        display: block;
+        width: 90%;
+        color: black;
+    }
+    footer p {
+        margin: 1% 0px 20px 0px;
+    }
+    span.textHeading {
+        float: none;
+    }
+    #arohanam {
+        display: block;
+        font-size: 20px;
+        line-height: 30px;
+    }
+    #avarohanam {
+        display: block;
+        font-size: 20px;
+        line-height: 30px;
+    }
 }
 
 @media (max-width: 319px) {
-*{display:none;}
-.small{display:block;}
+    * {
+        display: none;
+    }
+    .small {
+        display: block;
+    }
 }

@@ -1,20 +1,19 @@
+<h2>
+    RAGA DATABASE</h2>
+<p>Welcome to the Raga Database. This is a list of around 900 Ragas. Use this resource to filter and explore Ragas in the Carnatic system of music.</p>
 
-  <h2>Raga Database</h2>
-  <p>Welcome to the Raga Database. This is a list of around 900 Ragas. Use this resource to filter and explore Ragas in the
-  Carnatic system of music.</p>
-  <h3>Enter search to filter matching ragas</h3>
-  
-  <div class="search">
-		<input type="text" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search"/>
-	  {{pianoMessage}}
-		<div class="searchNotes">
-  How to enter search query: <br/>
-  1. Enter name of Raga. e.g. "Kanada". <br/>
-  2. Enter swaras in ascending or descending order of appearance. e.g. "S R2 G2"  <br/>
-  3. Enter swaras through on-screen piano. Notes will automatically appear in search box (Desktop only).
-  </div>
-		<p>The Ragas that matched your query are:</p>
-   </div>
-   <div>
-		<span class="ragaName" ng-repeat="raga in ragaName  | filter:ignoreAccents | orderBy:raga.name"><a href="#ragaDetail/{{raga.name}}">{{raga.name}}</a></span>
-   </div>
+<div class="search">
+    <input type="text" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" /> {{pianoMessage}}
+    <div class="searchNotes">
+        <div id="help"><b>How to enter search query</b></div>
+        <span id="helpText">
+          1. Enter name of Raga. e.g. "Kanada". <br/> 
+          2. Enter swaras in ascending or descending order of appearance. e.g. "S R2 G2" <br/> 
+          3. Enter swaras through on-screen piano. Notes will automatically appear in
+        search box (Desktop only).</span>
+    </div>
+    <h3>FILTERED RAGA LIST</h3>
+</div>
+<div>
+    <span class="ragaName" ng-repeat="raga in ragaName  | filter:ignoreAccents | orderBy:raga.name"><a href="#ragaDetail/{{raga.name}}">{{raga.name}}</a></span>
+</div>
