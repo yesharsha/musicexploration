@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Indianclassical.org</title>
     <link href="css/appStylesheet.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -90,11 +90,32 @@
                 </label>
             </div>
             <div class="effects">
-                <input type="range" class="input-knob" oninput="volume(this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                <input type="range" class="input-knob" oninput="dubDelayFeedback(this.value)" value="0.7" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                <input type="range" class="input-knob" oninput="dubDelayTime(this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                <input type="range" class="input-knob" oninput="dubDelayCutoff(this.value)" value="1800" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                <input type="range" class="input-knob" oninput="filterCutoff(this.value)" value="10000" min="10" max="22050" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                <div class="module">
+                    <div>
+                        <input type="range" name="volume" class="input-knob" oninput="volume(this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <label for="volume">VOLUME</label>
+                    </div>
+                </div>
+                <div class="module">
+                    <div>
+                        <input type="range" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback(this.value)" value="0.72" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <label for="dubDelayFeedback">FEEDBACK</label>
+                    </div>
+                    <div>
+                        <input type="range" name="dubDelayTime" class="input-knob" oninput="dubDelayTime(this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <label for="">DELAY TIME</label>
+                    </div>
+                    <div>
+                        <input type="range" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff(this.value)" value="3200" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <label for="dubDelayCutoff">CUTOFF</label>
+                    </div>
+                </div>
+                <div class="module">
+                    <div>
+                        <input type="range" name="filterCutoff" class="input-knob" oninput="filterCutoff(this.value)" value="22010" min="10" max="22050" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <label for="filterCutoff">FILTERCUTOFF</label>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="clear"></div>
@@ -116,8 +137,8 @@
 
     <script src="js/input-knobs.js"></script>
     <script src="js/Pizzicato.min.js"></script>
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
     <script src="js/appScript.js"></script>

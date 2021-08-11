@@ -754,6 +754,39 @@ b {
     display: none;
 }
 
+
+/* Effects section styles */
+
+.effects {
+    margin-top: 20px;
+}
+
+.effects label {
+    font-family: 'Roboto Mono';
+    font-size: 0.5em;
+    letter-spacing: 0.06em;
+    float: left;
+    width: 64px;
+    text-align: center;
+}
+
+.input-knob {
+    float: left;
+}
+
+.module {
+    border: 1px solid rgb(224, 223, 223);
+    display: inline-block;
+    border-radius: 3px;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.effects .module div {
+    width: 64px;
+    float: left;
+}
+
 @media (max-width:1217px) and (min-width:320px) {
     #pianoWrapper {
         display: none;

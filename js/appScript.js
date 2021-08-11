@@ -139,15 +139,15 @@ swarasGroup.volume = 0.5;
 
 //Add Effects to the group
 var dubDelay = new Pizzicato.Effects.DubDelay({
-    feedback: 0.7,
+    feedback: 0.72,
     time: 0.6,
     mix: 0.5,
-    cutoff: 1800
+    cutoff: 3200
 });
 
 var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-    frequency: 10,
-    peak: 5
+    frequency: 22010,
+    peak: 7
 });
 
 swarasGroup.addEffect(lowPassFilter);
