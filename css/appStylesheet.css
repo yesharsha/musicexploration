@@ -204,8 +204,7 @@ h2 {
     font-size: 1.6em;
     letter-spacing: 1.1px;
     font-weight: 400;
-    margin-bottom: 40px;
-    margin-top: 40px;
+    margin: 40px 0px 10px 0px;
     padding-bottom: 10px;
     border-bottom: 1px dotted green;
 }
@@ -218,7 +217,8 @@ h2 {
 }
 
 .content h3 {
-    margin-top: 40px;
+    margin: 30px 0px 20px 0px;
+    display: block;
     font-size: 1.3em;
     letter-spacing: 0.06em;
 }
@@ -229,6 +229,10 @@ h2 {
     padding: 2px;
     letter-spacing: 0.01em;
     font-family: 'Roboto Mono';
+}
+
+.ragasContainer {
+    display: inline-block;
 }
 
 .breadcrumb {

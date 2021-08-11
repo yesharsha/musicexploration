@@ -1,19 +1,45 @@
-<h2>
-    RAGA DATABASE</h2>
-<p>Welcome to the Raga Database. This is a list of around 900 Ragas. Use this resource to filter and explore Ragas in the Carnatic system of music.</p>
-
-<div class="search">
-    <input type="text" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" /> {{pianoMessage}}
-    <div class="searchNotes">
-        <div id="help"><b>How to enter search query</b></div>
-        <span id="helpText">
-          1. Enter name of Raga. e.g. "Kanada". <br/> 
-          2. Enter swaras in ascending or descending order of appearance. e.g. "S R2 G2" <br/> 
-          3. Enter swaras through on-screen piano. Notes will automatically appear in
-        search box (Desktop only).</span>
+<div>
+    <h2>
+        RAGA DATABASE
+    </h2>
+</div>
+<p>
+    Welcome to the Raga Database. This is a list of around 900 Ragas. Use this resource to filter and explore Ragas in the Carnatic system of music.
+</p>
+<p>
+    You can also create beautiful atmospheres with the Ragas by playing around with the classic Jamaican style Dub Delay Effect.
+</p>
+<div>
+    <h3>POPULAR RAGAS</h3>
+    <div class="ragasContainer">
+        <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Māyamālava%20Gowla">Māyamālava Gowla</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Hindolam">Hindolam</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Dheera%20Shankarābharanam">Dheera Shankarābharanam</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Mechakalyāni">Mechakalyāni</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Chārukeshi">Chārukeshi</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriyaa">Shanmukhapriyaa</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Abhogi">Abhogi</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Reethigowla">Reethigowla</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Natabhairavi">Natabhairavi</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Hamsadhwani">Hamsadhwani</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Mohanam">Mohanam</a></span>
     </div>
-    <h3>FILTERED RAGA LIST</h3>
 </div>
 <div>
-    <span class="ragaName" ng-repeat="raga in ragaName  | filter:ignoreAccents | orderBy:raga.name"><a href="#ragaDetail/{{raga.name}}">{{raga.name}}</a></span>
+    <h3>FULL RAGA LIST</h3>
+    <div class="search">
+        <input type="text" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" /> {{pianoMessage}}
+        <div class="searchNotes">
+            <div id="help" ng-click="expand()"><b>How to enter search query</b></div>
+            <span id="helpText">
+              1. Enter name of Raga. e.g. "Kanada ". <br/> 
+              2. Enter swaras in ascending or descending order of appearance. e.g. "S R2 G2 " <br/> 
+              3. Enter swaras through on-screen piano. Notes will automatically appear in
+            search box (Desktop only).</span>
+        </div>
+    </div>
+    <div class="ragasContainer">
+        <span class="ragaName " ng-repeat="raga in ragaName | filter:ignoreAccents | orderBy:raga.name "><a href="#ragaDetail/{{raga.name}} ">{{raga.name}}</a></span>
+    </div>
 </div>

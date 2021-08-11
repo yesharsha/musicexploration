@@ -89,7 +89,13 @@
                   <span class="slider round"></span>
                 </label>
             </div>
-
+            <div class="effects">
+                <input type="range" class="input-knob" oninput="volume(this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                <input type="range" class="input-knob" oninput="dubDelayFeedback(this.value)" value="0.7" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                <input type="range" class="input-knob" oninput="dubDelayTime(this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                <input type="range" class="input-knob" oninput="dubDelayCutoff(this.value)" value="1800" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                <input type="range" class="input-knob" oninput="filterCutoff(this.value)" value="10000" min="10" max="22050" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+            </div>
         </div>
         <div class="clear"></div>
 
@@ -108,8 +114,9 @@
 
     </div>
 
+    <script src="js/input-knobs.js"></script>
+    <script src="js/Pizzicato.min.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script src="js/buzz.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
