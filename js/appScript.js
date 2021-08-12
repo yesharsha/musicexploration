@@ -107,7 +107,10 @@ $('#close').click(function() {
     $(this).parent().hide();
 });
 
-//Some utility arrays
+// Variables
+var interval;
+var count = 0;
+var temp;
 var keyList = ['s', 'r1', 'r2', 'g2', 'g3', 'm1', 'm2', 'p', 'd1', 'd2', 'n2', 'n3', 'saHigh'];
 var keyListPseudo = ['s', 'r1', 'r2', 'g2', 'g3', 'm1', 'm2', 'p', 'd1', 'd2', 'n2', 'n3', 'saHigh'];
 
@@ -137,17 +140,21 @@ swarasGroup = new Pizzicato.Group(keyList)
 swarasGroup.addSound(shruti)
 swarasGroup.volume = 0.5;
 
+//
+//
+//
+//
 //Add Effects to the group
 var dubDelay = new Pizzicato.Effects.DubDelay({
-    feedback: 0.72,
+    feedback: 0.70,
     time: 0.6,
-    mix: 0.5,
-    cutoff: 3200
+    cutoff: 3200,
+    mix: 0.5
 });
 
 var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-    frequency: 22010,
-    peak: 7
+    frequency: 16000,
+    peak: 1
 });
 
 swarasGroup.addEffect(lowPassFilter);
@@ -155,26 +162,126 @@ swarasGroup.addEffect(dubDelay)
 
 //CONTROL PANEL for Volume and effetcs
 //window.inputKnobsOptions = { fgcolor: "#00ff00", bgcolor: "#000080", knobDiameter: "48" }
-
-function volume(param) {
+// When a knob is moved, these functions assign values to the effects
+function volume(obj, param) {
     swarasGroup.volume = parseFloat(param)
+    obj.next().text(param)
 }
 
-function dubDelayFeedback(param) {
-    dubDelay.feedback = parseFloat(param)
+function filterCutoff(obj, param) {
+    lowPassFilter.frequency = parseInt(param);
+    var freq
+    if (parseInt(param) > 1000) {
+        freq = String(parseInt(param) / 1000) + " kHz";
+    } else {
+        freq = param + " Hz";
+    }
+    obj.next().text(freq)
 }
 
-function dubDelayTime(param) {
+function dubDelayFeedback(obj, param) {
+    dubDelay.feedback = parseFloat(param);
+
+    //Setting warning colors to the value in case of crazy high feedback
+    if (parseFloat(param) <= 0.7) {
+        obj.next().css('color', '#a0a0a0');
+    } else if (parseFloat(param) >= 0.7 && parseFloat(param) < 0.8) {
+        obj.next().css('color', '#e2bc00');
+    } else if (parseFloat(param) >= 0.8 && parseFloat(param) <= 0.9) {
+        obj.next().css('color', '#ff0000');
+        obj.next().css('text-shadow', 'none');
+    } else if (parseFloat(param) >= 0.9) {
+        obj.next().css('text-shadow', '0px 0px 9px #ff0000');
+    }
+
+    obj.next().text(param)
+}
+
+function dubDelayTime(obj, param) {
     dubDelay.time = parseFloat(param)
+    obj.next().text(param)
 }
 
-function dubDelayCutoff(param) {
+function dubDelayCutoff(obj, param) {
     dubDelay.cutoff = parseInt(param)
+    var freq
+    if (parseInt(param) > 1000) {
+        freq = String(parseInt(param) / 1000) + " kHz";
+    } else {
+        freq = param + " Hz";
+    }
+    obj.next().text(freq)
 }
 
-function filterCutoff(param) {
-    lowPassFilter.frequency = parseInt(param)
+function dubDelayMix(obj, param) {
+    dubDelay.mix = parseFloat(param)
+    obj.next().text(parseFloat(param))
 }
+
+// Presets - takes all the values as parameters and assigns these value to the Knob and the display text
+
+function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayTimeParam, dubDelayCutoffParam, dubDelayMixParam) {
+    // Set the volume
+    volume($('#volumeKnob'), volumeParam)
+    $('#volumeKnob').attr('value', volumeParam)
+    let elem = document.getElementById("volumeKnob"); // get existing input-knob element
+    elem.refresh();
+
+    filterCutoff($('#filterCutoffKnob'), filterCutoffParam)
+    $('#filterCutoffKnob').attr('value', filterCutoffParam)
+        //$('#filterCutoffKnob').refresh()
+
+    dubDelayFeedback($('#dubDelayFeedbackKnob'), dubDelayFeedbackParam)
+    $('#dubDelayFeedback').attr('value', dubDelayFeedbackParam)
+
+    dubDelayTime($('#dubDelayTimeKnob'), dubDelayTimeParam)
+    $('#dubDelayTime').attr('value', dubDelayTimeParam)
+
+    dubDelayCutoff($('#dubDelayCutoffKnob'), dubDelayCutoffParam)
+    $('#dubDelayCutoff').attr('value', dubDelayCutoffParam)
+
+    dubDelayMix($('#dubDelayMixKnob'), dubDelayMixParam)
+    $('#dubDelayMix').attr('value', dubDelayMixParam)
+
+
+
+    // swarasGroup.volume = parseFloat(param)
+    // $('#volumeKnob').attr('value', volume).next().text(volume);
+
+    // $('#filterCutoffKnob').attr('value', filter)
+    // if (parseInt(filter) > 1000) {
+    //     $('#filterCutoffKnob').next().text(String(parseInt(filter) / 1000) + " kHz");
+    // } else {
+    //     $('#filterCutoffKnob').next().text(String(filter + " Hz"));
+    // }
+
+    // $('#dubDelayFeedback').attr('value', feedback).next().text(feedback);
+
+    // //Setting warning colors to the value in case of crazy high feedback
+    // if (parseFloat(feedback) <= 0.7) {
+    //     $('#dubDelayFeedback').next().css('color', '#a0a0a0');
+    // } else if (parseFloat(feedback) >= 0.7 && parseFloat(feedback) < 0.8) {
+    //     $('#dubDelayFeedback').next().css('color', '#e2bc00');
+    // }
+
+    // $('#dubDelayTime').attr('value', time).next().text(time);
+
+    // $('#dubDelayCutoff').attr('value', cutoff).next().text(cutoff);
+
+    // if (parseInt(filter) > 1000) {
+    //     $('#dubDelayCutoff').next().text(String(parseInt(cutoff) / 1000) + " kHz");
+    // } else {
+    //     $('#dubDelayCutoff').next().text(String(cutoff + " Hz"));
+    // }
+
+    // $('#dubDelayMix').attr('value', mix).next().text(mix);
+}
+
+$('#presets ul li a').on('click', function() {
+    $(this).css('background-color', '#ffe600');
+    $(this).parent('li').siblings().children('a').css('background-color', '#ffffff');
+
+});
 
 // Tanpura toggle control
 $('#shrutiON').on('click', function() {
@@ -229,74 +336,126 @@ $('#newPiano p').mouseup(function() {
 
 });
 
-//on Click Key register
-// var pianomessage = '';
-// var keyName;
-// var a = $('input').val();
-// $('#newPiano p').click(function() {
-//     keyName = $(this).attr('id').split('K');
-//     if (keyName[0] == "saHigh") {
-//         keyName[0] = "s";
-//     }
-//     a = $('input').val() + " " + keyName[0];
-//     $('input').val(a);
-//     pianomessage = 'Our system detected that you entered keys through the on-screen keyboard. Do you want to try modifying the faux-Swaras?'
-// });
-
-///setimeout function
-
-function doSetTimeout(i, time, sequence) {
-    var d;
-    setTimeout(function(j) {
-        if ($(keyId).hasClass('whiteKeyPressed')) {
-
-            $(keyId).addClass('whiteKey').removeClass('whiteKeyPressed');
-        }
-
-        if ($(keyId).hasClass('blackKeyPressed')) {
-            $(keyId).addClass('blackKey').removeClass('blackKeyPressed');
-
-        }
-
-        for (z = 0; z < keyListPseudo.length; z++) {
-            if (sequence[j].toLowerCase() == keyListPseudo[z]) {
-                d = z;
-            } else {
-                switch (sequence[j]) {
-                    case "G1":
-                        d = 2;
-                        break;
-                    case "R3":
-                        d = 3;
-                        break;
-                    case "N1":
-                        d = 9;
-                        break;
-                    case "D3":
-                        d = 10;
-                        break;
-                    case "saHigh":
-                        d = 12;
-                        break;
-                }
-            }
-        }
-        keyList[d].stop();
-        //keyList[d].play();
-        var keyId = "#" + keyListPseudo[d] + "Key";
-        //console.log(keyId);
-        $(keyId).trigger("mousedown");
-        $(keyId).trigger("mouseup");
-    }, time * i, i);
+//
+// On Screen Keyboard
+var keyBindings = {
+    'a': '#sKey',
+    'w': '#r1Key',
+    's': '#r2Key',
+    'e': '#g2Key',
+    'd': '#g3Key',
+    'f': '#m1Key',
+    't': '#m2Key',
+    'g': '#pKey',
+    'y': '#d1Key',
+    'h': '#d2Key',
+    'u': '#n2Key',
+    'j': '#n3Key',
+    'k': '#saHighKey'
 }
 
-// Function to play a sequence.
-// Input: Sequence - [Sequence of notes]
-// Time: In Milliseconds
-function play(sequence, time) {
-    for (var i = 0; i <= sequence.length - 1; i++) {
-        doSetTimeout(i, time, sequence);
+for (const [key, value] of Object.entries(keyBindings)) {
+    keyboardJS.bind(key, (e) => {
+        e.preventRepeat();
+        if ($(value).hasClass('whiteKey')) {
+            $(value).addClass('whiteKeyPressed').removeClass('whiteKey');
+        } else if ($(value).hasClass('blackKey')) {
+            $(value).addClass('blackKeyPressed').removeClass('blackKey');
+        }
+        var keyName = String(value).substring(1).split('K');
+        for (i = 0; i < keyListPseudo.length; i++) {
+            if (keyName[0] == keyListPseudo[i]) {
+                keyList[i].stop();
+                keyList[i].play();
+            }
+        }
+    }, (e) => {
+        if ($(value).hasClass('whiteKeyPressed')) {
+            $(value).removeClass('whiteKeyPressed').addClass('whiteKey');
+        } else if ($(value).hasClass('blackKeyPressed')) {
+            $(value).removeClass('blackKeyPressed').addClass('blackKey');
+        }
+    });
+}
+
+// On Click Key register on the search bar
+var pianomessage = '';
+var keyName;
+var a = $('#search').val();
+$('#newPiano p').click(function() {
+    keyName = $(this).attr('id').split('K');
+    if (keyName[0] == "saHigh") {
+        keyName[0] = "s";
     }
+    a = $('#search').val() + " " + keyName[0];
+    $('#search').val(a);
+    pianomessage = 'Our system detected that you entered keys through the on-screen keyboard. Do you want to try modifying the faux-Swaras?'
+});
+
+//
+//
+//
+// Play function
+// Timeline - does the actual playing
+function timeline(sequence, repeat) {
+    if ($(keyId).hasClass('whiteKeyPressed')) {
+
+        $(keyId).addClass('whiteKey').removeClass('whiteKeyPressed');
+    }
+
+    if ($(keyId).hasClass('blackKeyPressed')) {
+        $(keyId).addClass('blackKey').removeClass('blackKeyPressed');
+
+    }
+
+    for (z = 0; z < keyListPseudo.length; z++) {
+        if (sequence[count].toLowerCase() == keyListPseudo[z]) {
+            d = z;
+        } else {
+            switch (sequence[count]) {
+                case "G1":
+                    d = 2;
+                    break;
+                case "R3":
+                    d = 3;
+                    break;
+                case "N1":
+                    d = 9;
+                    break;
+                case "D3":
+                    d = 10;
+                    break;
+                case "saHigh":
+                    d = 12;
+                    break;
+            }
+        }
+    }
+    keyList[d].stop();
+    //keyList[d].play();
+    var keyId = "#" + keyListPseudo[d] + "Key";
+    //console.log(keyId);
+    $(keyId).trigger("mousedown");
+    $(keyId).trigger("mouseup");
+
+    count++
+    if (count >= sequence.length) {
+        clearInterval(interval);
+        temp = ''
+    }
+}
+
+//Play function does the time setting
+function play(sequence, time) {
+    stop();
+    temp = sequence;
+    interval = setInterval('timeline(temp)', time);
+}
+// Stop function stops any currently scheduled sequences
+function stop() {
+    clearInterval(interval);
+    count = 0;
+    temp = ''
 }
 
 //Arohanam Play
@@ -306,14 +465,15 @@ $(document).on('click', '#arohanamPlay', function() {
     play(arohanam, 700);
 });
 
-//Avarohanam play starts here
+//Avarohanam play
 $(document).on('click', '#avarohanamPlay', function() {
     var avarohanam = $('#avarohanam').text().split(" ");
     avarohanam[0] = "saHigh";
     play(avarohanam, 700);
 });
 
-//Randomize play starts here
+//Randomize play
+// Generates a sequence of 300 notes and pushes them and their next two notes to an array totalling 900 notes.
 $(document).on('click', '#randomizePlay', function() {
     var arohanam = $('#arohanam').text().split(" ");
     arohanam[arohanam.length - 1] = "saHigh";

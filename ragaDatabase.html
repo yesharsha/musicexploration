@@ -77,6 +77,55 @@
                 </ul>
                 <div class="clear"></div>
             </div>
+            <div class="effects">
+                <div class="module" id="presets">
+                    <ul>
+                        <li class="preset" onclick="preset(0.85, 900, 0.75, 0.6, 3800, 1)"><a>FOGGY</a></li>
+                        <li class="preset" onclick="preset(0.5, 5600, 0.77, 0.15, 3700, 0.8)"><a>SPARKLY</a></li>
+                        <li class="preset" onclick="preset(0.5, 8400, 0.71, 0.58, 3700, 0.9)"><a>MISTY</a></li>
+                        <li class="preset" onclick="preset(0.5, 16000, 0.70, 0.6, 3500, 0.5)"><a style="background-color: #ffe600">BRIGHT</a></li>
+                        <li class=" preset " onclick="preset(0, 16000, 0.7, 0.6, 3200, 0.5) "><a>OFF</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <div>
+                        <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <output class="knobValue">0.5</output>
+                        <label for="volume">VOLUME</label>
+                    </div>
+                </div>
+                <div class="module">
+                    <div>
+                        <input type="range" id="filterCutoffKnob" name="filterCutoff" class="input-knob" oninput="filterCutoff($(this), this.value)" value="16000" min="0" max="16000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <output class="knobValue">16 kHz</output>
+                        <label for="filterCutoff">FLTR CUTOFF</label>
+                    </div>
+                </div>
+                <div class="module">
+                    <div>
+                        <input type="range" id="dubDelayFeedbackKnob" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback($(this), this.value)" value="0.7" min="0.00" max="1.00" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <output class="knobValue">0.70</output>
+                        <label for="dubDelayFeedback">FEEDBACK</label>
+                    </div>
+                    <div>
+                        <input type="range" id="dubDelayTimeKnob" name="dubDelayTime" class="input-knob" oninput="dubDelayTime($(this), this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <span class="knobValue">0.6</span>
+                        <label for="dubDelayTime">DELAY TIME</label>
+                    </div>
+                    <div>
+                        <input type="range" id="dubDelayCutoffKnob" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff($(this), this.value)" value="3200" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <span class="knobValue">3.2 kHz</span>
+                        <label for="dubDelayCutoff">CUTOFF</label>
+                    </div>
+                    <div>
+                        <input type="range" id="dubDelayMixKnob" name="dubDelayMix" class="input-knob" oninput="dubDelayMix($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                        <span class="knobValue">0.5</span>
+                        <label for="dubDelayMix">DRY/WET</label>
+                    </div>
+                </div>
+
+            </div>
             <div class="options">
                 <span>TANPURA</span>
                 <label class="switch">
@@ -89,35 +138,8 @@
                   <span class="slider round"></span>
                 </label>
             </div>
-            <div class="effects">
-                <div class="module">
-                    <div>
-                        <input type="range" name="volume" class="input-knob" oninput="volume(this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                        <label for="volume">VOLUME</label>
-                    </div>
-                </div>
-                <div class="module">
-                    <div>
-                        <input type="range" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback(this.value)" value="0.72" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                        <label for="dubDelayFeedback">FEEDBACK</label>
-                    </div>
-                    <div>
-                        <input type="range" name="dubDelayTime" class="input-knob" oninput="dubDelayTime(this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                        <label for="">DELAY TIME</label>
-                    </div>
-                    <div>
-                        <input type="range" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff(this.value)" value="3200" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                        <label for="dubDelayCutoff">CUTOFF</label>
-                    </div>
-                </div>
-                <div class="module">
-                    <div>
-                        <input type="range" name="filterCutoff" class="input-knob" oninput="filterCutoff(this.value)" value="22010" min="10" max="22050" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                        <label for="filterCutoff">FILTERCUTOFF</label>
-                    </div>
-                </div>
-            </div>
         </div>
+
         <div class="clear"></div>
 
         <footer>
@@ -141,6 +163,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
+    <script src="js/keyboard.min.js"></script>
     <script src="js/appScript.js"></script>
     <script>
         (function(i, s, o, g, r, a, m) {

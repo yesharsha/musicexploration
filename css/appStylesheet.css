@@ -465,7 +465,7 @@ footer p:last-child a {
 /* Options styles */
 
 .options {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 
@@ -779,12 +779,49 @@ b {
     display: inline-block;
     border-radius: 3px;
     padding: 10px;
-    margin-right: 5px;
+    margin-left: 3px;
+    font-family: 'Roboto Mono';
 }
 
 .effects .module div {
     width: 64px;
     float: left;
+}
+
+#presets {
+    width: 97px;
+    margin-left: 0px;
+}
+
+#presets ul li {
+    font-size: 0.5em;
+    letter-spacing: 0.06em;
+    float: left;
+    cursor: pointer;
+    text-align: center;
+    width: 104px;
+}
+
+#presets ul li a {
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    padding: 1px 5px;
+    margin: 3px 10px;
+    display: inline-block;
+}
+
+#presets ul li:last-child {
+    font-size: 0.7em;
+    margin-top: 1px;
+}
+
+.knobValue {
+    width: 64px;
+    float: left;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #a0a0a0;
 }
 
 @media (max-width:1217px) and (min-width:320px) {
