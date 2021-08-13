@@ -83,16 +83,24 @@ ragaApp.controller('mainController', function($scope, $http) {
 });
 
 //ragaController
-ragaApp.controller('ragaController', function($scope, $window, $routeParams, $http) {
+ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     //Get name of Raga
     $scope.name = $routeParams.name;
     var buffer = $routeParams.name;
 
-    //Get Raga Details
-    var raga = ragaDatabase.filter(function(raga) { return raga.name == buffer });
-    console.log(raga);
-    $scope.Arohanam = raga[0].Arohanam;
-    $scope.Avarohanam = raga[0].Avarohanam;
+    //Display list of all the ragas from the JSON file
+    $http({
+        method: 'GET',
+        url: 'mainRagaDatabase.json'
+    }).success(function(data, status) {
+        $scope.ragaName = data.ragas;
+        ragaDatabase = data.ragas;
+
+        //Get Raga Details
+        var raga = ragaDatabase.filter(function(raga) { return raga.name == buffer });
+        $scope.Arohanam = raga[0].Arohanam;
+        $scope.Avarohanam = raga[0].Avarohanam;
+    });
 });
 
 //
@@ -161,11 +169,11 @@ swarasGroup.addEffect(lowPassFilter);
 swarasGroup.addEffect(dubDelay)
 
 //CONTROL PANEL for Volume and effetcs
-//window.inputKnobsOptions = { fgcolor: "#00ff00", bgcolor: "#000080", knobDiameter: "48" }
 // When a knob is moved, these functions assign values to the effects
 function volume(obj, param) {
     swarasGroup.volume = parseFloat(param)
     obj.next().text(param)
+    originalVolume = parseFloat(swarasGroup.volume)
 }
 
 function filterCutoff(obj, param) {
@@ -225,23 +233,27 @@ function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayT
     volume($('#volumeKnob'), volumeParam)
     $('#volumeKnob').attr('value', volumeParam)
     let elem = document.getElementById("volumeKnob"); // get existing input-knob element
-    elem.refresh();
+    volumeKnob.value = volumeParam;
 
-    filterCutoff($('#filterCutoffKnob'), filterCutoffParam)
-    $('#filterCutoffKnob').attr('value', filterCutoffParam)
-        //$('#filterCutoffKnob').refresh()
+    filterCutoff($('#filterCutoffKnob'), filterCutoffParam);
+    $('#filterCutoffKnob').attr('value', filterCutoffParam);
+    filterCutoffKnob.value = filterCutoffParam;
 
-    dubDelayFeedback($('#dubDelayFeedbackKnob'), dubDelayFeedbackParam)
-    $('#dubDelayFeedback').attr('value', dubDelayFeedbackParam)
+    dubDelayFeedback($('#dubDelayFeedbackKnob'), dubDelayFeedbackParam);
+    $('#dubDelayFeedbackKnob').attr('value', dubDelayFeedbackParam);
+    dubDelayFeedbackKnob.value = dubDelayFeedbackParam;
 
-    dubDelayTime($('#dubDelayTimeKnob'), dubDelayTimeParam)
-    $('#dubDelayTime').attr('value', dubDelayTimeParam)
+    dubDelayTime($('#dubDelayTimeKnob'), dubDelayTimeParam);
+    $('#dubDelayTimeKnob').attr('value', dubDelayTimeParam);
+    dubDelayTimeKnob.value = dubDelayTimeParam;
 
-    dubDelayCutoff($('#dubDelayCutoffKnob'), dubDelayCutoffParam)
-    $('#dubDelayCutoff').attr('value', dubDelayCutoffParam)
+    dubDelayCutoff($('#dubDelayCutoffKnob'), dubDelayCutoffParam);
+    $('#dubDelayCutoffKnob').attr('value', dubDelayCutoffParam);
+    dubDelayCutoffKnob.value = dubDelayCutoffParam;
 
-    dubDelayMix($('#dubDelayMixKnob'), dubDelayMixParam)
-    $('#dubDelayMix').attr('value', dubDelayMixParam)
+    dubDelayMix($('#dubDelayMixKnob'), dubDelayMixParam);
+    $('#dubDelayMixKnob').attr('value', dubDelayMixParam);
+    dubDelayMixKnob.value = dubDelayMixParam;
 
 
 
@@ -397,15 +409,17 @@ $('#newPiano p').click(function() {
 //
 // Play function
 // Timeline - does the actual playing
-function timeline(sequence, repeat) {
-    if ($(keyId).hasClass('whiteKeyPressed')) {
+// var originalVolume = parseFloat(swarasGroup.volume)
 
+function timeline(sequence, repeat) {
+    //Initialize the volume as specified in the knob
+    //swarasGroup.volume = originalVolume;
+    if ($(keyId).hasClass('whiteKeyPressed')) {
         $(keyId).addClass('whiteKey').removeClass('whiteKeyPressed');
     }
 
     if ($(keyId).hasClass('blackKeyPressed')) {
         $(keyId).addClass('blackKey').removeClass('blackKeyPressed');
-
     }
 
     for (z = 0; z < keyListPseudo.length; z++) {
@@ -432,9 +446,29 @@ function timeline(sequence, repeat) {
         }
     }
     keyList[d].stop();
-    //keyList[d].play();
+
+    //Function to place the swara sequence in the sequence window
+    function displaySequence() {
+        var seq = sequence.slice(count - 8, count + 1).toString().replaceAll("saHigh", "S").replaceAll(",", "  ").replaceAll(/[0-9]/g, "");
+        //var seqFuture = sequence.slice(count, count + 1).toString().replaceAll("saHigh", "S").replaceAll(",", "  ").replaceAll(/[0-9]/g, "");
+        if (count > 8) {
+            $('#sequencePast').text(seq);
+        }
+    }
+    displaySequence()
+
+    //Set a random volume - functionality disabled as the sound is getting choppy with this function.
+    // function randomVolume() {
+    //     var min = originalVolume - 0.15;
+    //     var max = originalVolume;
+    //     var rndmVolume = Math.random() * (max - min) + min;
+    //     swarasGroup.volume = rndmVolume;
+    //     console.log("Random volume is: " + swarasGroup.volume)
+    // }
+    // randomVolume();
+
+    //not triggering .play(), just simulating a mouseclick on the piano
     var keyId = "#" + keyListPseudo[d] + "Key";
-    //console.log(keyId);
     $(keyId).trigger("mousedown");
     $(keyId).trigger("mouseup");
 
@@ -445,17 +479,21 @@ function timeline(sequence, repeat) {
     }
 }
 
-//Play function does the time setting
+// Play function does the time setting with setInterval
 function play(sequence, time) {
     stop();
     temp = sequence;
     interval = setInterval('timeline(temp)', time);
+
+    //Display the first 16 notes in the sequence that is going to play now
+    var seqPast = sequence.slice(count, count + 8).toString().replaceAll("saHigh", "S").replaceAll(",", "  ").replaceAll(/[0-9]/g, "");
+    $('#sequencePast').text(seqPast);
 }
 // Stop function stops any currently scheduled sequences
 function stop() {
     clearInterval(interval);
     count = 0;
-    temp = ''
+    temp = '';
 }
 
 //Arohanam Play

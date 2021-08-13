@@ -214,6 +214,7 @@ h2 {
     width: 42%;
     float: left;
     min-height: 400px;
+    font-family: 'Roboto Mono';
 }
 
 .content h3 {
@@ -655,6 +656,15 @@ input:focus {
 
 .clearfix {
     clear: both;
+    margin-bottom: 20px;
+}
+
+.sequence {
+    padding: 20px 0px;
+    border-radius: 3px;
+    font-size: 1.7em;
+    letter-spacing: 0.8em;
+    color: #b9b7b7;
 }
 
 .textHeading {
