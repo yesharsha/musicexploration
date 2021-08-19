@@ -204,14 +204,52 @@ h2 {
     font-size: 1.6em;
     letter-spacing: 1.1px;
     font-weight: 400;
-    margin: 40px 0px 10px 0px;
+    margin: 0px 0px 20px 0px;
     padding-bottom: 10px;
     border-bottom: 1px dotted green;
 }
 
+.title {
+    border-bottom: 1px dotted green;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.title h2 {
+    margin-bottom: 0px;
+    border-bottom: 0px;
+    float: left;
+}
+
+.collapsible {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#favourite {
+    margin-left: 40px;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    cursor: pointer;
+}
+
+.fav_true {
+    color: black;
+}
+
+.fav_false {
+    color: #6b6b6b;
+}
+
+.fav_false:hover {
+    color: black;
+}
+
 .content {
-    margin: 74px 0px 0px 3%;
-    width: 42%;
+    margin-top: 66px;
+    padding: 3%;
+    box-sizing: border-box;
+    width: 50%;
     float: left;
     min-height: 400px;
     font-family: 'Roboto Mono';
@@ -230,35 +268,40 @@ h2 {
     padding: 2px;
     letter-spacing: 0.01em;
     font-family: 'Roboto Mono';
+    font-size: 0.9em;
 }
 
 .ragasContainer {
     display: inline-block;
 }
 
+.ragasContainer div div {
+    display: inline-block;
+}
+
+.ragasContainer h4 {
+    margin: 20px 0px 10px 0px;
+}
+
 .breadcrumb {
     font-size: 0.7em;
     font-family: 'Roboto Mono';
-    margin-top: 29px;
+    margin-bottom: 40px;
 }
 
 .button {
-    padding: 10px 30px;
-    border: 1px solid #d0d0d0;
-    font-family: 'Oswald';
-    background: none;
-    font-size: 1em;
-    border-radius: 90px;
-    color: black;
-    margin: 30px 30px 0px 0px;
-    display: inline-block;
-    text-decoration: none;
+    font-size: 0.7em;
+    font-family: 'Roboto Mono';
+    letter-spacing: 0.2em;
+    color: #848484;
+    border: 0px;
+    margin-right: 15px;
+    border-radius: 3px;
     cursor: pointer;
 }
 
 .buttonToggle {
     padding: 10px 20px;
-    border: 1px solid black;
     font-family: 'Oswald';
     background: none;
     font-size: 1em;
@@ -270,11 +313,10 @@ h2 {
     cursor: pointer;
 }
 
-.button:hover {
-    background: #afafaf;
+.button:hover,
+.button.active {
+    background: #6b6b6b;
     color: white;
-    border: 1px solid white;
-    opacity: 0.7
 }
 
 
@@ -332,16 +374,20 @@ footer p:last-child a {
 /* Piano Styles*/
 
 #pianoWrapper {
-    margin-top: 110px;
+    margin-top: 66px;
     position: fixed;
-    left: 48%;
+    left: 50%;
+    width: 50%;
+    padding: 3% 0px;
+    font-family: 'Roboto Mono';
 }
 
 #newPiano {
     background: black;
     position: relative;
-    padding-right: 3px;
     border-radius: 5px;
+    width: 587px;
+    margin-bottom: 20px;
 }
 
 .whiteKey {
@@ -385,19 +431,19 @@ footer p:last-child a {
 
 /*Black key margin offset */
 
-#g2Key {
+#g₂Key {
     margin-left: 37px;
 }
 
-#m2Key {
+#m₂Key {
     margin-left: 109px;
 }
 
-#d1Key {
+#d₁Key {
     margin-left: 37px;
 }
 
-#n2Key {
+#n₂Key {
     margin-left: 37px;
 }
 
@@ -466,7 +512,7 @@ footer p:last-child a {
 /* Options styles */
 
 .options {
-    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 
@@ -555,6 +601,19 @@ input:checked+.slider:before {
 }
 
 
+/* Beginner tips */
+
+.tips {
+    width: 587px;
+    line-height: 1.3em;
+    letter-spacing: 0.02em;
+}
+
+.tips p {
+    font-size: 0.8em;
+}
+
+
 /*Search terms */
 
 .searchterms span {
@@ -583,7 +642,7 @@ input:checked+.slider:before {
 /* Search */
 
 .search {
-    margin: 20px 0px;
+    margin: 30px 0px 20px 0px;
 }
 
 .search input {
@@ -606,7 +665,7 @@ input:focus {
 }
 
 .ragaName {
-    font-size: 16px;
+    font-size: 0.9em;
     padding: 10px 20px;
     background: #f5f5f5;
     color: #4e4e4e;
@@ -641,30 +700,53 @@ input:focus {
 }
 
 #arohanam {
-    padding: 0px 0px 10px 0px;
-    font-size: 22px;
+    font-size: 21px;
     letter-spacing: 2px;
     float: left;
 }
 
 #avarohanam {
-    padding: 0px 0px 10px 0px;
-    font-size: 22px;
+    font-size: 21px;
     letter-spacing: 2px;
     float: left;
 }
 
 .clearfix {
-    clear: both;
     margin-bottom: 20px;
+    width: 100%;
+}
+
+.clearfix p {
+    margin-top: 0px;
+    line-height: 1em;
+    display: inline-block;
+}
+
+.controls {
+    margin-top: 40px;
+}
+
+#stop {
+    line-height: 16px
+}
+
+#stop span {
+    font-size: 1.55em;
+    margin-top: -3px;
+    display: inline-block;
 }
 
 .sequence {
-    padding: 20px 0px;
+    padding: 40px 0px;
     border-radius: 3px;
-    font-size: 1.7em;
-    letter-spacing: 0.8em;
+    font-size: 1.5em;
+    letter-spacing: 0.21em;
     color: #b9b7b7;
+    font-weight: 600;
+    background-image: linear-gradient(90deg, #ececec, #3a3939);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .textHeading {
@@ -768,7 +850,7 @@ b {
 /* Effects section styles */
 
 .effects {
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .effects label {
@@ -818,6 +900,7 @@ b {
     padding: 1px 5px;
     margin: 3px 10px;
     display: inline-block;
+    box-shadow: 1px 1px #afafaf;
 }
 
 #presets ul li:last-child {
@@ -832,6 +915,95 @@ b {
     margin-bottom: 10px;
     font-size: 0.8em;
     color: #a0a0a0;
+}
+
+
+/* Phrase book styles */
+
+.phraseBook {
+    border: 1px solid #e4e3e3;
+    border-radius: 3px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.phrase {
+    font-size: 1em;
+    background: #efefef;
+    padding: 20px;
+    color: #676767;
+    font-weight: 600;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    letter-spacing: 0.3em;
+    font-family: 'Roboto Mono';
+    max-width: 100%;
+    min-width: 100%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    min-height: 111px;
+}
+
+.phrase textarea {
+    letter-spacing: 0.3em;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #c5c5c5;
+    opacity: 1;
+    font-size: 0.2!important;
+    font-weight: 100;
+    /* Firefox */
+}
+
+ :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #c5c5c5;
+}
+
+ ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #c5c5c5;
+}
+
+.phraseUnit {
+    margin-bottom: 10px;
+    border: 1px solid white;
+}
+
+.phraseUnit.active {
+    border: 1px solid #757575;
+    border-radius: 3px;
+}
+
+.rightControl {
+    float: right;
+    margin-right: 0px;
+    margin-left: 10px;
+}
+
+.phraseBookControl {
+    margin-bottom: 25px;
+}
+
+.phraseHeading {
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+    color: #9a9a9a;
+}
+
+.phraseSelection {
+    background: #dadada;
+    height: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    cursor: pointer;
+}
+
+.phraseSelection:hover {
+    background: #9a9a9a;
 }
 
 @media (max-width:1217px) and (min-width:320px) {

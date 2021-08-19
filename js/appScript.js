@@ -5,8 +5,6 @@
 //
 //Angular code
 var ragaApp = angular.module('ragaApp', ['ngRoute', 'angular.filter']);
-var ragaDatabase = undefined;
-
 
 // configure our routes
 ragaApp.config(function($routeProvider) {
@@ -41,17 +39,15 @@ ragaApp.config(function($routeProvider) {
             templateUrl: 'glossary.html',
             controller: 'mainController'
         })
-
-    // route for the Ragas page
-    .when('/ragaDetail/:name', {
-        templateUrl: 'ragaDetail.html',
-        controller: 'ragaController'
-    })
-
+        .when('/ragaDetail/:name', {
+            templateUrl: 'ragaDetail.html',
+            controller: 'ragaController'
+        })
 });
 //
 // Maincontroller
 ragaApp.controller('mainController', function($scope, $http) {
+    let ragaDatabase = undefined;
 
     function removeAccents(value) {
         return value.replace(/ā/g, 'a').replace(/ē/g, 'a');
@@ -73,12 +69,65 @@ ragaApp.controller('mainController', function($scope, $http) {
     }).success(function(data, status) {
         $scope.ragaName = data.ragas;
         ragaDatabase = data.ragas;
+        console.log("here")
+
+        //Ragas of the Day
+        {
+            let randomRagas = [];
+            for (let i = 0; i < 5; i++) {
+                let random = Math.floor(Math.random() * (ragaDatabase.length - 1));
+                randomRagas.push(ragaDatabase[random].name)
+            }
+
+            $scope.RagaOfTheDay = randomRagas;
+            console.log(randomRagas);
+        }
     });
 
-    //Expand the help section
-    $scope.expand = function() {
-        $("#helpText").toggle();
+    console.log(ragaDatabase)
+        // Random Beginner tips
+        {
+            let tips = {
+                0: "Use the 🎹 button to enter inputs using the onscreen keyboard",
+                1: "Use the FOGGY preset in the presets section to turn your sequence into a wisp of Raga smoke",
+                2: "Use the MISTY preset to make your sequences sound like you're on a mountain top",
+                3: "Use the FLTR CUTOFF knob to adjust the brightness of the sound",
+                4: "Use the FEEDBACK knob to adjust the delay feedback on your sequence",
+                5: "Use the DRY/WET knob to adjust how much delay you would like on your sequence",
+                6: "Use the CUTOFF knob to adjust the Cutoff frequency of the delay",
+                7: "Use the DRY/WET knob to adjust the amount of delay on your sequence",
+                8: "Use the PHRASING NOTEBOOK to enter any notes about a Raga",
+                9: "Use the PHRASING NOTEBOOK to compose and play notes in a Raga",
+                10: "Use the 🔧 icon in the Phrasing notebook to resolve the Swaras/Notes to the right format eg. 1 to ₁",
+                11: "Use the RANDOM button to generate a short, random sequence in a given Raga",
+                12: "Use the RANDOM button to generate a short, random sequence in a given Raga",
+                13: "Use the RANDOM button to generate a short, random sequence in a given Raga",
+                14: "Use the SAVE button to save your notes locally",
+                15: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
+                16: "Hold the shift button while adjusting the knobs to adjust finer values",
+            }
+
+            let random = Math.floor(Math.random() * (15));
+            $scope.Tip = tips[random];
+        }
+
+
+    //Display list of favourite ragas
+    {
+        const items = {...localStorage };
+        let favourites = []
+
+        for (let item in items) {
+            if (item.includes('_FAV')) {
+                let x = item.split('_');
+                favourites.push(x[0].replaceAll("%C4%80", "Ā").replaceAll("%C4%81", "ā").replaceAll("%20", " ").replaceAll("%C4%93", "ē"));
+            }
+        }
+
+        $scope.Favourites = favourites;
     }
+
+
 
 });
 
@@ -88,18 +137,49 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     $scope.name = $routeParams.name;
     var buffer = $routeParams.name;
 
+    console.log(buffer);
     //Display list of all the ragas from the JSON file
     $http({
         method: 'GET',
         url: 'mainRagaDatabase.json'
     }).success(function(data, status) {
         $scope.ragaName = data.ragas;
-        ragaDatabase = data.ragas;
+        let ragaDatabase = data.ragas;
 
-        //Get Raga Details
-        var raga = ragaDatabase.filter(function(raga) { return raga.name == buffer });
-        $scope.Arohanam = raga[0].Arohanam;
-        $scope.Avarohanam = raga[0].Avarohanam;
+        //Get Raga Arohanam Avarohanam and Moorchana phrase
+        let raga = ragaDatabase.filter(function(raga) { return raga.name == buffer });
+
+        let arohanam_ = raga[0].Arohanam.replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+        arohanam = arohanam_.join(" ");
+        $scope.Arohanam = arohanam;
+
+        let avarohanam_ = raga[0].Avarohanam.replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+        avarohanam = avarohanam_.join(" ");
+        $scope.Avarohanam = avarohanam;
+
+        arohanam_[arohanam_.length - 1] = "Ṡ";
+        let shift = avarohanam_.shift();
+        avarohanam[0] = "Ṡ";
+        let moorchana_ = arohanam_.concat(avarohanam_)
+        moorchana = moorchana_.join(" ")
+        $scope.Moorchana = moorchana;
+
+        //Retrieve contents of local storage for phrasebook
+        if (window.localStorage.getItem(buffer)) {
+            let phrases_ = window.localStorage.getItem(buffer);
+            phrases = phrases_.split(',')
+
+            //remove the default phrase
+            phrases.shift()
+            phrases = phrases.filter(item => item)
+
+            $scope.Phrases = phrases;
+        }
+
+        //Retrieve _FAV key from local storage to check if this raga has been favourited
+        let key = (buffer + "_FAV")
+        $scope.Favourite = window.localStorage.getItem(key) || 'fav_false';
+
     });
 });
 
@@ -108,19 +188,30 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 //
 //
 //JQuery 
-//$(document).ready(function() {
-//close controls
-var clear;
-$('#close').click(function() {
-    $(this).parent().hide();
-});
 
 // Variables
 var interval;
 var count = 0;
-var temp;
-var keyList = ['s', 'r1', 'r2', 'g2', 'g3', 'm1', 'm2', 'p', 'd1', 'd2', 'n2', 'n3', 'saHigh'];
-var keyListPseudo = ['s', 'r1', 'r2', 'g2', 'g3', 'm1', 'm2', 'p', 'd1', 'd2', 'n2', 'n3', 'saHigh'];
+var tempo;
+const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'Ṡ'];
+const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'Ṡ'];
+
+//Keyboard bindings
+const keyBindings = {
+    'a': '#sKey',
+    'w': '#r₁Key',
+    's': '#r₂Key',
+    'e': '#g₂Key',
+    'd': '#g₃Key',
+    'f': '#m₁Key',
+    't': '#m₂Key',
+    'g': '#pKey',
+    'y': '#d₁Key',
+    'h': '#d₂Key',
+    'u': '#n₂Key',
+    'j': '#n₃Key',
+    'k': '#ṠKey'
+}
 
 //Declare all the sounds
 keyList[0] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/s.ogg', 'sounds/s.mp3'] } });
@@ -229,7 +320,7 @@ function dubDelayMix(obj, param) {
 // Presets - takes all the values as parameters and assigns these value to the Knob and the display text
 
 function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayTimeParam, dubDelayCutoffParam, dubDelayMixParam) {
-    // Set the volume
+    // Set the values for individual parameters
     volume($('#volumeKnob'), volumeParam)
     $('#volumeKnob').attr('value', volumeParam)
     let elem = document.getElementById("volumeKnob"); // get existing input-knob element
@@ -254,118 +345,10 @@ function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayT
     dubDelayMix($('#dubDelayMixKnob'), dubDelayMixParam);
     $('#dubDelayMixKnob').attr('value', dubDelayMixParam);
     dubDelayMixKnob.value = dubDelayMixParam;
-
-
-
-    // swarasGroup.volume = parseFloat(param)
-    // $('#volumeKnob').attr('value', volume).next().text(volume);
-
-    // $('#filterCutoffKnob').attr('value', filter)
-    // if (parseInt(filter) > 1000) {
-    //     $('#filterCutoffKnob').next().text(String(parseInt(filter) / 1000) + " kHz");
-    // } else {
-    //     $('#filterCutoffKnob').next().text(String(filter + " Hz"));
-    // }
-
-    // $('#dubDelayFeedback').attr('value', feedback).next().text(feedback);
-
-    // //Setting warning colors to the value in case of crazy high feedback
-    // if (parseFloat(feedback) <= 0.7) {
-    //     $('#dubDelayFeedback').next().css('color', '#a0a0a0');
-    // } else if (parseFloat(feedback) >= 0.7 && parseFloat(feedback) < 0.8) {
-    //     $('#dubDelayFeedback').next().css('color', '#e2bc00');
-    // }
-
-    // $('#dubDelayTime').attr('value', time).next().text(time);
-
-    // $('#dubDelayCutoff').attr('value', cutoff).next().text(cutoff);
-
-    // if (parseInt(filter) > 1000) {
-    //     $('#dubDelayCutoff').next().text(String(parseInt(cutoff) / 1000) + " kHz");
-    // } else {
-    //     $('#dubDelayCutoff').next().text(String(cutoff + " Hz"));
-    // }
-
-    // $('#dubDelayMix').attr('value', mix).next().text(mix);
 }
-
-$('#presets ul li a').on('click', function() {
-    $(this).css('background-color', '#ffe600');
-    $(this).parent('li').siblings().children('a').css('background-color', '#ffffff');
-
-});
-
-// Tanpura toggle control
-$('#shrutiON').on('click', function() {
-    if ($("#shrutiON").is(':checked')) {
-        shruti.play();
-    } else {
-        shruti.stop();
-    }
-});
-// Notes help toggle control
-$('#notesON').on('click', function() {
-    $('.noteHelp').toggle();
-});
-
-$('#newPiano p').mousedown(function() {
-    var keyName = $(this).attr('id').split('K');
-    var key;
-
-    for (i = 0; i < keyListPseudo.length; i++) {
-        if (keyName[0] == keyListPseudo[i]) {
-            key = i;
-
-        }
-    }
-    keyList[key].stop();
-    keyList[key].play();
-    if ($(this).hasClass('whiteKey')) {
-        $(this).addClass('whiteKeyPressed').removeClass('whiteKey');
-    }
-
-    if ($(this).hasClass('blackKey')) {
-        $(this).addClass('blackKeyPressed').removeClass('blackKey');
-
-    }
-
-});
-
-$('#newPiano p').mouseup(function() {
-    if ($(this).hasClass('whiteKeyPressed')) {
-        $(this).delay(100).queue(function() {
-            $(this).removeClass('whiteKeyPressed').addClass('whiteKey');
-            $(this).dequeue();
-        });
-    }
-
-    if ($(this).hasClass('blackKeyPressed')) {
-        $(this).delay(100).queue(function() {
-            $(this).removeClass('blackKeyPressed').addClass('blackKey');
-            $(this).dequeue();
-        });
-    }
-
-});
 
 //
 // On Screen Keyboard
-var keyBindings = {
-    'a': '#sKey',
-    'w': '#r1Key',
-    's': '#r2Key',
-    'e': '#g2Key',
-    'd': '#g3Key',
-    'f': '#m1Key',
-    't': '#m2Key',
-    'g': '#pKey',
-    'y': '#d1Key',
-    'h': '#d2Key',
-    'u': '#n2Key',
-    'j': '#n3Key',
-    'k': '#saHighKey'
-}
-
 for (const [key, value] of Object.entries(keyBindings)) {
     keyboardJS.bind(key, (e) => {
         e.preventRepeat();
@@ -375,7 +358,7 @@ for (const [key, value] of Object.entries(keyBindings)) {
             $(value).addClass('blackKeyPressed').removeClass('blackKey');
         }
         var keyName = String(value).substring(1).split('K');
-        for (i = 0; i < keyListPseudo.length; i++) {
+        for (let i = 0; i < keyListPseudo.length; i++) {
             if (keyName[0] == keyListPseudo[i]) {
                 keyList[i].stop();
                 keyList[i].play();
@@ -391,18 +374,21 @@ for (const [key, value] of Object.entries(keyBindings)) {
 }
 
 // On Click Key register on the search bar
-var pianomessage = '';
-var keyName;
-var a = $('#search').val();
-$('#newPiano p').click(function() {
-    keyName = $(this).attr('id').split('K');
-    if (keyName[0] == "saHigh") {
-        keyName[0] = "s";
-    }
-    a = $('#search').val() + " " + keyName[0];
-    $('#search').val(a);
-    pianomessage = 'Our system detected that you entered keys through the on-screen keyboard. Do you want to try modifying the faux-Swaras?'
-});
+function keyRegister() {
+    let pianomessage = '';
+    let keyName;
+    let a = $('#search').val();
+    $('#newPiano p').click(function() {
+        keyName = $(this).attr('id').split('K');
+        if (keyName[0] == "Ṡ") {
+            keyName[0] = "Ṡ";
+        }
+        a = $('#search').val() + " " + keyName[0];
+        $('#search').val(a);
+        pianomessage = 'Our system detected that you entered keys through the on-screen keyboard. Do you want to try modifying the faux-Swaras?'
+    });
+}
+keyRegister();
 
 //
 //
@@ -412,8 +398,8 @@ $('#newPiano p').click(function() {
 // var originalVolume = parseFloat(swarasGroup.volume)
 
 function timeline(sequence, repeat) {
-    //Initialize the volume as specified in the knob
-    //swarasGroup.volume = originalVolume;
+    let temp;
+
     if ($(keyId).hasClass('whiteKeyPressed')) {
         $(keyId).addClass('whiteKey').removeClass('whiteKeyPressed');
     }
@@ -422,35 +408,35 @@ function timeline(sequence, repeat) {
         $(keyId).addClass('blackKey').removeClass('blackKeyPressed');
     }
 
+    let index;
     for (z = 0; z < keyListPseudo.length; z++) {
         if (sequence[count].toLowerCase() == keyListPseudo[z]) {
-            d = z;
+            index = z;
         } else {
             switch (sequence[count]) {
-                case "G1":
-                    d = 2;
+                case "G₁":
+                    index = 2;
                     break;
-                case "R3":
-                    d = 3;
+                case "R₃":
+                    index = 3;
                     break;
-                case "N1":
-                    d = 9;
+                case "N₁":
+                    index = 9;
                     break;
-                case "D3":
-                    d = 10;
+                case "D₃":
+                    index = 10;
                     break;
-                case "saHigh":
-                    d = 12;
+                case "Ṡ":
+                    index = 12;
                     break;
             }
         }
     }
-    keyList[d].stop();
+    keyList[index].stop();
 
     //Function to place the swara sequence in the sequence window
     function displaySequence() {
-        var seq = sequence.slice(count - 8, count + 1).toString().replaceAll("saHigh", "S").replaceAll(",", "  ").replaceAll(/[0-9]/g, "");
-        //var seqFuture = sequence.slice(count, count + 1).toString().replaceAll("saHigh", "S").replaceAll(",", "  ").replaceAll(/[0-9]/g, "");
+        var seq = sequence.slice(count - 9, count + 1).toString().replaceAll(",", "  ").replaceAll(/[0-9]/g, "&emsp;");
         if (count > 8) {
             $('#sequencePast').text(seq);
         }
@@ -467,68 +453,71 @@ function timeline(sequence, repeat) {
     // }
     // randomVolume();
 
-    //not triggering .play(), just simulating a mouseclick on the piano
-    var keyId = "#" + keyListPseudo[d] + "Key";
+    //Not triggering .play(), just simulating a mouseclick on the piano
+    var keyId = "#" + keyListPseudo[index] + "Key";
     $(keyId).trigger("mousedown");
     $(keyId).trigger("mouseup");
 
     count++
     if (count >= sequence.length) {
         clearInterval(interval);
-        temp = ''
+        temp = '';
+        $('button').removeClass('active')
     }
 }
 
 // Play function does the time setting with setInterval
 function play(sequence, time) {
     stop();
+    //Clean array elements with empty strings
+    sequence = sequence.filter(item => item);
+
     temp = sequence;
     interval = setInterval('timeline(temp)', time);
 
-    //Display the first 16 notes in the sequence that is going to play now
-    var seqPast = sequence.slice(count, count + 8).toString().replaceAll("saHigh", "S").replaceAll(",", "  ").replaceAll(/[0-9]/g, "");
+    //Display the first 8 notes in the sequence that is going to play now
+    var seqPast = sequence.slice(count, count + 9).toString().replaceAll(",", " ");
     $('#sequencePast').text(seqPast);
 }
+
 // Stop function stops any currently scheduled sequences
 function stop() {
     clearInterval(interval);
     count = 0;
     temp = '';
+    $('button').removeClass('active');
 }
 
 //Arohanam Play
-$(document).on('click', '#arohanamPlay', function() {
-    var arohanam = $('#arohanam').text().split(" ");
-    arohanam[arohanam.length - 1] = "saHigh";
+function arohanamPlay() {
+    let arohanam = $('#arohanam').text().split(" ");
+    arohanam[arohanam.length - 1] = "Ṡ";
     play(arohanam, 700);
-});
+}
 
 //Avarohanam play
-$(document).on('click', '#avarohanamPlay', function() {
-    var avarohanam = $('#avarohanam').text().split(" ");
-    avarohanam[0] = "saHigh";
+function avarohanamPlay() {
+    let avarohanam = $('#avarohanam').text().split(" ");
+    avarohanam[0] = "Ṡ";
     play(avarohanam, 700);
-});
+}
 
 //Randomize play
 // Generates a sequence of 300 notes and pushes them and their next two notes to an array totalling 900 notes.
-$(document).on('click', '#randomizePlay', function() {
-    var arohanam = $('#arohanam').text().split(" ");
-    arohanam[arohanam.length - 1] = "saHigh";
+function randomizePlay() {
+    let arohanam = $('#arohanam').text().split(" ");
+    arohanam[arohanam.length - 1] = "Ṡ";
 
-    var avarohanam = $('#avarohanam').text().split(" ");
-    avarohanam[0] = "saHigh";
-    var shift = avarohanam.shift();
+    let avarohanam = $('#avarohanam').text().split(" ");
+    avarohanam[0] = "Ṡ";
+    let shift = avarohanam.shift();
 
-    var moorchana = arohanam.concat(avarohanam);
-    console.log("Moorchana is: ")
-    console.log(moorchana)
-
-    var randomSequence = [];
+    let moorchana = arohanam.concat(avarohanam);
+    let randomSequence = [];
 
     // Generate 90 Random numbers in sequence of 3
-    for (a = 0; a < 300; a++) {
-        var random = Math.floor(Math.random() * (moorchana.length - 1));
+    for (let a = 0; a < 300; a++) {
+        let random = Math.floor(Math.random() * (moorchana.length - 1));
         randomSequence.push(random);
 
         if (random + 1 > moorchana.length - 1) {
@@ -547,8 +536,8 @@ $(document).on('click', '#randomizePlay', function() {
     console.log(randomSequence)
 
     //Mapping the random numbers with the moorchana to another array
-    var randomSequenceNotes = [];
-    for (b = 0; b <= randomSequence.length - 1; b++) {
+    let randomSequenceNotes = [];
+    for (let b = 0; b <= randomSequence.length - 1; b++) {
         randomSequenceNotes.push(moorchana[randomSequence[b]])
     }
     console.log("Random sequence to be played is: ")
@@ -557,15 +546,213 @@ $(document).on('click', '#randomizePlay', function() {
     //Call the play() function to play the sequence
     play(randomSequenceNotes, 400)
 
+}
+
+//All event listeners here
+$(document).ready(function() {
+    // Button functionality
+    $(document).on('click', '.button', function() {
+        $(this).addClass('active');
+    });
+
+    //Phasebook functionalities
+    $(document).on('click', '#newPhrase', function() {
+        $(this).parent().parent().append('<div class="phraseUnit"> <div class="phraseSelection"></div> <textarea class="phrase"></textarea></div>');
+        $(this).removeClass('active')
+    });
+
+    //Phrase selection button
+    $(document).on('click', '.phraseSelection', function() {
+        if ($(this).parent().hasClass('active')) {
+            $(this).parent().removeClass('active');
+        } else {
+            $(this).parent().addClass('active')
+        }
+    });
+
+    //close controls
+    $('#close').click(function() {
+        $(this).parent().hide();
+    });
+
+    $('#presets ul li a').on('click', function() {
+        $(this).css('background-color', '#ffe600');
+        $(this).parent('li').siblings().children('a').css('background-color', '#ffffff');
+    });
+
+    // Tanpura toggle control
+    $('#shrutiON').on('click', function() {
+        if ($("#shrutiON").is(':checked')) {
+            shruti.play();
+        } else {
+            shruti.stop();
+        }
+    });
+    // Notes help toggle control
+    $('#notesON').on('click', function() {
+        $('.noteHelp').toggle();
+    });
+
+    $('#newPiano p').mousedown(function() {
+        var keyName = $(this).attr('id').split('K');
+        var key;
+
+        for (i = 0; i < keyListPseudo.length; i++) {
+            if (keyName[0] == keyListPseudo[i]) {
+                key = i;
+
+            }
+        }
+        keyList[key].stop();
+        keyList[key].play();
+        if ($(this).hasClass('whiteKey')) {
+            $(this).addClass('whiteKeyPressed').removeClass('whiteKey');
+        }
+
+        if ($(this).hasClass('blackKey')) {
+            $(this).addClass('blackKeyPressed').removeClass('blackKey');
+
+        }
+
+    });
+
+    $('#newPiano p').mouseup(function() {
+        if ($(this).hasClass('whiteKeyPressed')) {
+            $(this).delay(100).queue(function() {
+                $(this).removeClass('whiteKeyPressed').addClass('whiteKey');
+                $(this).dequeue();
+            });
+        }
+
+        if ($(this).hasClass('blackKeyPressed')) {
+            $(this).delay(100).queue(function() {
+                $(this).removeClass('blackKeyPressed').addClass('blackKey');
+                $(this).dequeue();
+            });
+        }
+
+    });
 });
 
-//Play a custom sequence
-$(document).on('click', '#customSequencePlay', function() {
-    var sampleSequence = ["G1", "R1", "S", "P", "M1", "G1", "saHigh"]
-    play(sampleSequence, 200)
+// Phrase Delete button
+function deletePhrase() {
+    $('.phraseUnit.active').each(function() {
+        $(this).remove();
+    });
+}
+
+function phraseBookPlay() {
+    let sequence = [];
+    let count = 0;
+
+    // Firstly, check how many phrases are selected
+    $('.phraseUnit').each(function() {
+        // Play selected items
+        if ($(this).hasClass('active')) {
+            count++;
+        }
+    });
+
+    // If one or more phrases are selected, play the selected items or play everything
+    if (count > 0) {
+        $('.phraseUnit').each(function() {
+            // Play selected items
+            if ($(this).hasClass('active')) {
+                let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+
+                sequence = sequence.concat(phrase);
+                console.log("sequence is: ")
+                console.log(sequence)
+
+                if (sequence.length > 0) {
+                    try {
+                        play(sequence, 400);
+                    } catch (error) {
+                        console.error("somethings wrong");
+                    }
+                }
+                count++;
+            } else {
+                console.log("error")
+                $('#playPhrase').removeClass('active');
+            }
+        });
+    } else {
+        $('.phraseUnit').each(function() {
+            let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+            sequence = sequence.concat(phrase);
+            console.log("sequence is: ")
+            console.log(sequence)
+            if (sequence) {
+                play(sequence, 400);
+            }
+        });
+    }
+
+}
+
+// 🔧 - resolve a phrase from 1 to ₁
+function resolvePhrase() {
+    //Perform play action only on phrases that are selected
+    var sequence = [];
+    $('.phraseUnit').each(function() {
+        if ($(this).hasClass('active')) {
+            var phrase = $(this).children('.phrase').val().replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").toUpperCase();
+            $(this).children('.phrase').val(phrase);
+        } else {
+            console.log('Selected phrases resolved with 0 errors');
+        }
+    });
+}
+
+// Local storage stuff
+function savePhrase() {
+    let href = window.location.href.split('/');
+    let raga_ = href.pop() || href.pop();
+    let raga = raga_.replaceAll("%C4%80", "Ā").replaceAll("%C4%81", "ā").replaceAll("%20", " ").replaceAll("%C4%93", "ē")
+    console.log(raga)
+
+    window.localStorage.removeItem(raga)
+    var phrases_ = ''
+    $('.phraseUnit').each(function() {
+        phrases_ += "," + $(this).children('.phrase').val();
+    });
+
+    let phrases = phrases_.substring(1)
+    console.log(phrases);
+    window.localStorage.setItem(raga, phrases);
+}
+
+// TODO - variable tempo
+function time() {
+    let bpm = parseInt($('#tempo').val());
+    let ms = 60000 / bpm;
+    if (!Number.isNaN(ms)) {
+        tempo = ms;
+        console.log(ms)
+    }
+
+}
+
+// Set Favourites function
+function favourite() {
+    let href = window.location.href.split('/');
+    let raga_ = href.pop() || href.pop();
+    let raga = raga_.replaceAll("%C4%80", "Ā").replaceAll("%C4%81", "ā").replaceAll("%20", " ").replaceAll("%C4%93", "ē")
+    let key = raga + '_FAV';
+
+    if ($('#favourite').hasClass('fav_true')) {
+        window.localStorage.removeItem(key);
+        $('#favourite').addClass('fav_false');
+        $('#favourite').removeClass('fav_true');
+    } else {
+        window.localStorage.setItem(key, 'fav_true');
+        $('#favourite').addClass('fav_true');
+        $('#favourite').removeClass('fav_false');
+    }
+}
+
+//Autosave feature
+$('document').on('keyup', '.phrase', function() {
+    console.log("keyup");
 });
-
-
-
-
-//});

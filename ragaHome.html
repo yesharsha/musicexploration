@@ -1,46 +1,118 @@
 <div>
     <h2>
-        RAGA DATABASE
+        RAGA PLAYGROUND
     </h2>
 </div>
 <p>
-    Welcome to the Raga Database. This is a list of around 900 Ragas. Use this resource to filter and explore Ragas in the Carnatic system of music.
-</p>
-<p>
-    You can also create beautiful atmospheres with the Ragas by playing around with the classic Jamaican style Dub Delay Effect.
+    Welcome to the Raga Database. This is a list of around 900 Ragas. Use this resource to filter and explore Ragas in the Carnatic system of music. You can also create rich, beautiful atmospheres with the Ragas by playing around with the classic Jamaican
+    style Dub Delay Effect.
 </p>
 <div>
     <h3>EDITOR'S PICKS</h3>
     <div class="ragasContainer">
-        <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Māyamālava%20Gowla">Māyamālava Gowla</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Hindolam">Hindolam</a></span>
-        <span class="ragaName "><a href="#/ragaDetail/Dheera%20Shankarābharanam">Dheera Shankarābharanam</a></span>
-        <span class="ragaName "><a href="#/ragaDetail/Mechakalyāni">Mechakalyāni</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Chārukeshi">Chārukeshi</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriyaa">Shanmukhapriyaa</a></span>
-        <span class="ragaName "><a href="#/ragaDetail/Abhogi">Abhogi</a></span>
+        <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Reethigowla">Reethigowla</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Natabhairavi">Natabhairavi</a></span>
-        <span class="ragaName "><a href="#/ragaDetail/Hamsadhwani">Hamsadhwani</a></span>
-        <span class="ragaName "><a href="#/ragaDetail/Mohanam">Mohanam</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Vijayanāgari">Vijayanāgari</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Ghanta">Ghanta</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Vanaspati">Vanaspati</a></span>
     </div>
 </div>
 <div>
-    <h3>FULL RAGA LIST</h3>
-    <div class="search">
-        <input type="text" id="search" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" /> {{pianoMessage}}
-        <div class="searchNotes">
-            <div id="help" ng-click="expand()"><b>How to enter search query</b></div>
-            <span id="helpText">
-              1. Enter name of Raga. e.g. "Kanada ". <br/> 
-              2. Enter swaras in ascending or descending order of appearance. e.g. "S R2 G2 " <br/> 
-              3. Enter swaras through on-screen piano. Notes will automatically appear in
-            search box (Desktop only).</span>
+    <h3 class="collapsible" ng-click="moods = !moods">MOODS</h3>
+    <div class="ragasContainer" ng-show="moods" ng-int="No Raga to display">
+        <div>
+            <h4>Meditative</h4>
+            <div>
+                <span class="ragaName "><a href="#ragaDetail/Māyamālava%20Gowla">Māyamālava Gowla</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriyaa">Shanmukhapriyaa</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Sāveri">Sāveri</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Malahari">Malahari</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Hindolam">Hindolam</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Kalyāna%20Vasantam">Kalyāna Vasantam</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Bindhumālini">Bindhumālini</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Saraswathi">Saraswathi</a></span>
+            </div>
+
+            <h4>Mysterious</h4>
+            <div>
+                <span class="ragaName "><a href="#ragaDetail/Nāsikabhooshhani">Nāsikabhooshhani</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Vanaspati">Vanaspati</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Gānamoorti">Gānamoorti</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Vāchaspathi">Vāchaspathi</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Ghanta">Ghanta</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Kanakāmbari">Kanakāmbari</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Rāgachoodāmani">Rāgachoodāmani</a></span>
+            </div>
+
+            <h4>Ecstatic</h4>
+            <div>
+                <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Reethigowla">Reethigowla</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Anandabhairavi">Anandabhairavi</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Kanadā">Kanadā</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Bhāgeshri">Bhāgeshri</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Miyan%20Malhār">Miyan Malhār</a></span>
+            </div>
+
+            <h4>Cinematic</h4>
+            <div>
+                <span class="ragaName "><a href="#ragaDetail/Natabhairavi">Natabhairavi</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Vijayanāgari">Vijayanāgari</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Chakravākam">Chakravākam</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Abheri">Abheri </a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Darbāri%20Kānada">Darbāri Kānada</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Sāramati">Sāramati</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Shivaranjani">Shivaranjani</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Shubhapanthuvarāli">Shubhapanthuvarāli</a></span>
+            </div>
+
+            <h4>Serene</h4>
+            <div>
+                <span class="ragaName "><a href="#/ragaDetail/Kāmbhoji">Kāmbhoji</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Bahudāri">Bahudāri</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Mechakalyāni">Mechakalyāni</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Nāttai%20Kurinji">Nāttai Kurinji</a></span>
+                <span class="ragaName "><a href="#ragaDetail/Dheera%20Shankarābharanam">Dheera Shankarābharanam</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Mohanam">Mohanam</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Hamsadhwani">Hamsadhwani</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Mechakalyāni">Mechakalyāni</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Madhyamāvathi">Madhyamāvathi</a></span>
+            </div>
         </div>
     </div>
-    <div class="ragasContainer">
-        <span class="ragaName " ng-repeat="raga in ragaName | filter:ignoreAccents | orderBy:raga.name "><a href="#ragaDetail/{{raga.name}} ">{{raga.name}}</a></span>
+</div>
+<div>
+    <h3 class="collapsible" ng-click="day = !day">RANDOM RAGAS</h3>
+    <div class="ragasContainer" ng-show="day" ng-int="No Raga to display">
+        <span class="ragaName " ng-repeat="raga in RagaOfTheDay"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+</div>
+<div>
+    <h3 class="collapsible" ng-click="favourites = !favourites">MY FAVOURITES</h3>
+    <div class="ragasContainer" ng-show="favourites" ng-int="No Raga to display">
+        <span class="ragaName " ng-repeat="raga in Favourites"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+</div>
+<div>
+    <h3 class="collapsible" ng-click="ragaList = !ragaList">FULL RAGA LIST </h3>
+    <div ng-show="!ragaList">
+        <div class="search">
+            <input type="text " id="search " placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search " /> {{pianoMessage}}
+            <div class="searchNotes ">
+                <div id="help" ng-click="helpText = !helpText"><b>How to enter search query</b></div>
+                <span id="helpText " ng-show="helpText">
+              1. Enter name of Raga. e.g. 'Kanada'. <br/> 
+              2. Enter swaras in ascending or descending order of appearance. e.g. 'S R2 G2'. <br/> 
+              3. Enter swaras through on-screen piano (Desktop only). Notes will automatically appear in search box.</span>
+            </div>
+        </div>
+        <div class="ragasContainer">
+            <span class="ragaName" ng-repeat="raga in ragaName | filter:ignoreAccents | orderBy:raga.name "><a href="#ragaDetail/{{raga.name}} ">{{raga.name}}</a></span>
+        </div>
     </div>
 </div>
