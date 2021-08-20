@@ -7,12 +7,14 @@
     <meta name="description" content="Bleeding edge Carnatic music interactive exploration.">
     <meta name="keywords" content="carnatic,learn,tutorial,school,music, ragas, Kharaharapriya">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Indianclassical.org - Raga Playground</title>
     <link href="css/appStylesheet.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/37095eb785.js" crossorigin="anonymous"></script>
     <script src="js/input-knobs.js"></script>
 </head>
 
@@ -79,16 +81,6 @@
                     <div class="clear"></div>
                 </div>
                 <div class="effects">
-                    <div class="module" id="presets">
-                        <ul>
-                            <li class="preset" onclick="preset(0.85, 900, 0.75, 0.6, 3800, 1)"><a>FOGGY</a></li>
-                            <li class="preset" onclick="preset(0.5, 3800, 0.75, 0.6, 3800, 0.8)"><a>MISTY</a></li>
-                            <li class="preset" onclick="preset(0.5, 5600, 0.77, 0.15, 3700, 0.8)"><a>SPARKLY</a></li>
-                            <li class="preset" onclick="preset(0.5, 16000, 0.70, 0.6, 3500, 0.5)"><a style="background-color: #ffe600">BRIGHT</a></li>
-                            <li class=" preset " onclick="preset(1, 22000, 0, 0.6, 0, 0) "><a>OFF</a>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="module">
                         <div>
                             <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
@@ -124,6 +116,15 @@
                             <span class="knobValue">0.5</span>
                             <label for="dubDelayMix">DRY/WET</label>
                         </div>
+                    </div>
+                    <div class="module" id="presets">
+                        <ul>
+                            <li class="preset" onclick="preset(0.85, 900, 0.75, 0.6, 3800, 1)"><button class="button">FOGGY</button></li>
+                            <li class="preset" onclick="preset(0.5, 3800, 0.75, 0.6, 3800, 0.8)"><button class="button">MISTY</button></li>
+                            <li class="preset" onclick="preset(0.5, 5600, 0.77, 0.15, 3700, 0.8)"><button class="button">SPARKLY</button></li>
+                            <li class="preset" onclick="preset(0.5, 16000, 0.70, 0.6, 3500, 0.5)"><button class="button active">BRIGHT</button></li>
+                            <li class=" preset " onclick="preset(1, 22000, 0, 0.6, 0, 0) "><button class="button">OFF</button></li>
+                        </ul>
                     </div>
 
                 </div>

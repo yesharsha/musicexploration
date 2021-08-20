@@ -462,7 +462,7 @@ function timeline(sequence, repeat) {
     if (count >= sequence.length) {
         clearInterval(interval);
         temp = '';
-        $('button').removeClass('active')
+        $('.controls .button').removeClass('active')
     }
 }
 
@@ -485,7 +485,7 @@ function stop() {
     clearInterval(interval);
     count = 0;
     temp = '';
-    $('button').removeClass('active');
+    $('.controls .button').removeClass('active');
 }
 
 //Arohanam Play
@@ -553,6 +553,11 @@ $(document).ready(function() {
     // Button functionality
     $(document).on('click', '.button', function() {
         $(this).addClass('active');
+    });
+
+    $(document).on('click', '.preset', function() {
+        $(this).addClass('active');
+        $(this).siblings().children('.button').removeClass('active')
     });
 
     //Phasebook functionalities
@@ -756,3 +761,14 @@ function favourite() {
 $('document').on('keyup', '.phrase', function() {
     console.log("keyup");
 });
+
+//Resize phrasebook features
+function enlargePhraseBook() {
+    $('.phraseBook').addClass('enlarge');
+    $('.resize').removeClass('fa-expand').addClass('fa-compress-alt').attr('onclick', "minimizePhraseBook()");
+}
+
+function minimizePhraseBook() {
+    $('.phraseBook').removeClass('enlarge');
+    $('.resize').addClass('fa-expand').removeClass('fa-compress-alt').attr('onclick', "enlargePhraseBook()");;
+}

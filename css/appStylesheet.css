@@ -228,13 +228,13 @@ h2 {
 
 #favourite {
     margin-left: 40px;
-    font-size: 1.2em;
-    line-height: 1.2em;
+    font-size: 1em;
+    line-height: 1.45em;
     cursor: pointer;
 }
 
 .fav_true {
-    color: black;
+    color: #c70000;
 }
 
 .fav_false {
@@ -242,7 +242,7 @@ h2 {
 }
 
 .fav_false:hover {
-    color: black;
+    color: #c70000;
 }
 
 .content {
@@ -851,6 +851,7 @@ b {
 
 .effects {
     margin-bottom: 20px;
+    display: inline-block;
 }
 
 .effects label {
@@ -868,11 +869,11 @@ b {
 
 .module {
     border: 1px solid rgb(224, 223, 223);
-    display: inline-block;
     border-radius: 3px;
     padding: 10px;
-    margin-left: 3px;
+    margin-right: 3px;
     font-family: 'Roboto Mono';
+    float: left;
 }
 
 .effects .module div {
@@ -881,31 +882,16 @@ b {
 }
 
 #presets {
-    width: 97px;
-    margin-left: 0px;
+    width: 116px;
+    height: 94px;
 }
 
-#presets ul li {
-    font-size: 0.5em;
-    letter-spacing: 0.06em;
-    float: left;
-    cursor: pointer;
-    text-align: center;
-    width: 104px;
+#presets.module {
+    padding-right: 0px;
 }
 
-#presets ul li a {
-    border: 1px solid darkgrey;
-    border-radius: 5px;
-    padding: 1px 5px;
-    margin: 3px 10px;
-    display: inline-block;
-    box-shadow: 1px 1px #afafaf;
-}
-
-#presets ul li:last-child {
-    font-size: 0.7em;
-    margin-top: 1px;
+.preset {
+    margin-bottom: 2px;
 }
 
 .knobValue {
@@ -945,6 +931,17 @@ b {
     min-height: 111px;
 }
 
+.enlarge {
+    position: fixed;
+    margin: 0 auto;
+    top: 66px;
+    left: 0px;
+    z-index: 1;
+    background: white;
+    height: 100%;
+    padding: 3%;
+}
+
 .phrase textarea {
     letter-spacing: 0.3em;
 }
@@ -970,11 +967,9 @@ b {
 
 .phraseUnit {
     margin-bottom: 10px;
-    border: 1px solid white;
 }
 
 .phraseUnit.active {
-    border: 1px solid #757575;
     border-radius: 3px;
 }
 
@@ -992,6 +987,18 @@ b {
     margin-bottom: 20px;
     letter-spacing: 0.1em;
     color: #9a9a9a;
+    display: inline-block;
+    width: 100%;
+}
+
+.phraseHeading h4 {
+    float: left;
+}
+
+.phraseHeading span {
+    float: right;
+    cursor: pointer;
+    color: #9a9a9a;
 }
 
 .phraseSelection {
@@ -1006,6 +1013,10 @@ b {
     background: #9a9a9a;
 }
 
+.phraseUnit.active>.phraseSelection {
+    background: #9a9a9a;
+}
+
 @media (max-width:1217px) and (min-width:320px) {
     #pianoWrapper {
         display: none;
@@ -1016,6 +1027,16 @@ b {
     }
     .content>div {
         margin: 0px 3%;
+    }
+    .phrase {
+        margin-top: 0px;
+        margin-bottom: 0px !important;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+    .button {
+        background-color: #efefef;
+        padding: 2px 10px;
     }
 }
 
@@ -1081,6 +1102,7 @@ b {
     }
     span.textHeading {
         float: none;
+        margin-bottom: 10px;
     }
     #arohanam {
         display: block;
@@ -1091,6 +1113,16 @@ b {
         display: block;
         font-size: 20px;
         line-height: 30px;
+    }
+    .phrase {
+        margin-top: 0px;
+        margin-bottom: 0px !important;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+    .button {
+        background-color: #efefef;
+        padding: 2px 10px;
     }
 }
 
