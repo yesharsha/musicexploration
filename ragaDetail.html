@@ -1,17 +1,55 @@
 <div class="breadcrumb">
-    <a href="#"><span class="backIcon">
+    <a href="#" onclick="swarasHelpClear()"><span class="backIcon">
             < </span>BACK TO SEARCH</a>
 </div>
-<h2>{{name | uppercase}}</h2>
-<div class="clearfix">
-    <p><span class="textHeading">AROHANAM</span> <span id="arohanam">{{Arohanam}}</span></p>
+<div class="clearfix title">
+    <h2>{{name | uppercase}}</h2>
+    <span id="favourite" class="{{Favourite}}" onclick="favourite()"><i class="fas fa-heart fa-sm"></i></span>
 </div>
 <div class="clearfix">
-    <p><span class="textHeading">AVAROHANAM</span> <span id="avarohanam">{{Avarohanam}}</span></p>
+    <div class="clearfix">
+        <p><span class="textHeading">AROHANAM</span> <span id="arohanam">{{Arohanam}}</span></p>
+    </div>
+    <div class="clearfix">
+        <p><span class="textHeading">AVAROHANAM</span> <span id="avarohanam">{{Avarohanam}}</span></p>
+    </div>
 </div>
-<div class="clearfix">
-    <button id="arohanamPlay" class="button"> <span></span> AROHANAM </button>
-    <button id="avarohanamPlay" class="button"> AVAROHANAM </button>
-    <button id="randomizePlay" class="button"> RANDOM </button>
-    <button id="customSequencePlay" class="button"> CUSTOM </button>
+<div class="clearfix controls">
+    <button id="arohanamPlay" class="button" onclick="arohanamPlay()"> <i class="fas fa-play fa-sm"></i>AROHANAM </button>
+    <button id="avarohanamPlay" class="button" onclick="avarohanamPlay()"><i class="fas fa-play fa-sm"></i>AVAROHANAM </button>
+    <button id="randomizePlay" class="button" onclick="randomizePlay()"><i class="fas fa-play fa-sm"></i>RANDOM </button>
+    <button id="stop" class="button rightControl" onclick="stop()"><i class="fas fa-stop fa-sm"></i> STOP </button>
+</div>
+<div class="clearfix sequence">
+    <div id="sequencePast">
+
+    </div>
+</div>
+<div class="clearfix phraseBook">
+    <div class="phraseHeading">
+        <h4>PHRASING NOTEBOOK</h4>
+        <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
+    </div>
+    <div class="phraseBookControl">
+        <button class="button" id="newPhrase">+ NEW</button>
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()"><i class="fas fa-play fa-sm"></i>PLAY</button>
+        <button id="stop" class="button" onclick="stop()"><i class="fas fa-stop fa-sm"></i></button>
+        <button class="button" id="keyBoardEntryPhrase"><i class="far fa-keyboard"></i></button>
+        <button class="button" id="savePhrase" onclick="savePhrase()"><i class="far fa-save"></i>SAVE</button>
+
+        <button class="button rightControl" onclick="deletePhrase()"><i class="fas fa-backspace"></i>DEL</button>
+        <button class="button rightControl" id="resolvePhrase" onclick="resolvePhrase()"><i class="fas fa-wrench"></i></button>
+    </div>
+    <div class="phraseUnit">
+        <div class="phraseSelection"></div>
+        <textarea class="phrase">{{Moorchana}}</textarea>
+    </div>
+    <div class="phraseUnit" ng-repeat="phrase in Phrases">
+        <div class="phraseSelection"></div>
+        <textarea class="phrase">{{phrase}}</textarea>
+    </div>
+    <div class="phraseUnit">
+        <div class="phraseSelection"></div>
+        <textarea class="phrase" placeholder="Enter a phrase here, select the input box and use the play button to play your selections."></textarea>
+    </div>
 </div>
