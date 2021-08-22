@@ -221,8 +221,8 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 var interval;
 var count = 0;
 var tempo;
-const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ'];
-const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ'];
+const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
+const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
 
 //Keyboard bindings
 const keyBindings = {
@@ -255,6 +255,7 @@ keyList[9] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d2.
 keyList[10] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n2.ogg', 'sounds/n2.mp3'] } });
 keyList[11] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n3.ogg', 'sounds/n3.mp3'] } });
 keyList[12] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/saHigh.ogg', 'sounds/saHigh.mp3'] } });
+keyList[13] = new Pizzicato.Sound({ source: 'wave', options: { frequency: 22000 } });
 var shruti = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.ogg'] } });
 
 //Set attack to 0.001 for all the notes so it sounds sharp
@@ -456,6 +457,9 @@ function timeline(sequence, repeat) {
                     break;
                 case "Ṡ":
                     index = 12;
+                    break;
+                case "-":
+                    index = 13;
                     break;
             }
         }

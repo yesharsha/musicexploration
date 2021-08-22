@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/monkeylup/public_html/meditation_indianclassical
+    - export DEPLOYPATH=/home/monkelup/public_html/meditation_indianclassical
     - /bin/cp -R css $DEPLOYPATH
     - /bin/cp -R images $DEPLOYPATH
     - /bin/cp -R js $DEPLOYPATH
