@@ -1,0 +1,21 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/monkeylup/public_html/meditation_indianclassical
+    - /bin/cp -R css $DEPLOYPATH
+    - /bin/cp -R images $DEPLOYPATH
+    - /bin/cp -R js $DEPLOYPATH
+    - /bin/cp -R sounds $DEPLOYPATH
+    - /bin/cp composition.html $DEPLOYPATH
+    - /bin/cp exercises.html $DEPLOYPATH
+    - /bin/cp glossary.html $DEPLOYPATH
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp mainRagaDatabase.json $DEPLOYPATH
+    - /bin/cp outroduction.html $DEPLOYPATH
+    - /bin/cp ragaDatabase.html $DEPLOYPATH
+    - /bin/cp ragaDetail.html $DEPLOYPATH
+    - /bin/cp ragaHome.html $DEPLOYPATH
+    - /bin/cp ragas.html $DEPLOYPATH
+    - /bin/cp result.html $DEPLOYPATH
+    - /bin/cp swara.html $DEPLOYPATH
+    - /bin/cp README.md $DEPLOYPATH

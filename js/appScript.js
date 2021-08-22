@@ -180,6 +180,34 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
         let key = (buffer + "_FAV")
         $scope.Favourite = window.localStorage.getItem(key) || 'fav_false';
 
+        //Swarahelp
+        {
+            for (let i = 0; i < moorchana_.length; i++) {
+                console.log(moorchana_[i]);
+
+                switch (moorchana_[i]) {
+                    case "G₁":
+                        moorchana_[i] = 'R₂';
+                        break;
+                    case "R₃":
+                        moorchana_[i] = 'G₂';
+                        break;
+                    case "N₁":
+                        moorchana_[i] = 'D₂';
+                        break;
+                    case "D₃":
+                        moorchana_[i] = 'N₂';
+                        break;
+                }
+
+                let id = "#" + moorchana_[i].toLowerCase() + "Key"
+                console.log(id)
+
+                $(id).html("•").addClass('swaraHelpActive');
+            }
+            swarasHelpON();
+        }
+
     });
 });
 
@@ -193,8 +221,8 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 var interval;
 var count = 0;
 var tempo;
-const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'Ṡ'];
-const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'Ṡ'];
+const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ'];
+const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ'];
 
 //Keyboard bindings
 const keyBindings = {
@@ -210,7 +238,7 @@ const keyBindings = {
     'h': '#d₂Key',
     'u': '#n₂Key',
     'j': '#n₃Key',
-    'k': '#ṠKey'
+    'k': '#ṡKey'
 }
 
 //Declare all the sounds
@@ -593,10 +621,6 @@ $(document).ready(function() {
             shruti.stop();
         }
     });
-    // Notes help toggle control
-    $('#notesON').on('click', function() {
-        $('.noteHelp').toggle();
-    });
 
     $('#newPiano p').mousedown(function() {
         var keyName = $(this).attr('id').split('K');
@@ -771,4 +795,19 @@ function enlargePhraseBook() {
 function minimizePhraseBook() {
     $('.phraseBook').removeClass('enlarge');
     $('.resize').addClass('fa-expand').removeClass('fa-compress-alt').attr('onclick', "enlargePhraseBook()");;
+}
+
+//Turn off Swaras help
+function swarasHelpClear() {
+    $('#newPiano > p').text("");
+    $('.setOfBlackKeys > p').text("");
+}
+
+//Turn swaras help ON or OFF
+function swarasHelpON() {
+    if ($("#notesON").is(':checked')) {
+        $('#newPiano p').removeClass('notesHelpOFF');
+    } else {
+        $('#newPiano p').addClass('notesHelpOFF');
+    }
 }

@@ -509,6 +509,31 @@ footer p:last-child a {
 }
 
 
+/* Swara help styles */
+
+.swaraHelpActive {
+    box-sizing: border-box;
+    font-size: 1.6em;
+    color: #FFE600;
+    text-shadow: 0px 0px 10px #FFE600;
+    text-align: center;
+    padding-top: 65px;
+}
+
+.whiteKey.swaraHelpActive {
+    padding-top: 140px;
+}
+
+.whiteKeyPressed.swaraHelpActive {
+    padding-top: 140px;
+}
+
+.notesHelpOFF {
+    color: rgba(234, 240, 246, 0);
+    text-shadow: none;
+}
+
+
 /* Options styles */
 
 .options {
@@ -861,6 +886,7 @@ b {
     float: left;
     width: 64px;
     text-align: center;
+    margin-bottom: 6px;
 }
 
 .input-knob {
@@ -888,6 +914,7 @@ b {
 
 #presets.module {
     padding-right: 0px;
+    display: table;
 }
 
 .preset {
@@ -929,6 +956,7 @@ b {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     min-height: 111px;
+    margin-top: 0px;
 }
 
 .enlarge {
@@ -1015,6 +1043,34 @@ b {
 
 .phraseUnit.active>.phraseSelection {
     background: #9a9a9a;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 @media (max-width:1217px) and (min-width:320px) {
