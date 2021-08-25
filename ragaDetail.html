@@ -1,6 +1,6 @@
 <div class="breadcrumb">
     <a href="#" onclick="swarasHelpClear()"><span class="backIcon">
-            < </span>BACK TO SEARCH</a>
+            < </span>BACK TO HOME</a>
 </div>
 <div class="clearfix title">
     <h2>{{name | uppercase}}</h2>
@@ -27,14 +27,14 @@
 </div>
 <div class="clearfix phraseBook">
     <div class="phraseHeading">
-        <h4>PHRASING NOTEBOOK</h4>
+        <h4>PHRASING NOTEBOOK <span>*</span></h4>
         <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
     </div>
     <div class="phraseBookControl">
         <button class="button" id="newPhrase">+ NEW</button>
         <button class="button" id="playPhrase" onclick="phraseBookPlay()"><i class="fas fa-play fa-sm"></i>PLAY</button>
-        <button id="stop" class="button" onclick="stop()"><i class="fas fa-stop fa-sm"></i></button>
-        <button class="button" id="keyBoardEntryPhrase"><i class="far fa-keyboard"></i></button>
+        <button id="stop" class="button" onclick="stop()"><i class="fas fa-stop fa-sm"></i>STOP</button>
+        <!-- <button class="button" id="keyBoardEntryPhrase"><i class="far fa-keyboard"></i></button> -->
         <button class="button" id="savePhrase" onclick="savePhrase()"><i class="far fa-save"></i>SAVE</button>
 
         <button class="button rightControl" onclick="deletePhrase()"><i class="fas fa-backspace"></i>DEL</button>
@@ -50,6 +50,6 @@
     </div>
     <div class="phraseUnit">
         <div class="phraseSelection"></div>
-        <textarea class="phrase" placeholder="Enter a phrase here, select the input box and use the play button to play your selections."></textarea>
+        <textarea id="phrase" class="phrase" placeholder="Enter a phrase here, select the input box and use the play button to play your selections."></textarea>
     </div>
 </div>

@@ -1,61 +1,192 @@
 <!doctype html>
 <html ng-app="ragaApp">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<meta name="description" content="Bleeding edge Carnatic music interactive exploration.">
-<meta name="keywords" content="carnatic,learn,tutorial,school,music,anugraha,anuradha,sreedhar">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Anugraha Sangeetha Shiksha</title>
-<link href="css/appStylesheet.css" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Playround for interactiveCarnatic music exploration.">
+    <meta name="keywords" content="carnatic,learn,tutorial,school,music, ragas, Kharaharapriya">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Indianclassical.org - Raga Meditation</title>
+    <link href="css/appStylesheet.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/37095eb785.js" crossorigin="anonymous"></script>
+    <script src="js/input-knobs.js"></script>
 </head>
+
 <body>
-	<header>
-      <h1><a href="#/">Anugraha Sangeetha Shiksha</a></h1>
-	  <div class="menu">
-		<ul>
-			<li><a href="ragaDatabase.html#/swara">Swara-Raga course</a></li>
-			<li><a href="ragaDatabase.html#/">Raga Database</a></li>
-			<li><a href="ragaDatabase.html#/composition">Composition</a></li>
-			<li><a href="ragaDatabase.html#/outroduction">Scope</a></li>
-			<li><a href="ragaDatabase.html#/glossary">Glossary</a></li>
-	  </div>
-      <div class="clear"></div>
-    </header>
-	
-	<div class="page-1">
-		<div class="logoClass">
-			<img src="images/Tree.svg"/>
-		</div>
-		<div class="logoText">
-				<a href="ragaDatabase.html#/">Anugraha Sangeetha Shiksha</a>
-		</div>
-		<div class="siteDescription">
-			Indian classical music exploration.
-		</div>
-		<div class="indexMenu">
-			<ul>
-				<li class="oddLi"><a href="ragaDatabase.html#/swara">Introductory course</a></li>
-				<li><span class="indexButton"><a href="ragaDatabase.html">Enter the Raga Database App.</a></span></li>
-				<li class="oddLi"><a href="ragaDatabase.html#/outroduction">Read about the scope of this application.</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="small">
-		This app can be used only on a larger screen.
-	</div>
-	
-	
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <div class="wrapper">
+        <header>
+            <h1><a href="#/">INDIANCLASSICAL.ORG</a></h1>
+            <div class="menu">
+                <ul>
+                    <li><a href="#swara">LEARN</a></li>
+                    <li><a href="#glossary">GLOSSARY</a></li>
+            </div>
+            <div class="clear"></div>
+        </header>
 
-  ga('create', 'UA-55006211-3', 'auto');
-  ga('send', 'pageview');
+        <section ng-controller="mainController" class="control">
+            <div class="content">
+                <!-- All content goes here -->
+                <div ng-view>
+                </div>
+            </div>
 
-</script>	
+            <div id="pianoWrapper" ng-controller="mainController">
+                <div id="newPiano">
+                    <p id="sKey" class="whiteKey"></p>
+                    <p id="r₂Key" class="whiteKey"></p>
+                    <p id="g₃Key" class="whiteKey"></p>
+                    <p id="m₁Key" class="whiteKey"></p>
+                    <p id="pKey" class="whiteKey"></p>
+                    <p id="d₂Key" class="whiteKey"></p>
+                    <p id="n₃Key" class="whiteKey"></p>
+                    <p id="ṡKey" class="whiteKey"></p>
+                    <div class="clear"></div>
+                    <div class="setOfBlackKeys">
+                        <p id="r₁Key" class="blackKey"></p>
+                        <p id="g₂Key" class="blackKey"></p>
+                        <p id="m₂Key" class="blackKey"></p>
+                        <p id="d₁Key" class="blackKey"></p>
+                        <p id="n₂Key" class="blackKey"></p>
+                    </div>
+                </div>
+                <!--<div class="twelveNote noteHelp">
+                    <ul class="firstRow">
+                        <li>R1</li>
+                        <li>R3 G2</li>
+                        <li>M2</li>
+                        <li>D1</li>
+                        <li>D3 N2</li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="secondRow">
+                        <li><span>S</li>
+                    <li><span>R2 G1</span></li>
+                        <li><span>G3</span></li>
+                        <li><span>M1</span></li>
+                        <li><span>P</span></li>
+                        <li><span>D2 N1</span></li>
+                        <li><span>N3</span></li>
+                        <li><span>Sa</span></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div> -->
+                <div class="effects">
+                    <div class="module">
+                        <div>
+                            <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <output class="knobValue">0.5</output>
+                            <label for="volume">VOLUME</label>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div>
+                            <input type="range" id="filterCutoffKnob" name="filterCutoff" class="input-knob" oninput="filterCutoff($(this), this.value)" value="16000" min="0" max="16000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <output class="knobValue">16 kHz</output>
+                            <label for="filterCutoff">FLTR CUTOFF</label>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div>
+                            <input type="range" id="dubDelayFeedbackKnob" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback($(this), this.value)" value="0.7" min="0.00" max="1.00" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <output class="knobValue">0.7</output>
+                            <label for="dubDelayFeedback">FEEDBACK</label>
+                        </div>
+                        <div>
+                            <input type="range" id="dubDelayTimeKnob" name="dubDelayTime" class="input-knob" oninput="dubDelayTime($(this), this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <span class="knobValue">0.6</span>
+                            <label for="dubDelayTime">DELAY TIME</label>
+                        </div>
+                        <div>
+                            <input type="range" id="dubDelayCutoffKnob" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff($(this), this.value)" value="3200" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <span class="knobValue">3.2 kHz</span>
+                            <label for="dubDelayCutoff">CUTOFF</label>
+                        </div>
+                        <div>
+                            <input type="range" id="dubDelayMixKnob" name="dubDelayMix" class="input-knob" oninput="dubDelayMix($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <span class="knobValue">0.5</span>
+                            <label for="dubDelayMix">DRY/WET</label>
+                        </div>
+                    </div>
+                    <div class="module" id="presets">
+                        <ul>
+                            <li class="preset" onclick="preset(0.85, 900, 0.75, 0.6, 3800, 1)"><button class="button">FOGGY</button></li>
+                            <li class="preset" onclick="preset(0.5, 3800, 0.75, 0.6, 3800, 0.8)"><button class="button">MISTY</button></li>
+                            <li class="preset" onclick="preset(0.5, 5600, 0.77, 0.15, 3700, 0.8)"><button class="button">SPARKLY</button></li>
+                            <li class="preset" onclick="preset(0.5, 16000, 0.7, 0.6, 3200, 0.5)"><button class="button active">BRIGHT</button></li>
+                            <li class=" preset " onclick="preset(1, 16000, 0, 0.6, 0, 0) "><button class="button">OFF</button></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="options">
+                    <span>TANPURA</span>
+                    <label class="switch">
+                  <input type="checkbox" id="shrutiON">
+                  <span class="slider round"></span>
+                </label>
+                    <span>SWARAS</span>
+                    <label class="switch">
+                  <input type="checkbox" checked="checked" id="notesON" onclick="swarasHelpON()">
+                  <span class="slider round"></span>
+                </label>
+                </div>
+                <!-- <div class="tips">
+                    <input type="number" id="tempo" value="400" step="1" onchange="time()" />
+                </div> -->
+                <div class="tips">
+                    <p><b>BEGINNER TIP : </b> {{Tip}}</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="clear"></div>
+
+        <footer>
+            <p>
+                <span class="footerLinks">Links:</span>
+                <a href="#swara">LEARN</a>
+                <a href="#glossary">GLOSSARY</a>
+            </p>
+
+            <p>
+                <span class="footerLinks">Contact:</span><a href="mailto:indianclassicalorg@gmail.com"> indianclassicalorg@gmail.com</a>
+            </p>
+        </footer>
+
+    </div>
+
+
+    <script src="js/Pizzicato.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
+    <script src="js/keyboard.min.js"></script>
+    <script src="js/appScript.js"></script>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-55006211-3', 'auto');
+        ga('send', 'pageview');
+    </script>
 </body>
+
+
 </html>
