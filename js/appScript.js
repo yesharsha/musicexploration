@@ -69,7 +69,6 @@ ragaApp.controller('mainController', function($scope, $http) {
     }).success(function(data, status) {
         $scope.ragaName = data.ragas;
         ragaDatabase = data.ragas;
-        console.log("here")
 
         //Ragas of the Day
         {
@@ -80,36 +79,34 @@ ragaApp.controller('mainController', function($scope, $http) {
             }
 
             $scope.RagaOfTheDay = randomRagas;
-            console.log(randomRagas);
         }
     });
 
-    console.log(ragaDatabase)
-        // Random Beginner tips
-        {
-            let tips = {
-                0: "Use the 🎹 button to enter inputs using the onscreen keyboard",
-                1: "Use the FOGGY preset in the presets section to turn your sequence into a wisp of Raga smoke",
-                2: "Use the MISTY preset to make your sequences sound like you're on a mountain top",
-                3: "Use the FLTR CUTOFF knob to adjust the brightness of the sound",
-                4: "Use the FEEDBACK knob to adjust the delay feedback on your sequence",
-                5: "Use the DRY/WET knob to adjust how much delay you would like on your sequence",
-                6: "Use the CUTOFF knob to adjust the Cutoff frequency of the delay",
-                7: "Use the DRY/WET knob to adjust the amount of delay on your sequence",
-                8: "Use the PHRASING NOTEBOOK to enter any notes about a Raga",
-                9: "Use the PHRASING NOTEBOOK to compose and play notes in a Raga",
-                10: "Use the 🔧 icon in the Phrasing notebook to resolve the Swaras/Notes to the right format eg. 1 to ₁",
-                11: "Use the RANDOM button to generate a short, random sequence in a given Raga",
-                12: "Use the RANDOM button to generate a short, random sequence in a given Raga",
-                13: "Use the RANDOM button to generate a short, random sequence in a given Raga",
-                14: "Use the SAVE button to save your notes locally",
-                15: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
-                16: "Hold the shift button while adjusting the knobs to adjust finer values",
-            }
-
-            let random = Math.floor(Math.random() * (15));
-            $scope.Tip = tips[random];
+    // Random Beginner tips
+    {
+        let tips = {
+            0: "Use the 🎹 button to enter inputs using the onscreen keyboard",
+            1: "Use the FOGGY preset in the presets section to turn your sequence into a wisp of Raga smoke",
+            2: "Use the MISTY preset to make your sequences sound like you're on a mountain top",
+            3: "Use the FLTR CUTOFF knob to adjust the brightness of the sound",
+            4: "Use the FEEDBACK knob to adjust the delay feedback on your sequence",
+            5: "Use the DRY/WET knob to adjust how much delay you would like on your sequence",
+            6: "Use the CUTOFF knob to adjust the Cutoff frequency of the delay",
+            7: "Use the DRY/WET knob to adjust the amount of delay on your sequence",
+            8: "Use the PHRASING NOTEBOOK to enter any notes about a Raga",
+            9: "Use the PHRASING NOTEBOOK to compose and play notes in a Raga",
+            10: "Use the 🔧 icon in the Phrasing notebook to resolve the Swaras/Notes to the right format eg. 1 to ₁",
+            11: "Use the RANDOM button to generate a short, random sequence in a given Raga",
+            12: "Use the RANDOM button to generate a short, random sequence in a given Raga",
+            13: "Use the RANDOM button to generate a short, random sequence in a given Raga",
+            14: "Use the SAVE button to save your notes locally",
+            15: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
+            16: "Hold the shift button while adjusting the knobs to adjust finer values",
         }
+
+        let random = Math.floor(Math.random() * (15));
+        $scope.Tip = tips[random];
+    }
 
 
     //Display list of favourite ragas
@@ -127,8 +124,6 @@ ragaApp.controller('mainController', function($scope, $http) {
         $scope.Favourites = favourites;
     }
 
-
-
 });
 
 //ragaController
@@ -137,7 +132,6 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     $scope.name = $routeParams.name;
     var buffer = $routeParams.name;
 
-    console.log(buffer);
     //Display list of all the ragas from the JSON file
     $http({
         method: 'GET',
@@ -182,9 +176,8 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 
         //Swarahelp
         {
+            swarasHelpClear();
             for (let i = 0; i < moorchana_.length; i++) {
-                console.log(moorchana_[i]);
-
                 switch (moorchana_[i]) {
                     case "G₁":
                         moorchana_[i] = 'R₂';
@@ -200,9 +193,7 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                         break;
                 }
 
-                let id = "#" + moorchana_[i].toLowerCase() + "Key"
-                console.log(id)
-
+                let id = "#" + moorchana_[i].toLowerCase() + "Key";
                 $(id).html("•").addClass('swaraHelpActive');
             }
             swarasHelpON();
@@ -221,8 +212,8 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 var interval;
 var count = 0;
 var tempo;
-const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ'];
-const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ'];
+const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
+const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
 
 //Keyboard bindings
 const keyBindings = {
@@ -255,6 +246,7 @@ keyList[9] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d2.
 keyList[10] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n2.ogg', 'sounds/n2.mp3'] } });
 keyList[11] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n3.ogg', 'sounds/n3.mp3'] } });
 keyList[12] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/saHigh.ogg', 'sounds/saHigh.mp3'] } });
+keyList[13] = new Pizzicato.Sound({ source: 'wave', options: { frequency: 22000 } });
 var shruti = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.ogg'] } });
 
 //Set attack to 0.001 for all the notes so it sounds sharp
@@ -392,6 +384,7 @@ for (const [key, value] of Object.entries(keyBindings)) {
                 keyList[i].play();
             }
         }
+
     }, (e) => {
         if ($(value).hasClass('whiteKeyPressed')) {
             $(value).removeClass('whiteKeyPressed').addClass('whiteKey');
@@ -456,6 +449,9 @@ function timeline(sequence, repeat) {
                     break;
                 case "Ṡ":
                     index = 12;
+                    break;
+                case "-":
+                    index = 13;
                     break;
             }
         }
@@ -734,7 +730,7 @@ function resolvePhrase() {
     });
 }
 
-// Local storage stuff
+// Phrasebook Save function using Local storage
 function savePhrase() {
     let href = window.location.href.split('/');
     let raga_ = href.pop() || href.pop();
@@ -750,6 +746,8 @@ function savePhrase() {
     let phrases = phrases_.substring(1)
     console.log(phrases);
     window.localStorage.setItem(raga, phrases);
+
+    $('h4 span').hide();
 }
 
 // TODO - variable tempo
@@ -781,9 +779,9 @@ function favourite() {
     }
 }
 
-//Autosave feature
-$('document').on('keyup', '.phrase', function() {
-    console.log("keyup");
+//Phrase save pending indicator
+$(document).on('keyup', '.phrase', function() {
+    $('h4 span').show();
 });
 
 //Resize phrasebook features
@@ -797,7 +795,7 @@ function minimizePhraseBook() {
     $('.resize').addClass('fa-expand').removeClass('fa-compress-alt').attr('onclick', "enlargePhraseBook()");;
 }
 
-//Turn off Swaras help
+//Clear Swaras help when there is no Raga selected
 function swarasHelpClear() {
     $('#newPiano > p').text("");
     $('.setOfBlackKeys > p').text("");
@@ -811,3 +809,15 @@ function swarasHelpON() {
         $('#newPiano p').addClass('notesHelpOFF');
     }
 }
+
+function pianoInput(input) {
+    $('#newPiano p').on('click', function(e) {
+        e.stopPropagation();
+        input.val(input.val() + $(this).attr('id').replace('Key', ' ').toUpperCase());
+    });
+}
+
+$(document).on('focus', '.phrase', function() {
+    //$(this).attr('readonly', '');
+    pianoInput($(this));
+});
