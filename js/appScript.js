@@ -666,7 +666,7 @@ $(document).ready(function() {
         $('.phrase').each(function() {
             this.style.height = (this.scrollHeight) + 'px';
         });
-    }, 1000);
+    }, 2000);
 
     // Button functionality
     $(document).on('click', '.button', function() {
