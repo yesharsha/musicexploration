@@ -10,7 +10,7 @@ deployment:
     - /bin/cp exercises.html $DEPLOYPATH
     - /bin/cp glossary.html $DEPLOYPATH
     - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp mainRagaDatabase.json $DEPLOYPATH
+    - /bin/cp Raga_Database.json $DEPLOYPATH
     - /bin/cp outroduction.html $DEPLOYPATH
     - /bin/cp ragaDatabase.html $DEPLOYPATH
     - /bin/cp ragaDetail.html $DEPLOYPATH
@@ -19,3 +19,5 @@ deployment:
     - /bin/cp result.html $DEPLOYPATH
     - /bin/cp swara.html $DEPLOYPATH
     - /bin/cp README.md $DEPLOYPATH
+    - /bin/cp scraper.py $DEPLOYPATH
+    

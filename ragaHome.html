@@ -87,6 +87,12 @@
     </div>
 </div>
 <div>
+    <h3 class="collapsible" ng-click="melakarta = !melakarta">MELAKARTA RAGAS</h3>
+    <div class="ragasContainer" ng-show="melakarta">
+        <span class="ragaName " ng-repeat="raga in Melakartas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+</div>
+<div>
     <h3 class="collapsible" ng-click="day = !day">RANDOM RAGAS</h3>
     <div class="ragasContainer" ng-show="day" ng-int="No Raga to display">
         <span class="ragaName " ng-repeat="raga in RagaOfTheDay"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
@@ -102,13 +108,14 @@
     <h3 class="collapsible" ng-click="ragaList = !ragaList">FULL RAGA LIST </h3>
     <div ng-show="ragaList">
         <div class="search">
-            <input type="text " id="search " placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search " /> {{pianoMessage}}
+            <input type="text " id="search" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" /> {{pianoMessage}}
             <div class="searchNotes ">
                 <div id="help" ng-click="helpText = !helpText"><b>How to enter search query</b></div>
                 <span id="helpText " ng-show="helpText">
-              1. Enter name of Raga. e.g. 'Kanada'. <br/> 
-              2. Enter swaras in ascending or descending order of appearance. e.g. 'S R2 G2'. <br/> 
-              3. Enter swaras through on-screen piano (Desktop only). Notes will automatically appear in search box.</span>
+                    1. Enter name of Raga. e.g. 'Kanada'. <br/> 
+                    2. Enter swaras in ascending or descending order of appearance. e.g. 'S R2 G2'. <br/> 
+                    3. Enter swaras through on-screen piano (Desktop only). Notes will automatically appear in search box.
+                </span>
             </div>
         </div>
         <div class="ragasContainer">

@@ -14,11 +14,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/37095eb785.js" crossorigin="anonymous"></script>
     <script src="js/input-knobs.js"></script>
 </head>
 
 <body>
+    <div id="splashscreen">
+        <p></p>LOADING...</div>
     <div class="wrapper">
         <header>
             <h1><a href="#/">INDIANCLASSICAL.ORG</a></h1>
@@ -80,8 +91,8 @@
                 <div class="effects">
                     <div class="module">
                         <div>
-                            <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                            <output class="knobValue">0.5</output>
+                            <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" value="0.3" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <output class="knobValue">0.3</output>
                             <label for="volume">VOLUME</label>
                         </div>
                     </div>
@@ -94,8 +105,8 @@
                     </div>
                     <div class="module">
                         <div>
-                            <input type="range" id="dubDelayFeedbackKnob" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback($(this), this.value)" value="0.7" min="0.00" max="1.00" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                            <output class="knobValue">0.7</output>
+                            <input type="range" id="dubDelayFeedbackKnob" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback($(this), this.value)" value="0" min="0.00" max="1.00" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <output class="knobValue">0</output>
                             <label for="dubDelayFeedback">FEEDBACK</label>
                         </div>
                         <div>
@@ -104,23 +115,23 @@
                             <label for="dubDelayTime">DELAY TIME</label>
                         </div>
                         <div>
-                            <input type="range" id="dubDelayCutoffKnob" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff($(this), this.value)" value="3200" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                            <span class="knobValue">3.2 kHz</span>
+                            <input type="range" id="dubDelayCutoffKnob" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff($(this), this.value)" value="0" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <span class="knobValue">0 Hz</span>
                             <label for="dubDelayCutoff">CUTOFF</label>
                         </div>
                         <div>
-                            <input type="range" id="dubDelayMixKnob" name="dubDelayMix" class="input-knob" oninput="dubDelayMix($(this), this.value)" value="0.5" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
-                            <span class="knobValue">0.5</span>
+                            <input type="range" id="dubDelayMixKnob" name="dubDelayMix" class="input-knob" oninput="dubDelayMix($(this), this.value)" value="0" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <span class="knobValue">0</span>
                             <label for="dubDelayMix">DRY/WET</label>
                         </div>
                     </div>
                     <div class="module" id="presets">
                         <ul>
-                            <li class="preset" onclick="preset(0.85, 900, 0.75, 0.6, 3800, 1)"><button class="button">FOGGY</button></li>
-                            <li class="preset" onclick="preset(0.5, 3800, 0.75, 0.6, 3800, 0.8)"><button class="button">MISTY</button></li>
-                            <li class="preset" onclick="preset(0.5, 5600, 0.77, 0.15, 3700, 0.8)"><button class="button">SPARKLY</button></li>
-                            <li class="preset" onclick="preset(0.5, 16000, 0.7, 0.6, 3200, 0.5)"><button class="button active">BRIGHT</button></li>
-                            <li class=" preset " onclick="preset(1, 16000, 0, 0.6, 0, 0) "><button class="button">OFF</button></li>
+                            <li class="preset" onclick="preset(0.5, 900, 0.75, 0.6, 3800, 1)"><button class="button">FOGGY</button></li>
+                            <li class="preset" onclick="preset(0.3, 3800, 0.75, 0.6, 3800, 0.8)"><button class="button">MISTY</button></li>
+                            <li class="preset" onclick="preset(0.3, 5600, 0.77, 0.15, 3700, 0.8)"><button class="button">SPARKLY</button></li>
+                            <li class="preset" onclick="preset(0.3, 16000, 0.7, 0.6, 3200, 0.5)"><button class="button">BRIGHT</button></li>
+                            <li class=" preset " onclick="preset(0.3, 16000, 0, 0.6, 0, 0) "><button class="button active">OFF</button></li>
                         </ul>
                     </div>
 
