@@ -1121,7 +1121,7 @@
         },
         {
             "name": "Poorvikavasanta",
-            "Arohanam": "S M₁ G₃ M₁ D N₃ Ṡ",
+            "Arohanam": "S M₁ G₃ M₁ D₁ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₁ M₁ P M₁ G₃ R₁ S",
             "janaka": "false",
             "janyaOf": 15
@@ -1185,7 +1185,7 @@
         {
             "name": "Sāranga Nāta",
             "Arohanam": "S R₁ M₁ P D₁ Ṡ",
-            "Avarohanam": "Ṡ N₃ S D₁ P M₁ G₃ R₁ S",
+            "Avarohanam": "Ṡ N₃ Ṡ D₁ P M₁ G₃ R₁ S",
             "janaka": "false",
             "janyaOf": 15
         },

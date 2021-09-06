@@ -91,6 +91,19 @@ ragaApp.controller('mainController', function($scope, $http) {
             }
             $scope.Melakartas = melakartas;
         }
+
+        //splashscreen stuff
+        $('document').ready(function() {
+            setTimeout(function() {
+                $('#splashscreen').hide();
+                $('.wrapper').show();
+
+                //initialize phrase scroll length as soon as page loads
+                $('.phrase').each(function() {
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+            }, 2000);
+        });
     });
 
     // Random Beginner tips
@@ -570,6 +583,7 @@ function timeline(sequence, repeat) {
         clearInterval(interval);
         temp = '';
         $('.controls .button').removeClass('active')
+        $('.phraseBookControl .button').removeClass('active')
     }
 }
 
@@ -656,17 +670,6 @@ function randomizePlay() {
 
 //All event listeners here
 $(document).ready(function() {
-
-    //splashscreen stuff
-    setTimeout(function() {
-        $('#splashscreen').hide();
-        $('.wrapper').show();
-
-        //initialize phrase scroll length as soon as page loads
-        $('.phrase').each(function() {
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-    }, 2000);
 
     // Button functionality
     $(document).on('click', '.button', function() {
