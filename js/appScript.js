@@ -65,7 +65,7 @@ ragaApp.controller('mainController', function($scope, $http) {
     //Display list of all the ragas
     $http({
         method: 'POST',
-        url: 'mainRagaDatabase.json'
+        url: 'Raga_Database.json'
     }).success(function(data, status) {
         $scope.ragaName = data.ragas;
         ragaDatabase = data.ragas;
@@ -80,6 +80,30 @@ ragaApp.controller('mainController', function($scope, $http) {
 
             $scope.RagaOfTheDay = randomRagas;
         }
+
+        // Display list of Melakartha Ragas
+        {
+            let melakartas = []
+            for (let i = 0; i < ragaDatabase.length; i++) {
+                if (ragaDatabase[i].janyaOf == "false") {
+                    melakartas.push(ragaDatabase[i].name);
+                }
+            }
+            $scope.Melakartas = melakartas;
+        }
+
+        //splashscreen stuff
+        $('document').ready(function() {
+            setTimeout(function() {
+                $('#splashscreen').hide();
+                $('.wrapper').show();
+
+                //initialize phrase scroll length as soon as page loads
+                $('.phrase').each(function() {
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+            }, 2000);
+        });
     });
 
     // Random Beginner tips
@@ -135,7 +159,7 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     //Display list of all the ragas from the JSON file
     $http({
         method: 'GET',
-        url: 'mainRagaDatabase.json'
+        url: 'Raga_Database.json'
     }).success(function(data, status) {
         $scope.ragaName = data.ragas;
         let ragaDatabase = data.ragas;
@@ -143,20 +167,97 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
         //Get Raga Arohanam Avarohanam and Moorchana phrase
         let raga = ragaDatabase.filter(function(raga) { return raga.name == buffer });
 
-        let arohanam_ = raga[0].Arohanam.replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+        let arohanam_ = raga[0].Arohanam.split(" ");
         arohanam = arohanam_.join(" ");
         $scope.Arohanam = arohanam;
 
-        let avarohanam_ = raga[0].Avarohanam.replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+        let avarohanam_ = raga[0].Avarohanam.split(" ");
         avarohanam = avarohanam_.join(" ");
         $scope.Avarohanam = avarohanam;
 
-        arohanam_[arohanam_.length - 1] = "Ṡ";
         let shift = avarohanam_.shift();
-        avarohanam[0] = "Ṡ";
         let moorchana_ = arohanam_.concat(avarohanam_)
         moorchana = moorchana_.join(" ")
         $scope.Moorchana = moorchana;
+
+        var chakras = ['Indu', 'Nētra', 'Agni', 'Veda', 'Bāna', 'Rutu', 'Rishi', 'Vasu', 'Brahma', 'Disi', 'Rudra', 'Āditya']
+
+        //Show list of janya Ragas if given Raga is a Melakarta Raga
+        {
+            let janyaRagas = [];
+            $scope.JanakaNumber = raga[0].janaka;
+
+            //To show whether Shuddha/Prati madhyama equivalent
+            $scope.Madhyama = raga[0].janaka < 36 ? "Prati" : "Shuddha";
+
+            if (parseInt(raga[0].janaka) < 72) {
+                let chakraNo = (parseInt(parseInt(raga[0].janaka) / 6));
+                $scope.Chakra = chakras[chakraNo];
+            } else {
+                $scope.Chakra = chakras[11];
+            }
+
+            if (parseInt(raga[0].janaka)) {
+                $scope.Janaka = true;
+            }
+
+            for (let i = 0; i < data.ragas.length; i++) {
+                if (data.ragas[i].janyaOf == raga[0].janaka) {
+                    janyaRagas.push(data.ragas[i].name);
+                }
+                //To find Shuddha/Prati Madhyama equivalent Raga
+                if (raga[0].janaka < 36 && data.ragas[i].janaka == raga[0].janaka + 36) {
+                    $scope.MadhyamaEquivalent = data.ragas[i].name
+                } else if (raga[0].janaka > 36 && data.ragas[i].janaka == raga[0].janaka - 36) {
+                    $scope.MadhyamaEquivalent = data.ragas[i].name
+                }
+            }
+
+            $scope.JanyaRagas = janyaRagas;
+
+        }
+
+        // Show Melakartha Raga and related Ragas if this is a Janya Raga
+        {
+            // Check if this Raga is Janya Raga
+            $scope.Janaka = raga[0].janaka === 'false' ? false : true;
+
+            let similarRagas = [];
+
+            for (let i = 0; i < data.ragas.length; i++) {
+                if (data.ragas[i].janaka == raga[0].janyaOf) {
+                    $scope.JanakaRaga = data.ragas[i].name
+                }
+                // Previous and next three Ragas
+                if (data.ragas[i] === raga[0]) {
+                    try {
+                        similarRagas.push(data.ragas[i - 3].name)
+                        similarRagas.push(data.ragas[i - 2].name)
+                        similarRagas.push(data.ragas[i - 1].name)
+                        similarRagas.push(data.ragas[i + 1].name)
+                        similarRagas.push(data.ragas[i + 2].name)
+                        similarRagas.push(data.ragas[i + 3].name)
+                    } catch {
+                        if (i == 1) {
+                            similarRagas.push(data.ragas[i - 1].name)
+                            similarRagas.push(data.ragas[i + 1].name)
+                            similarRagas.push(data.ragas[i + 2].name)
+                            similarRagas.push(data.ragas[i + 3].name)
+                        } else if (i == 2) {
+                            similarRagas.push(data.ragas[i - 2].name)
+                            similarRagas.push(data.ragas[i - 1].name)
+                            similarRagas.push(data.ragas[i + 1].name)
+                            similarRagas.push(data.ragas[i + 2].name)
+                            similarRagas.push(data.ragas[i + 3].name)
+                        }
+                    }
+                }
+            }
+
+            $scope.SimilarRagas = similarRagas
+
+
+        }
 
         //Retrieve contents of local storage for phrasebook
         if (window.localStorage.getItem(buffer)) {
@@ -265,10 +366,10 @@ swarasGroup.volume = 0.5;
 //
 //Add Effects to the group
 var dubDelay = new Pizzicato.Effects.DubDelay({
-    feedback: 0.70,
+    feedback: 0,
     time: 0.6,
-    cutoff: 3200,
-    mix: 0.5
+    cutoff: 0,
+    mix: 0
 });
 
 var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
@@ -278,6 +379,7 @@ var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
 
 swarasGroup.addEffect(lowPassFilter);
 swarasGroup.addEffect(dubDelay)
+swarasGroup.volume = 0.3;
 
 //CONTROL PANEL for Volume and effetcs
 // When a knob is moved, these functions assign values to the effects
@@ -369,47 +471,41 @@ function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayT
 
 //
 // On Screen Keyboard
-for (const [key, value] of Object.entries(keyBindings)) {
-    keyboardJS.bind(key, (e) => {
-        e.preventRepeat();
-        if ($(value).hasClass('whiteKey')) {
-            $(value).addClass('whiteKeyPressed').removeClass('whiteKey');
-        } else if ($(value).hasClass('blackKey')) {
-            $(value).addClass('blackKeyPressed').removeClass('blackKey');
-        }
-        var keyName = String(value).substring(1).split('K');
-        for (let i = 0; i < keyListPseudo.length; i++) {
-            if (keyName[0] == keyListPseudo[i]) {
-                keyList[i].stop();
-                keyList[i].play();
-            }
-        }
-
-    }, (e) => {
-        if ($(value).hasClass('whiteKeyPressed')) {
-            $(value).removeClass('whiteKeyPressed').addClass('whiteKey');
-        } else if ($(value).hasClass('blackKeyPressed')) {
-            $(value).removeClass('blackKeyPressed').addClass('blackKey');
-        }
-    });
+function keyBind() {
+    for (const [key, value] of Object.entries(keyBindings)) {
+        keyboardJS.bind(key, (e) => {
+            e.preventRepeat();
+            $(value).trigger("mousedown");
+        }, (e) => {
+            $(value).trigger("mouseup");
+        });
+    }
 }
+keyBind();
 
-// On Click Key register on the search bar
+// On Click Key register on the search bar and phrase
 function keyRegister() {
-    let pianomessage = '';
-    let keyName;
     let a = $('#search').val();
-    $('#newPiano p').click(function() {
-        keyName = $(this).attr('id').split('K');
-        if (keyName[0] == "Ṡ") {
-            keyName[0] = "Ṡ";
-        }
-        a = $('#search').val() + " " + keyName[0];
+    $('#newPiano p').unbind("click");
+    $('#newPiano p').on('click', function(e) {
+        e.stopPropagation();
+        a = $('#search').val() + " " + $(this).attr('id').split('K')[0];
         $('#search').val(a);
-        pianomessage = 'Our system detected that you entered keys through the on-screen keyboard. Do you want to try modifying the faux-Swaras?'
     });
 }
 keyRegister();
+
+function pianoInput(input) {
+    $('#newPiano p').unbind("click");
+    $('#newPiano p').on('click', function(e) {
+        e.stopPropagation();
+        input.val(input.val() + $(this).attr('id').replace('Key', ' ').toUpperCase());
+    });
+}
+
+$(document).on('focus', '.phrase', function() {
+    pianoInput($(this));
+});
 
 //
 //
@@ -458,7 +554,7 @@ function timeline(sequence, repeat) {
     }
     keyList[index].stop();
 
-    //Function to place the swara sequence in the sequence window
+    //Function to place the swara sequence in the sequence window - temporarily disabled
     function displaySequence() {
         var seq = sequence.slice(count - 9, count + 1).toString().replaceAll(",", "  ").replaceAll(/[0-9]/g, "&emsp;");
         if (count > 8) {
@@ -487,6 +583,7 @@ function timeline(sequence, repeat) {
         clearInterval(interval);
         temp = '';
         $('.controls .button').removeClass('active')
+        $('.phraseBookControl .button').removeClass('active')
     }
 }
 
@@ -510,19 +607,18 @@ function stop() {
     count = 0;
     temp = '';
     $('.controls .button').removeClass('active');
+    $('.phraseBookControl .button').removeClass('active');
 }
 
 //Arohanam Play
 function arohanamPlay() {
     let arohanam = $('#arohanam').text().split(" ");
-    arohanam[arohanam.length - 1] = "Ṡ";
     play(arohanam, 700);
 }
 
 //Avarohanam play
 function avarohanamPlay() {
     let avarohanam = $('#avarohanam').text().split(" ");
-    avarohanam[0] = "Ṡ";
     play(avarohanam, 700);
 }
 
@@ -574,6 +670,7 @@ function randomizePlay() {
 
 //All event listeners here
 $(document).ready(function() {
+
     // Button functionality
     $(document).on('click', '.button', function() {
         $(this).addClass('active');
@@ -657,6 +754,23 @@ $(document).ready(function() {
         }
 
     });
+
+    //Disable and resume keyboard input on .phrase:focus and search:focus
+    $(document).on('focus', '.phrase', function() {
+        keyboardJS.pause();
+    });
+
+    $(document).on('blur', '.phrase', function() {
+        keyboardJS.resume();
+    });
+
+    $(document).on('focus', '#search', function() {
+        keyboardJS.pause();
+    });
+
+    $(document).on('blur', '#search', function() {
+        keyboardJS.resume();
+    });
 });
 
 // Phrase Delete button
@@ -664,6 +778,8 @@ function deletePhrase() {
     $('.phraseUnit.active').each(function() {
         $(this).remove();
     });
+
+    fadeout('#deletePhrase');
 }
 
 function phraseBookPlay() {
@@ -686,8 +802,6 @@ function phraseBookPlay() {
                 let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
 
                 sequence = sequence.concat(phrase);
-                console.log("sequence is: ")
-                console.log(sequence)
 
                 if (sequence.length > 0) {
                     try {
@@ -706,8 +820,6 @@ function phraseBookPlay() {
         $('.phraseUnit').each(function() {
             let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
             sequence = sequence.concat(phrase);
-            console.log("sequence is: ")
-            console.log(sequence)
             if (sequence) {
                 play(sequence, 400);
             }
@@ -728,6 +840,7 @@ function resolvePhrase() {
             console.log('Selected phrases resolved with 0 errors');
         }
     });
+    fadeout('#resolvePhrase')
 }
 
 // Phrasebook Save function using Local storage
@@ -748,6 +861,8 @@ function savePhrase() {
     window.localStorage.setItem(raga, phrases);
 
     $('h4 span').hide();
+
+    fadeout('#savePhrase')
 }
 
 // TODO - variable tempo
@@ -810,14 +925,16 @@ function swarasHelpON() {
     }
 }
 
-function pianoInput(input) {
-    $('#newPiano p').on('click', function(e) {
-        e.stopPropagation();
-        input.val(input.val() + $(this).attr('id').replace('Key', ' ').toUpperCase());
-    });
-}
+$(document).on('input', '.phrase', function() {
+    console.log('here');
+    this.style.height = 'auto';
 
-$(document).on('focus', '.phrase', function() {
-    //$(this).attr('readonly', '');
-    pianoInput($(this));
+    this.style.height =
+        (this.scrollHeight) + 'px';
 });
+
+function fadeout(id) {
+    setTimeout(function() {
+        $(id).removeClass('active');
+    }, 200);
+}

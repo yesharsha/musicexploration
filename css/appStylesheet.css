@@ -745,12 +745,11 @@ input:focus {
 
 .clearfix p {
     margin-top: 0px;
-    line-height: 1em;
     display: inline-block;
 }
 
 .controls {
-    margin-top: 40px;
+    margin: 40px 0px;
 }
 
 #stop {
@@ -940,6 +939,7 @@ b {
     border-radius: 3px;
     padding: 15px;
     box-sizing: border-box;
+    margin-top: 40px;
 }
 
 .phrase {
@@ -1088,6 +1088,36 @@ h4 span {
 
  ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+#splashscreen {
+    background: white;
+    width: 100%;
+    Height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+    text-align: center;
+    padding-top: 15%;
+    letter-spacing: 0.1em;
+    overflow: hidden;
+}
+
+#splashscreen p {
+    width: 128px;
+    height: 100px;
+    margin: 0 auto;
+    background-size: cover;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    display: none;
+}
+
+.about .ragasContainer {
+    margin-top: 20px;
 }
 
 @media (max-width:1217px) and (min-width:320px) {
