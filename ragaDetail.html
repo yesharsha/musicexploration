@@ -1,9 +1,8 @@
 <div class="breadcrumb">
-    <a href="#" onclick="swarasHelpClear()"><span class="backIcon">
-            < </span>BACK TO HOME</a>
+    <a href="#" onclick="swarasHelpClear()"><i class="fas fa-angle-left fa-sm"> </i>BACK TO HOME</a>
 </div>
 <div class="clearfix title">
-    <h2>{{name | uppercase}}</h2>
+    <h1>{{name | uppercase}}</h1>
     <span id="favourite" class="{{Favourite}}" onclick="favourite()"><i class="fas fa-heart fa-sm"></i></span>
 </div>
 <div class="clearfix">
@@ -15,10 +14,9 @@
     </div>
 </div>
 <div class="clearfix controls">
-    <button id="arohanamPlay" class="button" onclick="arohanamPlay()"> <i class="fas fa-play fa-sm"></i>AROHANAM </button>
-    <button id="avarohanamPlay" class="button" onclick="avarohanamPlay()"><i class="fas fa-play fa-sm"></i>AVAROHANAM </button>
-    <button id="randomizePlay" class="button" onclick="randomizePlay()"><i class="fas fa-play fa-sm"></i>RANDOM </button>
-    <button id="stop" class="button rightControl" onclick="stop()"><i class="fas fa-stop fa-sm"></i> STOP </button>
+    <button id="arohanamPlay" class="button" onclick="arohanamPlay()" title="Play the ascending sequence of notes"> <i class="fas fa-play fa-sm"></i>AROHANAM</button><button id="avarohanamPlay" class="button" onclick="avarohanamPlay()" title="Play the descending sequence of notes"><i class="fas fa-play fa-sm"></i>AVAROHANAM</button>
+    <button id="randomizePlay" class="button" onclick="randomizePlay()" title="Play a Random sequence of 900 notes in this Raga"><i class="fas fa-play fa-sm"></i>RANDOM</button>
+    <button id="stop" class="button rightControl" onclick="stop()" title="Stop playing all sequences"><i class="fas fa-stop fa-sm"></i> STOP </button>
 </div>
 <!-- <div class="clearfix sequence">
     <div id="sequencePast">
@@ -28,8 +26,8 @@
 <div class="clearfix about" ng-show="JanakaNumber">
     <h3 class="collapsible" ng-click="about = !about">ABOUT THIS RAGA</h3>
     <p ng-show="!about">
-        {{name}} is the Melakartha #{{JanakaNumber}} in the Venkatamakhin classification and is present in the {{Chakra}} chakra. It's {{Madhyama}} Madhyama equivalent Raga is
-        <a href=" #ragaDetail/{{MadhyamaEquivalent}} ">{{MadhyamaEquivalent}}</a>. The following Janya Ragas are derived from it -
+        {{name}} is the Melakartha #{{JanakaNumber}} in Govindhacharya's 72 Melakartha classification and is present in the {{Chakra}} chakra. It's {{Madhyama}} Madhyama equivalent Raga is
+        <a href=" #ragaDetail/{{MadhyamaEquivalent}} ">{{MadhyamaEquivalent}}</a>. The following Janya Ragas are derived from it:
     </p>
     <div class="ragasContainer" ng-show="!about">
         <span class="ragaName " ng-repeat="raga in JanyaRagas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
@@ -39,7 +37,7 @@
 <div class="clearfix about" ng-show="!Janaka">
     <h3 class="collapsible" ng-click="about = !about">ABOUT THIS RAGA</h3>
     <p ng-show="!about">
-        {{name}} is a janya raga of the Melakartha <a href=" #ragaDetail/{{JanakaRaga}} ">{{JanakaRaga}}</a> in the Venkatamakhin classification. Ragas similar to {{name}} are -
+        {{name}} is a janya raga of the Melakartha <a href=" #ragaDetail/{{JanakaRaga}} ">{{JanakaRaga}}</a> in Govindhacharya's 72 Melakartha classification. Ragas similar to {{name}} are:
     </p>
     <div class="ragasContainer" ng-show="!about">
         <span class="ragaName " ng-repeat="raga in SimilarRagas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
@@ -49,28 +47,29 @@
 <div class="clearfix phraseBook">
     <div class="phraseHeading">
         <h4>PHRASING NOTEBOOK <span>*</span></h4>
+        <span id="toastMessages">
+            Your notes have been saved
+        </span>
         <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
     </div>
     <div class="phraseBookControl">
-        <button class="button" id="newPhrase">+ NEW</button>
-        <button class="button" id="playPhrase" onclick="phraseBookPlay()"><i class="fas fa-play fa-sm"></i>PLAY</button>
-        <button id="stop" class="button" onclick="stop()"><i class="fas fa-stop fa-sm"></i>STOP</button>
-        <!-- <button class="button" id="keyBoardEntryPhrase"><i class="far fa-keyboard"></i></button> -->
-        <button class="button" id="savePhrase" onclick="savePhrase()"><i class="far fa-save"></i>SAVE</button>
+        <button class="button" id="newPhrase" title="Add a new phrase">+ NEW</button>
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button>
+        <button id="stop" class="button" onclick="stop()" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+        <button class="button" id="savePhrase" onclick="savePhrase()" title="Save all phrases to local Storage. Phrases will be available on page reload."><i class="far fa-save"></i>SAVE</button>
 
-        <button class="button rightControl" id="deletePhrase" onclick="deletePhrase()"><i class="fas fa-backspace"></i>DEL</button>
-        <button class="button rightControl" id="resolvePhrase" onclick="resolvePhrase()"><i class="fas fa-wrench"></i></button>
+        <button class="button rightControl" id="deletePhrase" onclick="deletePhrase()" title="Delete selected phrases"><i class="fas fa-backspace"></i>DEL</button>
     </div>
     <div class="phraseUnit">
-        <div class="phraseSelection"></div>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
         <textarea class="phrase">{{Moorchana}}</textarea>
     </div>
     <div class="phraseUnit" ng-repeat="phrase in Phrases">
-        <div class="phraseSelection"></div>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
         <textarea class="phrase">{{phrase}}</textarea>
     </div>
     <div class="phraseUnit">
-        <div class="phraseSelection"></div>
+        <div class="phraseSelection" title="Click here to select this phrase, You can specifically play or delete selected phrases"></div>
         <textarea id="phrase" class="phrase" placeholder="Enter a phrase here, select the input box and use the play button to play your selections."></textarea>
     </div>
 </div>

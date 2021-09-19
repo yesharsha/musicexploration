@@ -1267,7 +1267,7 @@
             "janyaOf": 16
         },
         {
-            "name": "Āhir Bhairavi",
+            "name": "Ahir Bhairav",
             "Arohanam": "S R₁ G₃ M₁ P N₂ D₂ M₁ P D₂ Ṡ",
             "Avarohanam": "Ṡ N₂ D₂ P M₁ P G₃ R₁ S",
             "janaka": "false",
@@ -1743,7 +1743,7 @@
             "janyaOf": 20
         },
         {
-            "name": "Jingaḷa",
+            "name": "Jingala",
             "Arohanam": "S R₂ G₂ M₁ P D₁ N₂ D₁ P Ṡ",
             "Avarohanam": "Ṡ N₂ D₁ P M₁ G₂ R₂ S",
             "janaka": "false",
@@ -2317,7 +2317,7 @@
             "janyaOf": 22
         },
         {
-            "name": "Kanadā",
+            "name": "Kānadā",
             "Arohanam": "S R₂ G₂ M₁ D₂ N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ P M₁ G₂ M₁ R₂ S",
             "janaka": "false",
@@ -2892,8 +2892,8 @@
         },
         {
             "name": "Velāvali",
-            "Arohanam": "S G₂ R₂ M₁ P D₂ S",
-            "Avarohanam": "S N₃ D₂ P M₁ G₂ R₂ S",
+            "Arohanam": "S G₂ R₂ M₁ P D₂ Ṡ",
+            "Avarohanam": "Ṡ N₃ D₂ P M₁ G₂ R₂ S",
             "janaka": "false",
             "janyaOf": 23
         },
@@ -2941,8 +2941,8 @@
         },
         {
             "name": "Gayakamandini",
-            "Arohanam": "S R2 G3 M1 P D1 S",
-            "Avarohanam": "S D1 P M1 G3 R2 S",
+            "Arohanam": "S R₂ G₃ M₁ P D₁ S",
+            "Avarohanam": "S D₁ P M₁ G₃ R₂ S",
             "janaka": "false",
             "janyaOf": 25
         },
@@ -5236,7 +5236,7 @@
             "janyaOf": 51
         },
         {
-            "name": "ādhi Panchama",
+            "name": "Adhi Panchama",
             "Arohanam": "S R₁ P D₁ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₁ N₃ P M₂ G₃ R₁ S",
             "janaka": "false",
@@ -5600,7 +5600,7 @@
             "janyaOf": 55
         },
         {
-            "name": "Shanmukhapriyaa",
+            "name": "Shanmukhapriya",
             "Arohanam": "S R₂ G₂ M₂ P D₁ N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ D₁ P M₂ G₂ R₂ S",
             "janaka": 56,
