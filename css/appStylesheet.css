@@ -172,24 +172,39 @@ i {
     /* Gecko Browsers */
 }
 
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 header {
-    background: #002B5E;
+    /* background: #002B5E; */
+    background: #000000;
     position: fixed;
     width: 100%;
     top: 0px;
-    padding: 7px 0px;
 }
 
 h1 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Old Standard TT';
+    font-size: 1.6em;
+    letter-spacing: 1.1px;
     font-weight: 400;
-    font-size: 1.4em;
-    margin: 15px;
-    float: left;
-    color: white;
-    margin-left: 3%;
-    font-style: italic;
-    letter-spacing: 0.05em;
+    margin: 0px 0px 20px 0px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #444444;
+    color: #444444;
 }
 
 h1 a {
@@ -206,16 +221,42 @@ h2 {
     font-weight: 400;
     margin: 0px 0px 20px 0px;
     padding-bottom: 10px;
-    border-bottom: 1px dotted green;
+    border-bottom: 1px dotted black;
+}
+
+.logo {
+    font-weight: 400;
+    font-size: 1.4em;
+    margin: 15px;
+    float: left;
+    color: white;
+    margin-left: 3%;
+    font-style: italic;
+    letter-spacing: 0.05em;
+}
+
+.logo span {
+    float: left;
+    margin-right: 10px;
+}
+
+.logo span:nth-child(2) {
+    margin-top: 3px;
+}
+
+.logo a {
+    text-decoration: none;
+    margin-top: 4px;
+    display: inline-block;
 }
 
 .title {
-    border-bottom: 1px dotted green;
+    border-bottom: 1px dotted black;
     margin-bottom: 20px;
     display: inline-block;
 }
 
-.title h2 {
+.title h1 {
     margin-bottom: 0px;
     border-bottom: 0px;
     float: left;
@@ -223,13 +264,12 @@ h2 {
 
 .collapsible {
     cursor: pointer;
-    text-decoration: underline;
 }
 
 #favourite {
     margin-left: 40px;
     font-size: 1em;
-    line-height: 1.45em;
+    line-height: 1.15em;
     cursor: pointer;
 }
 
@@ -260,10 +300,12 @@ h2 {
     display: block;
     font-size: 1.3em;
     letter-spacing: 0.06em;
+    font-family: 'Old Standard TT';
+    color: #585858;
 }
 
 .content p {
-    margin-top: 15px;
+    margin: 15px 0px;
     line-height: 1.8em;
     padding: 2px;
     letter-spacing: 0.01em;
@@ -289,6 +331,15 @@ h2 {
     margin-bottom: 40px;
 }
 
+.breadcrumb a {
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline #848484;
+    text-underline-offset: 3px;
+}
+
 .button {
     font-size: 0.7em;
     font-family: 'Roboto Mono';
@@ -298,6 +349,7 @@ h2 {
     margin-right: 15px;
     border-radius: 3px;
     cursor: pointer;
+    user-select: none;
 }
 
 .buttonToggle {
@@ -336,7 +388,7 @@ footer p {
 }
 
 footer p a {
-    padding: 0px 20px;
+    padding: 0px 5px;
 }
 
 footer p a:last-child {
@@ -364,10 +416,121 @@ footer p:last-child a {
     background: yellow;
 }
 
-.options span {
+.options {
+    display: inline-block;
+    margin-bottom: 40px;
+}
+
+.options div {
+    float: left;
+    /* border: 1px solid rgb(224, 223, 223); */
+    border-radius: 3px;
+    margin-right: 3px;
+    padding: 4px 4px 4px 0px;
+    box-sizing: border-box;
+}
+
+.options div:first-child {
+    width: 175px;
+}
+
+.options div:nth-child(2) {
+    width: 278px;
+}
+
+.options div:nth-child(3) {
+    width: 128px;
+}
+
+.options div>span {
     font-family: 'Roboto Mono';
-    font-size: 18px;
+    font-size: 13px;
     letter-spacing: 1px;
+    color: #848484;
+    margin-top: 4px;
+    float: left;
+}
+
+.switch {
+    float: left;
+}
+
+.options input {
+    height: 22px;
+    width: 34px;
+    font-family: 'Roboto Mono';
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    font-size: 1.1em;
+    padding: 1px 3px 1px 4px;
+    margin: -3px 0px 0px 10px;
+    color: #585858;
+}
+
+
+/* Toggle button styles*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+    margin: 2px 20px 0px 8px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 1px;
+    bottom: 1px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #ffe600;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #ffe600;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 
@@ -536,79 +699,6 @@ footer p:last-child a {
 }
 
 
-/* Options styles */
-
-.options {
-    margin-bottom: 40px;
-}
-
-
-/* Toggle button styles*/
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 32px;
-    height: 16px;
-    margin: 0px 20px 0px 10px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 1px;
-    bottom: 1px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-input:checked+.slider {
-    background-color: #ffe600;
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px #ffe600;
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(16px);
-    -ms-transform: translateX(16px);
-    transform: translateX(16px);
-}
-
-
-/* Rounded sliders */
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-
 /* Exercises styles */
 
 .headingHighlight {
@@ -634,6 +724,7 @@ input:checked+.slider:before {
     width: 587px;
     line-height: 1.3em;
     letter-spacing: 0.02em;
+    color: #585858;
 }
 
 .tips p {
@@ -702,6 +793,14 @@ input:focus {
     font-family: 'Roboto Mono', monospace;
 }
 
+.ragaName a {
+    text-decoration: none;
+}
+
+.ragaName a:hover {
+    text-decoration: underline;
+}
+
 
 /* menu */
 
@@ -744,12 +843,12 @@ input:focus {
 }
 
 .clearfix p {
-    margin-top: 0px;
+    margin: 0px;
     display: inline-block;
 }
 
 .controls {
-    margin: 40px 0px;
+    margin: 40px 0px 50px 0px;
 }
 
 #stop {
@@ -975,6 +1074,10 @@ b {
     width: 100.05%;
 }
 
+#playPhrase {
+    margin-right: 5px;
+}
+
 .phrase textarea {
     letter-spacing: 0.3em;
 }
@@ -1026,6 +1129,7 @@ b {
 
 .phraseHeading h4 {
     float: left;
+    color: #585858;
 }
 
 .phraseHeading span {
@@ -1038,6 +1142,13 @@ h4 span {
     font-size: 0.7em;
     margin-left: 10px;
     display: none;
+}
+
+#toastMessages {
+    float: left;
+    margin-left: 20px;
+    font-size: 0.6em;
+    margin-top: 5px;
 }
 
 .phraseSelection {
@@ -1118,6 +1229,56 @@ h4 span {
 
 .about .ragasContainer {
     margin-top: 20px;
+}
+
+
+/* Raga Moods styles */
+
+.moods {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #585858;
+}
+
+.mood {
+    float: left;
+    padding: 25px 10px;
+    box-sizing: border-box;
+    margin-right: 1%;
+    border-radius: 60px;
+    width: 118px;
+    cursor: pointer;
+    color: #b3b3b3;
+}
+
+.mood i {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mood div {
+    font-size: 0.6em;
+    margin-top: 20px;
+    text-align: center;
+    letter-spacing: 0.19em;
+}
+
+.mood:hover,
+.mood.active {
+    color: #383838;
+}
+
+.mysterious,
+.ecstatic,
+.cinematic,
+.serene {
+    display: none;
+}
+
+hr {
+    margin: 20px 0px;
+    border: solid 1px #f3f3f3;
 }
 
 @media (max-width:1217px) and (min-width:320px) {

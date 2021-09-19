@@ -1,7 +1,7 @@
 <div>
-    <h2>
+    <h1>
         RAGA MEDITATION
-    </h2>
+    </h1>
 </div>
 <p>
     Welcome to Raga Meditation. This is a database of around 950 Ragas. Use this resource to filter and explore Ragas in the Carnatic system of music. You can also create rich, beautiful atmospheres with the Ragas by playing sequences with the classic Jamaican
@@ -13,7 +13,7 @@
         <span class="ragaName "><a href="#/ragaDetail/Māyamālava%20Gowla">Māyamālava Gowla</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Hindolam">Hindolam</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Chārukeshi">Chārukeshi</a></span>
-        <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriyaa">Shanmukhapriyaa</a></span>
+        <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriya">Shanmukhapriya</a></span>
         <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Reethigowla">Reethigowla</a></span>
         <span class="ragaName "><a href="#/ragaDetail/Natabhairavi">Natabhairavi</a></span>
@@ -23,22 +23,58 @@
     </div>
 </div>
 <div>
-    <h3 class="collapsible" ng-click="moods = !moods">MOODS</h3>
-    <div class="ragasContainer" ng-show="moods" ng-int="No Raga to display">
-        <div>
-            <h4>Meditative</h4>
+    <h3>MOODS</h3>
+    <div class="moods">
+        <div class="mood active" id="meditative">
+            <i class="fas fa-om fa-2x"></i>
+            <div>MEDITATIVE</div>
+        </div>
+        <div class="mood" id="ecstatic">
+            <i class="fas fa-gopuram fa-2x"></i>
+            <div>ECSTATIC</div>
+        </div>
+        <div class="mood" id="mysterious">
+            <i class="fas fa-ghost fa-2x"></i>
+            <div>MYSTERIOUS</div>
+        </div>
+        <div class="mood" id="cinematic">
+            <i class="fas fa-theater-masks fa-2x"></i>
+            <div>CINEMATIC</div>
+        </div>
+        <div class="mood" id="serene">
+            <i class="fas fa-wind fa-2x"></i>
+            <div>SERENE</div>
+        </div>
+    </div>
+
+    <div class="ragasContainer">
+        <div class="meditative">
+            <p>Meditative Ragas - early morning, silence, clarity of thought.</p>
             <div>
                 <span class="ragaName "><a href="#ragaDetail/Māyamālava%20Gowla">Māyamālava Gowla</a></span>
-                <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriyaa">Shanmukhapriyaa</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Shanmukhapriya">Shanmukhapriya</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Sāveri">Sāveri</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Malahari">Malahari</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Hindolam">Hindolam</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Kalyāna%20Vasantam">Kalyāna Vasantam</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Bindhumālini">Bindhumālini</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Saraswathi">Saraswathi</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Ahir%20Bhairav">Ahir Bhairav</a></span>
             </div>
-
-            <h4>Mysterious</h4>
+        </div>
+        <div class="ecstatic">
+            <p>Ecstatic Ragas - alluring, Hallucinogenic euphoria.</p>
+            <div>
+                <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Reethigowla">Reethigowla</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Anandabhairavi">Anandabhairavi</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Kanadā">Kānadā</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Bhāgeshri">Bhāgeshri</a></span>
+                <span class="ragaName "><a href="#/ragaDetail/Miyan%20Malhār">Miyan Malhār</a></span>
+            </div>
+        </div>
+        <div class="mysterious">
+            <p>Mysterious Ragas - dark, nocturnal alternative reality.</p>
             <div>
                 <span class="ragaName "><a href="#ragaDetail/Nāsikabhooshhani">Nāsikabhooshhani</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Vanaspati">Vanaspati</a></span>
@@ -48,18 +84,9 @@
                 <span class="ragaName "><a href="#/ragaDetail/Kanakāmbari">Kanakāmbari</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Rāgachoodāmani">Rāgachoodāmani</a></span>
             </div>
-
-            <h4>Ecstatic</h4>
-            <div>
-                <span class="ragaName "><a href="#ragaDetail/Kharaharapriya">Kharaharapriya</a></span>
-                <span class="ragaName "><a href="#/ragaDetail/Reethigowla">Reethigowla</a></span>
-                <span class="ragaName "><a href="#/ragaDetail/Anandabhairavi">Anandabhairavi</a></span>
-                <span class="ragaName "><a href="#/ragaDetail/Kanadā">Kanadā</a></span>
-                <span class="ragaName "><a href="#/ragaDetail/Bhāgeshri">Bhāgeshri</a></span>
-                <span class="ragaName "><a href="#/ragaDetail/Miyan%20Malhār">Miyan Malhār</a></span>
-            </div>
-
-            <h4>Cinematic</h4>
+        </div>
+        <div class="cinematic">
+            <p>Cinematic Ragas - viscous, fluid, sympathetic emotions</p>
             <div>
                 <span class="ragaName "><a href="#ragaDetail/Natabhairavi">Natabhairavi</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Vijayanāgari">Vijayanāgari</a></span>
@@ -70,8 +97,9 @@
                 <span class="ragaName "><a href="#/ragaDetail/Shivaranjani">Shivaranjani</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Shubhapanthuvarāli">Shubhapanthuvarāli</a></span>
             </div>
-
-            <h4>Serene</h4>
+        </div>
+        <div class="serene">
+            <p>Serene Ragas - joyful, uplifting, relaxed evening vibe.</p>
             <div>
                 <span class="ragaName "><a href="#/ragaDetail/Kāmbhoji">Kāmbhoji</a></span>
                 <span class="ragaName "><a href="#/ragaDetail/Bahudāri">Bahudāri</a></span>
@@ -86,31 +114,41 @@
         </div>
     </div>
 </div>
-<div>
-    <h3 class="collapsible" ng-click="melakarta = !melakarta">MELAKARTA RAGAS</h3>
-    <div class="ragasContainer" ng-show="melakarta">
-        <span class="ragaName " ng-repeat="raga in Melakartas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
-    </div>
 </div>
+
 <div>
-    <h3 class="collapsible" ng-click="day = !day">RANDOM RAGAS</h3>
-    <div class="ragasContainer" ng-show="day" ng-int="No Raga to display">
-        <span class="ragaName " ng-repeat="raga in RagaOfTheDay"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
-    </div>
-</div>
-<div>
-    <h3 class="collapsible" ng-click="favourites = !favourites">MY FAVOURITES</h3>
-    <div class="ragasContainer" ng-show="favourites" ng-int="No Raga to display">
+    <h3 class="collapsible">MY FAVOURITES</h3>
+    <p ng-show="Favourites.length==0">No Ragas to show yet</p>
+    <div class="ragasContainer" ng-show="Favourites.length > 0">
         <span class="ragaName " ng-repeat="raga in Favourites"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
     </div>
 </div>
+
 <div>
-    <h3 class="collapsible" ng-click="ragaList = !ragaList">FULL RAGA LIST </h3>
-    <div ng-show="ragaList">
+    <h3 class="collapsible">RANDOM RAGAS</h3>
+    <div class="ragasContainer">
+        <span class="ragaName" ng-repeat="raga in RagaOfTheDay"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+</div>
+
+<div>
+    <h3 class="collapsible">MELAKARTA RAGAS</h3>
+    <div class="ragasContainer">
+        <span class="ragaName " ng-repeat="raga in ShuddhaMelakartas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+    <hr>
+    <div class="ragasContainer">
+        <span class="ragaName " ng-repeat="raga in PratiMelakartas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+</div>
+
+<div>
+    <h3 class="collapsible">FULL RAGA LIST </h3>
+    <div>
         <div class="search">
-            <input type="text " id="search" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" /> {{pianoMessage}}
-            <div class="searchNotes ">
-                <div id="help" ng-click="helpText = !helpText"><b>How to enter search query</b></div>
+            <input type="text " id="search" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" ng-click="searchResults = !searchResults" /> {{pianoMessage}}
+            <div class="searchNotes">
+                <div id="help" ng-click="helpText = !helpText"><b>How to enter search query (click search field to toggle results ON/OFF)</b></div>
                 <span id="helpText " ng-show="helpText">
                     1. Enter name of Raga. e.g. 'Kanada'. <br/> 
                     2. Enter swaras in ascending or descending order of appearance. e.g. 'S R2 G2'. <br/> 
@@ -118,7 +156,7 @@
                 </span>
             </div>
         </div>
-        <div class="ragasContainer">
+        <div class="ragasContainer" ng-show="searchResults">
             <span class="ragaName" ng-repeat="raga in ragaName | filter:ignoreAccents | orderBy:raga.name "><a href="#ragaDetail/{{raga.name}} ">{{raga.name}}</a></span>
         </div>
     </div>
