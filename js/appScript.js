@@ -50,7 +50,7 @@ ragaApp.controller('mainController', function($scope, $http) {
     let ragaDatabase = undefined;
 
     function removeAccents(value) {
-        return value.replace(/ā/g, 'a').replace(/ē/g, 'a');
+        return value.replace(/ā/g, 'a').replace(/ē/g, 'a').replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃");
     }
 
     $scope.ignoreAccents = function(item) {
@@ -81,7 +81,7 @@ ragaApp.controller('mainController', function($scope, $http) {
             $scope.RagaOfTheDay = randomRagas;
         }
 
-        // Display list of Melakartha Ragas
+        // Display list of Shuddha Madhyama and Prati Madhyama Melakartha Ragas
         {
             let melakartas = []
             for (let i = 0; i < ragaDatabase.length; i++) {
@@ -89,7 +89,8 @@ ragaApp.controller('mainController', function($scope, $http) {
                     melakartas.push(ragaDatabase[i].name);
                 }
             }
-            $scope.Melakartas = melakartas;
+            $scope.ShuddhaMelakartas = melakartas.slice(0, 35);
+            $scope.PratiMelakartas = melakartas.slice(36, 72);
         }
 
         //splashscreen stuff
@@ -109,26 +110,16 @@ ragaApp.controller('mainController', function($scope, $http) {
     // Random Beginner tips
     {
         let tips = {
-            0: "Use the 🎹 button to enter inputs using the onscreen keyboard",
-            1: "Use the FOGGY preset in the presets section to turn your sequence into a wisp of Raga smoke",
-            2: "Use the MISTY preset to make your sequences sound like you're on a mountain top",
-            3: "Use the FLTR CUTOFF knob to adjust the brightness of the sound",
-            4: "Use the FEEDBACK knob to adjust the delay feedback on your sequence",
-            5: "Use the DRY/WET knob to adjust how much delay you would like on your sequence",
-            6: "Use the CUTOFF knob to adjust the Cutoff frequency of the delay",
-            7: "Use the DRY/WET knob to adjust the amount of delay on your sequence",
-            8: "Use the PHRASING NOTEBOOK to enter any notes about a Raga",
-            9: "Use the PHRASING NOTEBOOK to compose and play notes in a Raga",
-            10: "Use the 🔧 icon in the Phrasing notebook to resolve the Swaras/Notes to the right format eg. 1 to ₁",
-            11: "Use the RANDOM button to generate a short, random sequence in a given Raga",
-            12: "Use the RANDOM button to generate a short, random sequence in a given Raga",
-            13: "Use the RANDOM button to generate a short, random sequence in a given Raga",
-            14: "Use the SAVE button to save your notes locally",
-            15: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
-            16: "Hold the shift button while adjusting the knobs to adjust finer values",
+            0: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
+            1: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
+            2: "Use the SAVE button in the phrasebook to save your notes locally",
+            3: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
+            4: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
+            5: "Use the DRY/WET parameter to add delay to your sequence",
+            6: "Use the on-screen piano to enter notes into the phrasebook"
         }
 
-        let random = Math.floor(Math.random() * (15));
+        let random = Math.floor(Math.random() * (6));
         $scope.Tip = tips[random];
     }
 
@@ -146,6 +137,36 @@ ragaApp.controller('mainController', function($scope, $http) {
         }
 
         $scope.Favourites = favourites;
+    }
+
+    // Homepage Moods toggle functionality
+    {
+        $('.mood').on('click', function() {
+            let mood = '.' + $(this).attr('id');
+
+            $(mood).show();
+            $(this).addClass('active');
+
+            $(mood).siblings().hide();
+            $(this).siblings().removeClass('active');
+
+        });
+    }
+
+    //Search field reveal functionality
+    {
+        let a = $('#search').val();
+        $('#search').on('focus', function() {
+            $('#newPiano p').on('click', function(e) {
+                e.stopPropagation();
+                a = a + " " + $(this).attr('id').split('K')[0];
+                $('#search').val(a);
+            });
+        });
+
+        $(document).on('blur', '#search', function(e) {
+            $('#search').off('focus')
+        });
     }
 
 });
@@ -300,6 +321,77 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
             swarasHelpON();
         }
 
+        // Series of events that have to occur on keyup on a phrase in the phrasebook
+        {
+            //Create an array with all the unique swaras
+            const moorchana__ = [...new Set(moorchana.split(" "))];
+
+            // Firstly, clear the previous keyup event and then add a fresh one
+            $(document).off('keyup', '.phrase');
+
+            $(document).on('keyup', '.phrase', function(e) {
+                //Phrase save pending indicator
+                $('h4 span').show();
+
+                //Preserving the cursor position
+                let start = $(this)[0].selectionStart;
+                let end = $(this)[0].selectionEnd;
+
+                //If user enters a key within the Raga, Automatically convert G -> G₁ etc
+                if (e.keyCode === 82 || e.keyCode === 71 || e.keyCode === 77 || e.keyCode === 68 || e.keyCode === 78) {
+                    for (let i = 0; i < moorchana__.length; i++) {
+                        if (moorchana__[i].includes(e.key.toUpperCase())) {
+
+                            let start = $(this)[0].selectionStart;
+                            let end = $(this)[0].selectionEnd;
+
+                            let phrase = $(this).val().replaceAll(e.key, moorchana__[i]);
+                            $(this).val(phrase);
+
+                            $(this)[0].selectionStart = start;
+                            $(this)[0].selectionEnd = end;
+                        }
+                    }
+                }
+
+                //Resolving the input from 1 -> ₁ etc and preserving the cursor position
+                let phrase = $(this).val().replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("S'", "Ṡ").replaceAll("S '", "Ṡ").toUpperCase();
+                $(this).val(phrase);
+
+                $(this)[0].selectionStart = start;
+                $(this)[0].selectionEnd = end;
+
+                // Automatic space
+                if (e.keyCode != 8) {
+                    if (['₁', '₂', '₃', '-', 'P', 'Ṡ', 'S'].includes(phrase.charAt(phrase.length - 1))) {
+                        phrase = phrase + ' ';
+                        $(this).val(phrase);
+                    }
+                }
+
+                //Resize the textarea according to input height
+                this.style.height = 'auto';
+
+                this.style.height =
+                    (this.scrollHeight) + 'px';
+
+                // // Check the input with regular expression - TODO
+                // let re = /^S\s|R₁\s|R₂\s|R₃\s|G₁\s|G₂\s|G₃\s|M₁\s|M₂\s|P\s|D₁\s|D₂\s|D₃\s|N₁\s|N₂\s|N₃\s|Ṡ\s|-\s$/;
+                // if (phrase.match(re)) {
+                //     console.log('This is a valid phrase');
+                // }
+            });
+        }
+
+        //initialize phrase scroll length as soon as page loads
+        $('document').ready(function() {
+            setTimeout(function() {
+                $('.phrase').each(function() {
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+            }, 2000);
+        });
+
     });
 });
 
@@ -366,10 +458,10 @@ swarasGroup.volume = 0.5;
 //
 //Add Effects to the group
 var dubDelay = new Pizzicato.Effects.DubDelay({
-    feedback: 0,
+    feedback: 0.7,
     time: 0.6,
-    cutoff: 0,
-    mix: 0
+    cutoff: 3200,
+    mix: 0.10
 });
 
 var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
@@ -483,17 +575,24 @@ function keyBind() {
 }
 keyBind();
 
-// On Click Key register on the search bar and phrase
-function keyRegister() {
-    let a = $('#search').val();
-    $('#newPiano p').unbind("click");
-    $('#newPiano p').on('click', function(e) {
-        e.stopPropagation();
-        a = $('#search').val() + " " + $(this).attr('id').split('K')[0];
-        $('#search').val(a);
-    });
-}
-keyRegister();
+// // On Click Key register on the search bar and phrase
+// function keyRegister() {
+//     let a = $('#search').val();
+//     $('#newPiano p').unbind("click");
+
+//     $('#search').on('focus', function() {
+//         $('#newPiano p').on('click', function(e) {
+//             e.stopPropagation();
+//             a = a + " " + $(this).attr('id').split('K')[0];
+//             $('#search').val(a);
+//         });
+//     });
+
+//     $('#search').on('blur', function(e) {
+//         $('#search').off('focus')
+//     });
+// }
+// keyRegister();
 
 function pianoInput(input) {
     $('#newPiano p').unbind("click");
@@ -554,14 +653,14 @@ function timeline(sequence, repeat) {
     }
     keyList[index].stop();
 
-    //Function to place the swara sequence in the sequence window - temporarily disabled
-    function displaySequence() {
-        var seq = sequence.slice(count - 9, count + 1).toString().replaceAll(",", "  ").replaceAll(/[0-9]/g, "&emsp;");
-        if (count > 8) {
-            $('#sequencePast').text(seq);
-        }
-    }
-    displaySequence()
+    // //Function to place the swara sequence in the sequence window - temporarily disabled
+    // function displaySequence() {
+    //     var seq = sequence.slice(count - 9, count + 1).toString().replaceAll(",", "  ").replaceAll(/[0-9]/g, "&emsp;");
+    //     if (count > 8) {
+    //         $('#sequencePast').text(seq);
+    //     }
+    // }
+    // displaySequence()
 
     //Set a random volume - functionality disabled as the sound is getting choppy with this function.
     // function randomVolume() {
@@ -595,10 +694,6 @@ function play(sequence, time) {
 
     temp = sequence;
     interval = setInterval('timeline(temp)', time);
-
-    //Display the first 8 notes in the sequence that is going to play now
-    var seqPast = sequence.slice(count, count + 9).toString().replaceAll(",", " ");
-    $('#sequencePast').text(seqPast);
 }
 
 // Stop function stops any currently scheduled sequences
@@ -608,18 +703,22 @@ function stop() {
     temp = '';
     $('.controls .button').removeClass('active');
     $('.phraseBookControl .button').removeClass('active');
+
+    fadeout('.controls .button#stop');
+    fadeout('.phraseBookControl .button#stop');
+    fadeout('.options .button#stop');
 }
 
 //Arohanam Play
 function arohanamPlay() {
     let arohanam = $('#arohanam').text().split(" ");
-    play(arohanam, 700);
+    play(arohanam, tempo);
 }
 
 //Avarohanam play
 function avarohanamPlay() {
     let avarohanam = $('#avarohanam').text().split(" ");
-    play(avarohanam, 700);
+    play(avarohanam, tempo);
 }
 
 //Randomize play
@@ -664,7 +763,7 @@ function randomizePlay() {
     console.log(randomSequenceNotes)
 
     //Call the play() function to play the sequence
-    play(randomSequenceNotes, 400)
+    play(randomSequenceNotes, tempo)
 
 }
 
@@ -753,6 +852,10 @@ $(document).ready(function() {
             });
         }
 
+        //Remove the pressed keys from other siblings if mouseup happens on a key other than the intended key but of same color
+        $(this).siblings('.whiteKeyPressed').removeClass('whiteKeyPressed').addClass('whiteKey');
+        $(this).siblings('.blackKeyPressed').removeClass('blackKeyPressed').addClass('blackKey');
+
     });
 
     //Disable and resume keyboard input on .phrase:focus and search:focus
@@ -771,6 +874,7 @@ $(document).ready(function() {
     $(document).on('blur', '#search', function() {
         keyboardJS.resume();
     });
+
 });
 
 // Phrase Delete button
@@ -785,62 +889,54 @@ function deletePhrase() {
 function phraseBookPlay() {
     let sequence = [];
     let count = 0;
+    let selection = window.getSelection().toString();
+    // Firstly check if a text is highlighted. If it is, play it.
+    if (typeof window.getSelection != "undefined" && selection.length > 0) {
+        sequence = selection.replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
+        play(sequence, tempo);
+    } else {
 
-    // Firstly, check how many phrases are selected
-    $('.phraseUnit').each(function() {
-        // Play selected items
-        if ($(this).hasClass('active')) {
-            count++;
-        }
-    });
-
-    // If one or more phrases are selected, play the selected items or play everything
-    if (count > 0) {
+        // If no phrase is highlighted, firstly, check how many phrases are selected
         $('.phraseUnit').each(function() {
             // Play selected items
             if ($(this).hasClass('active')) {
-                let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
-
-                sequence = sequence.concat(phrase);
-
-                if (sequence.length > 0) {
-                    try {
-                        play(sequence, 400);
-                    } catch (error) {
-                        console.error("somethings wrong");
-                    }
-                }
                 count++;
-            } else {
-                console.log("error")
-                $('#playPhrase').removeClass('active');
             }
         });
-    } else {
-        $('.phraseUnit').each(function() {
-            let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").split(" ");
-            sequence = sequence.concat(phrase);
-            if (sequence) {
-                play(sequence, 400);
-            }
-        });
+
+        // If one or more phrases are selected, play the selected items or play everything
+        if (count > 0) {
+            $('.phraseUnit').each(function() {
+                // Play selected items
+                if ($(this).hasClass('active')) {
+                    let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("|", " ").split(" ");
+
+                    sequence = sequence.concat(phrase);
+
+                    if (sequence.length > 0) {
+                        try {
+                            play(sequence, tempo);
+                        } catch (error) {
+                            console.error("somethings wrong");
+                        }
+                    }
+                    count++;
+                } else {
+                    console.log("Playing selected phrases")
+                    $('#playPhrase').removeClass('active');
+                }
+            });
+        } else {
+            $('.phraseUnit').each(function() {
+                let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("|", " ").split(" ");
+                sequence = sequence.concat(phrase);
+                if (sequence) {
+                    play(sequence, tempo);
+                }
+            });
+        }
     }
 
-}
-
-// 🔧 - resolve a phrase from 1 to ₁
-function resolvePhrase() {
-    //Perform play action only on phrases that are selected
-    var sequence = [];
-    $('.phraseUnit').each(function() {
-        if ($(this).hasClass('active')) {
-            var phrase = $(this).children('.phrase').val().replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").toUpperCase();
-            $(this).children('.phrase').val(phrase);
-        } else {
-            console.log('Selected phrases resolved with 0 errors');
-        }
-    });
-    fadeout('#resolvePhrase')
 }
 
 // Phrasebook Save function using Local storage
@@ -848,7 +944,6 @@ function savePhrase() {
     let href = window.location.href.split('/');
     let raga_ = href.pop() || href.pop();
     let raga = raga_.replaceAll("%C4%80", "Ā").replaceAll("%C4%81", "ā").replaceAll("%20", " ").replaceAll("%C4%93", "ē")
-    console.log(raga)
 
     window.localStorage.removeItem(raga)
     var phrases_ = ''
@@ -856,8 +951,7 @@ function savePhrase() {
         phrases_ += "," + $(this).children('.phrase').val();
     });
 
-    let phrases = phrases_.substring(1)
-    console.log(phrases);
+    let phrases = phrases_.substring(1);
     window.localStorage.setItem(raga, phrases);
 
     $('h4 span').hide();
@@ -868,13 +962,19 @@ function savePhrase() {
 // TODO - variable tempo
 function time() {
     let bpm = parseInt($('#tempo').val());
+    if (bpm > 600) {
+        $('#tempo').val('600');
+    } else if (bpm < 50) {
+        $('#tempo').val('50');
+    }
+
     let ms = 60000 / bpm;
     if (!Number.isNaN(ms)) {
         tempo = ms;
-        console.log(ms)
     }
-
+    console.log(tempo)
 }
+time()
 
 // Set Favourites function
 function favourite() {
@@ -893,11 +993,6 @@ function favourite() {
         $('#favourite').removeClass('fav_false');
     }
 }
-
-//Phrase save pending indicator
-$(document).on('keyup', '.phrase', function() {
-    $('h4 span').show();
-});
 
 //Resize phrasebook features
 function enlargePhraseBook() {
@@ -925,16 +1020,8 @@ function swarasHelpON() {
     }
 }
 
-$(document).on('input', '.phrase', function() {
-    console.log('here');
-    this.style.height = 'auto';
-
-    this.style.height =
-        (this.scrollHeight) + 'px';
-});
-
 function fadeout(id) {
     setTimeout(function() {
         $(id).removeClass('active');
-    }, 200);
+    }, 1000);
 }
