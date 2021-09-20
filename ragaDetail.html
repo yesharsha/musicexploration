@@ -48,9 +48,20 @@
     <div class="phraseHeading">
         <h4>PHRASING NOTEBOOK <span>*</span></h4>
         <span id="toastMessages">
-            Your notes have been saved
+            
         </span>
         <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
+        <span id="help" class="tooltip"><i class="fas fa-question-circle"></i> <span class="tooltiptext">
+            You can enter phrases into the phrasebook either through the keyboard or using the on-screen piano.
+            <br>
+            <br>
+            The phrasebook automatically resolves swaras into their default swara sthana based on the selected Raga.
+            <br>
+            <br>
+            Typing S' converts to Ṡ (Higher octave).
+            </ul>
+        </span></span>
+
     </div>
     <div class="phraseBookControl">
         <button class="button" id="newPhrase" title="Add a new phrase">+ NEW</button>
@@ -58,12 +69,21 @@
         <button id="stop" class="button" onclick="stop()" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
         <button class="button" id="savePhrase" onclick="savePhrase()" title="Save all phrases to local Storage. Phrases will be available on page reload."><i class="far fa-save"></i>SAVE</button>
 
-        <button class="button rightControl" id="deletePhrase" onclick="deletePhrase()" title="Delete selected phrases"><i class="fas fa-backspace"></i>DEL</button>
+        <button class="button rightControl" id="deletePhrase" onclick="deletePhrase()" title="Delete selected phrases. Select phrase by clicking on gray bar."><i class="fas fa-backspace"></i>DEL</button>
     </div>
     <div class="phraseUnit">
         <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
         <textarea class="phrase">{{Moorchana}}</textarea>
     </div>
+    <!-- <div class="phraseUnit">
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <div class="blocks phrase">
+            <div contenteditable="true">S</div>
+            <div contenteditable="true">R₁</div>
+            <div contenteditable="true">G₃</div>
+            <div contenteditable="true">M₁</div>
+        </div>
+    </div> -->
     <div class="phraseUnit" ng-repeat="phrase in Phrases">
         <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
         <textarea class="phrase">{{phrase}}</textarea>
