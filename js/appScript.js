@@ -380,6 +380,46 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                 // if (phrase.match(re)) {
                 //     console.log('This is a valid phrase');
                 // }
+
+                //Save message
+                $('#toastMessages').text('Don\'t forget to save your changes.');
+            });
+
+            // Using the keyboard to register notes in the phrasebook
+            let swap = {
+                'R₂': 'G₁',
+                'G₂': 'R₃',
+                'D₂': 'N₁',
+                'N₂': 'D₃'
+            }
+            $(document).on('click', '.phrase', function(e) {
+                //pianoInput($(this));
+                e.stopPropagation();
+                let input = $(this);
+
+                $('#newPiano p').unbind("click");
+                $('#newPiano p').on('click', function(e) {
+                    e.stopPropagation();
+                    let swara = $(this).attr('id').replace('Key', '').toUpperCase();
+
+                    //For Rgaas like Nattai, where G2 is swapped with R3.
+                    if (swara == 'R₂' || swara == 'G₂' || swara == 'D₂' || swara == 'N₂') {
+                        for (let i = 0; i < moorchana__.length; i++) {
+                            if (swap[swara] == moorchana__[i]) {
+                                swara = moorchana__[i];
+                            }
+                        }
+                    }
+
+                    swara = input.val() + swara + ' ';
+                    input.val(swara);
+                });
+
+            });
+
+            $('body').on('click', function() {
+                //$('.phrase').off("click");
+                $('#newPiano p').unbind("click");
             });
         }
 
@@ -601,10 +641,6 @@ function pianoInput(input) {
         input.val(input.val() + $(this).attr('id').replace('Key', ' ').toUpperCase());
     });
 }
-
-$(document).on('focus', '.phrase', function() {
-    pianoInput($(this));
-});
 
 //
 //
@@ -956,6 +992,11 @@ function savePhrase() {
 
     $('h4 span').hide();
 
+    $('#toastMessages').text('Your phrases are being saved');
+    setTimeout(function() {
+        $('#toastMessages').text('');
+    }, 1000)
+
     fadeout('#savePhrase')
 }
 
@@ -998,11 +1039,13 @@ function favourite() {
 function enlargePhraseBook() {
     $('.phraseBook').addClass('enlarge');
     $('.resize').removeClass('fa-expand').addClass('fa-compress-alt').attr('onclick', "minimizePhraseBook()");
+    $('body').css('overflow-y', 'hidden');
 }
 
 function minimizePhraseBook() {
     $('.phraseBook').removeClass('enlarge');
-    $('.resize').addClass('fa-expand').removeClass('fa-compress-alt').attr('onclick', "enlargePhraseBook()");;
+    $('.resize').addClass('fa-expand').removeClass('fa-compress-alt').attr('onclick', "enlargePhraseBook()");
+    $('body').css('overflow-y', 'scroll');
 }
 
 //Clear Swaras help when there is no Raga selected
