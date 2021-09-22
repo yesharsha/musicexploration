@@ -463,7 +463,7 @@
         },
         {
             "name": "Sindhubhairavi",
-            "Arohanam": "S R₂ G₂ M₁ G₂ P D₁ N₂ S\n",
+            "Arohanam": "S R₂ G₂ M₁ G₂ P D₁ N₂ S",
             "Avarohanam": "N₂ D₁ P M₁ G₂ R₁ S N₂ S",
             "janaka": "false",
             "janyaOf": 8
@@ -785,7 +785,7 @@
         },
         {
             "name": "Mukthipradayini",
-            "Arohanam": "S R₁ G₃ P N₂ Ṡ\n",
+            "Arohanam": "S R₁ G₃ P N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ P D₁ P G₃ R₁ S",
             "janaka": "false",
             "janyaOf": 14
@@ -1290,7 +1290,7 @@
         {
             "name": "Bindhumālini",
             "Arohanam": "S G₃ R₁ G₃ M₁ P N₂ Ṡ",
-            "Avarohanam": "Ṡ N₂ S D₂ P G₃ M₁ P G₃ R₁ S",
+            "Avarohanam": "Ṡ N₂ Ṡ D₂ P G₃ M₁ P G₃ R₁ S",
             "janaka": "false",
             "janyaOf": 16
         },
@@ -1380,7 +1380,7 @@
         },
         {
             "name": "Rudra Panchami",
-            "Arohanam": "S G₃ M₁ D₂ N₂ Ṡ\n",
+            "Arohanam": "S G₃ M₁ D₂ N₂ Ṡ",
             "Avarohanam": "Ṡ N₃ D₂ M₁ G₃ R₁ S",
             "janaka": "false",
             "janyaOf": 16
@@ -1981,7 +1981,7 @@
             "janyaOf": 21
         },
         {
-            "name": "Hamsapancama",
+            "name": "Hamsapanchama",
             "Arohanam": "S G₂ M₁ P N₃ D₁ N₃ P Ṡ",
             "Avarohanam": "Ṡ N₃ D₁ M₁ G₂ R₂ S",
             "janaka": "false",
@@ -2878,13 +2878,13 @@
         },
         {
             "name": "Thyagaraja Mangalam",
-            "Arohanam": "S G₂ M₁ P N₃ Ṡ\n",
+            "Arohanam": "S G₂ M₁ P N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₂ P M₁ G₂ R₂ S",
             "janaka": "false",
             "janyaOf": 23
         },
         {
-            "name": "Vasantashree ",
+            "name": "Vasantashree",
             "Arohanam": "S R₂ G₂ M₁ D₂ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₂ M₁ G₂ R₂ S",
             "janaka": "false",

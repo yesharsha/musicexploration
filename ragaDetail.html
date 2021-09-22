@@ -1,5 +1,6 @@
 <div class="breadcrumb">
-    <a href="#" onclick="swarasHelpClear()"><i class="fas fa-angle-left fa-sm"> </i>BACK TO HOME</a>
+    <a href="#" onclick="swarasHelpClear()">
+        <i class="fas fa-home fa-sm"></i>HOME</a> \ {{name | uppercase}}
 </div>
 <div class="clearfix title">
     <h1>{{name | uppercase}}</h1>
@@ -52,10 +53,10 @@
         </span>
         <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
         <span id="help" class="tooltip"><i class="fas fa-question-circle"></i> <span class="tooltiptext">
-            You can enter phrases into the phrasebook either through the keyboard or using the on-screen piano.
+            Enter phrases through the keyboard or using the on-screen piano.
             <br>
             <br>
-            The phrasebook automatically resolves swaras into their default swara sthana based on the selected Raga.
+            Swaras are automatically resolved based on the Raga.
             <br>
             <br>
             Typing S' converts to Ṡ (Higher octave).

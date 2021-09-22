@@ -62,7 +62,7 @@ ragaApp.controller('mainController', function($scope, $http) {
         return true;
     };
 
-    //Display list of all the ragas
+    // Display list of all the ragas
     $http({
         method: 'POST',
         url: 'Raga_Database.json'
@@ -70,7 +70,17 @@ ragaApp.controller('mainController', function($scope, $http) {
         $scope.ragaName = data.ragas;
         ragaDatabase = data.ragas;
 
-        //Ragas of the Day
+        // Editor's picks
+        $scope.EditorsPicks = ['Māyamālava Gowla', 'Hindolam', 'Chārukeshi', 'Shanmukhapriya', 'Kharaharapriya', 'Reethigowla', 'Natabhairavi', 'Vijayanāgari', 'Ghanta', 'Vanaspati'];
+
+        // Moods
+        $scope.Meditative = ['Māyamālava Gowla', 'Shanmukhapriya', 'Sāveri', 'Malahari', 'Hindolam', 'Kalyāna Vasantam', 'Bindhumālini', 'Saraswathi', 'Ahir Bhairav'];
+        $scope.Ecstatic = ['Kharaharapriya', 'Reethigowla', 'Anandabhairavi', 'Kānadā', 'Bhāgeshri', 'Miyan Malhār'];
+        $scope.Mysterious = ['Nāsikabhooshhani', 'Vanaspati', 'Gānamoorti', 'Vāchaspathi', 'Ghanta', 'Kanakāmbari', 'Rāgachoodāmani'];
+        $scope.Cinematic = ['Natabhairavi', 'Vijayanāgari', 'Chakravākam', 'Abheri', 'Darbāri Kānada', 'Sāramati', 'Shivaranjani', 'Shubhapanthuvarāli'];
+        $scope.Serene = ['Kāmbhoji', 'Bahudāri', 'Mechakalyāni', 'Nāttai Kurinji', 'Dheera Shankarābharanam', 'Mohanam', 'Hamsadhwani', 'Madhyamāvathi'];
+
+        // Ragas of the Day
         {
             let randomRagas = [];
             for (let i = 0; i < 5; i++) {
@@ -81,7 +91,7 @@ ragaApp.controller('mainController', function($scope, $http) {
             $scope.RagaOfTheDay = randomRagas;
         }
 
-        // Display list of Shuddha Madhyama and Prati Madhyama Melakartha Ragas
+        // Display list of Melakartha Ragas in deifferent Chakras
         {
             let melakartas = []
             for (let i = 0; i < ragaDatabase.length; i++) {
@@ -89,8 +99,20 @@ ragaApp.controller('mainController', function($scope, $http) {
                     melakartas.push(ragaDatabase[i].name);
                 }
             }
-            $scope.ShuddhaMelakartas = melakartas.slice(0, 35);
-            $scope.PratiMelakartas = melakartas.slice(36, 72);
+            $scope.Indu = melakartas.slice(0, 6);
+            $scope.Netra = melakartas.slice(6, 12);
+            $scope.Agni = melakartas.slice(12, 18);
+            $scope.Veda = melakartas.slice(18, 24);
+            $scope.Bana = melakartas.slice(24, 30);
+            $scope.Rutu = melakartas.slice(30, 36);
+            $scope.Rishi = melakartas.slice(36, 42);
+            $scope.Vasu = melakartas.slice(42, 48);
+            $scope.Brahma = melakartas.slice(48, 54);
+            $scope.Disi = melakartas.slice(54, 60);
+            $scope.Rudra = melakartas.slice(60, 66);
+            $scope.Aditya = melakartas.slice(66, 72);
+            // $scope.ShuddhaMelakartas = melakartas.slice(0, 36);
+            // $scope.PratiMelakartas = melakartas.slice(36, 72);
         }
 
         //splashscreen stuff
@@ -107,21 +129,21 @@ ragaApp.controller('mainController', function($scope, $http) {
         });
     });
 
-    // Random Beginner tips
-    {
-        let tips = {
-            0: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
-            1: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
-            2: "Use the SAVE button in the phrasebook to save your notes locally",
-            3: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
-            4: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
-            5: "Use the DRY/WET parameter to add delay to your sequence",
-            6: "Use the on-screen piano to enter notes into the phrasebook"
-        }
+    // // Random Beginner tips
+    // {
+    //     let tips = {
+    //         0: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
+    //         1: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
+    //         2: "Use the SAVE button in the phrasebook to save your notes locally",
+    //         3: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
+    //         4: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
+    //         5: "Use the DRY/WET parameter to add delay to your sequence",
+    //         6: "Use the on-screen piano to enter notes into the phrasebook"
+    //     }
 
-        let random = Math.floor(Math.random() * (6));
-        $scope.Tip = tips[random];
-    }
+    //     let random = Math.floor(Math.random() * (6));
+    //     $scope.Tip = tips[random];
+    // }
 
 
     //Display list of favourite ragas
@@ -167,6 +189,67 @@ ragaApp.controller('mainController', function($scope, $http) {
         $(document).on('blur', '#search', function(e) {
             $('#search').off('focus')
         });
+    }
+
+    //Melakarthas toggle functionality
+    {
+        $('.chakra').on('click', function() {
+            let className = '.' + $(this).attr('id');
+
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $(className).removeClass('selected');
+            } else {
+                $(this).addClass('active');
+                $(className).addClass('selected');
+            }
+
+        })
+    }
+
+    //Raga Auditioning functionality
+    {
+        $scope.ragaAudition = function(ragaName) {
+
+            console.log(ragaName);
+
+            //Get Raga Arohanam Avarohanam and Moorchana phrase
+            let raga = ragaDatabase.filter(function(raga) { return raga.name == ragaName });
+
+            let arohanam_ = raga[0].Arohanam.split(" ");
+            arohanam = arohanam_.join(" ");
+
+            let avarohanam_ = raga[0].Avarohanam.split(" ");
+            avarohanam = avarohanam_.join(" ");
+
+            let moorchana_ = arohanam_.concat(avarohanam_);
+            //play(moorchana_, tempo);
+            swarasHelpClear();
+            for (let i = 0; i < moorchana_.length; i++) {
+                switch (moorchana_[i]) {
+                    case "G₁":
+                        moorchana_[i] = 'R₂';
+                        break;
+                    case "R₃":
+                        moorchana_[i] = 'G₂';
+                        break;
+                    case "N₁":
+                        moorchana_[i] = 'D₂';
+                        break;
+                    case "D₃":
+                        moorchana_[i] = 'N₂';
+                        break;
+                }
+
+                let id = "#" + moorchana_[i].toLowerCase() + "Key";
+                $(id).html("•").addClass('swaraHelpActive');
+            }
+            swarasHelpON();
+
+            $scope.selected = ragaName;
+
+        }
+
     }
 
 });
@@ -292,6 +375,16 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
             $scope.Phrases = phrases;
         }
 
+        //initialize phrase scroll length as soon as page loads
+        $('document').ready(function() {
+            setTimeout(function() {
+                $('.phrase').each(function() {
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+            }, 2000);
+        });
+
+
         //Retrieve _FAV key from local storage to check if this raga has been favourited
         let key = (buffer + "_FAV")
         $scope.Favourite = window.localStorage.getItem(key) || 'fav_false';
@@ -372,8 +465,7 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                 //Resize the textarea according to input height
                 this.style.height = 'auto';
 
-                this.style.height =
-                    (this.scrollHeight) + 'px';
+                this.style.height = (this.scrollHeight) + 'px';
 
                 // // Check the input with regular expression - TODO
                 // let re = /^S\s|R₁\s|R₂\s|R₃\s|G₁\s|G₂\s|G₃\s|M₁\s|M₂\s|P\s|D₁\s|D₂\s|D₃\s|N₁\s|N₂\s|N₃\s|Ṡ\s|-\s$/;
@@ -402,7 +494,7 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                     e.stopPropagation();
                     let swara = $(this).attr('id').replace('Key', '').toUpperCase();
 
-                    //For Rgaas like Nattai, where G2 is swapped with R3.
+                    //For Ragas like Nattai, where G2 is swapped with R3.
                     if (swara == 'R₂' || swara == 'G₂' || swara == 'D₂' || swara == 'N₂') {
                         for (let i = 0; i < moorchana__.length; i++) {
                             if (swap[swara] == moorchana__[i]) {
@@ -422,15 +514,6 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                 $('#newPiano p').unbind("click");
             });
         }
-
-        //initialize phrase scroll length as soon as page loads
-        $('document').ready(function() {
-            setTimeout(function() {
-                $('.phrase').each(function() {
-                    this.style.height = (this.scrollHeight) + 'px';
-                });
-            }, 2000);
-        });
 
     });
 });
@@ -480,7 +563,7 @@ keyList[10] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n2
 keyList[11] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n3.ogg', 'sounds/n3.mp3'] } });
 keyList[12] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/saHigh.ogg', 'sounds/saHigh.mp3'] } });
 keyList[13] = new Pizzicato.Sound({ source: 'wave', options: { frequency: 22000 } });
-var shruti = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.ogg'] } });
+const tanpura = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.ogg'] } });
 
 //Set attack to 0.001 for all the notes so it sounds sharp
 for (i = 0; i < keyList.length; i++) {
@@ -488,9 +571,8 @@ for (i = 0; i < keyList.length; i++) {
 }
 
 //Create a group of all the notes
-swarasGroup = new Pizzicato.Group(keyList)
-swarasGroup.addSound(shruti)
-swarasGroup.volume = 0.5;
+swarasGroup = new Pizzicato.Group(keyList);
+swarasGroup.addSound(tanpura);
 
 //
 //
@@ -509,9 +591,18 @@ var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
     peak: 1
 });
 
+// For tanpura continuity
+var delay = new Pizzicato.Effects.Delay({
+    feedback: 0.7,
+    time: 1,
+    mix: 0.5
+});
+
 swarasGroup.addEffect(lowPassFilter);
 swarasGroup.addEffect(dubDelay)
 swarasGroup.volume = 0.3;
+
+tanpura.addEffect(delay);
 
 //CONTROL PANEL for Volume and effetcs
 // When a knob is moved, these functions assign values to the effects
@@ -569,6 +660,15 @@ function dubDelayCutoff(obj, param) {
 function dubDelayMix(obj, param) {
     dubDelay.mix = parseFloat(param)
     obj.next().text(parseFloat(param))
+}
+
+function tanpuraVolume(obj, param) {
+    tanpura.volume = parseFloat(param);
+    if (param >= 0.1) {
+        tanpura.play();
+    } else {
+        tanpura.stop();
+    }
 }
 
 // Presets - takes all the values as parameters and assigns these value to the Knob and the display text
