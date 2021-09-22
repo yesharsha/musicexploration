@@ -318,6 +318,11 @@ h2 {
     display: inline-block;
 }
 
+.ragasContainer .number {
+    font-size: 0.6em;
+    margin-right: 10px;
+}
+
 .ragasContainer div div {
     display: inline-block;
 }
@@ -330,15 +335,18 @@ h2 {
     font-size: 0.7em;
     font-family: 'Roboto Mono';
     margin-bottom: 40px;
+    color: #5F5F5F;
 }
 
 .breadcrumb a {
-    text-decoration: none;
+    text-decoration: underline #848484;
+    text-underline-offset: 1px;
 }
 
 .breadcrumb a:hover {
     text-decoration: underline #848484;
-    text-underline-offset: 3px;
+    text-underline-offset: 1px;
+    color: #545454;
 }
 
 .button {
@@ -415,6 +423,11 @@ footer p:last-child a {
 
 #notesON {
     background: yellow;
+}
+
+#tanpuraVolumeKnob {
+    margin-top: -6px;
+    margin-right: 17px;
 }
 
 .options {
@@ -800,6 +813,11 @@ input:focus {
 
 .ragaName a:hover {
     text-decoration: underline;
+}
+
+.ragaName.active {
+    background: #4e4e4e;
+    color: white;
 }
 
 
@@ -1248,7 +1266,7 @@ h4 span {
     box-sizing: border-box;
     margin-right: 1%;
     border-radius: 60px;
-    width: 118px;
+    width: 19%;
     cursor: pointer;
     color: #b3b3b3;
 }
@@ -1281,6 +1299,59 @@ h4 span {
 hr {
     margin: 20px 0px;
     border: solid 1px #f3f3f3;
+}
+
+
+/* Melakartha Chakras */
+
+.chakra {
+    float: left;
+    padding: 20px 1.7%;
+    cursor: pointer;
+}
+
+.chakra svg {
+    fill: #b3b3b3;
+    fill-opacity: 1;
+    stroke-width: 0.533333
+}
+
+.chakra.active svg,
+.chakra:hover svg {
+    fill: #383838;
+}
+
+.chakra div {
+    font-size: 0.6em;
+    margin-top: 20px;
+    text-align: center;
+    letter-spacing: 0.19em;
+    line-height: 1.5em;
+}
+
+.melakarthaChakra {
+    margin-bottom: 15px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.chakra1,
+.chakra2,
+.chakra3,
+.chakra4,
+.chakra5,
+.chakra6 {
+    display: none;
+}
+
+.chakra1.selected,
+.chakra2.selected,
+.chakra3.selected,
+.chakra4.selected,
+.chakra5.selected,
+.chakra6.selected {
+    display: inline-block;
 }
 
 
@@ -1340,12 +1411,6 @@ hr {
     right: 150%;
     top: -400%;
 }
-
-.tooltiptext ul {
-    margin-top: 10px;
-}
-
-.tooltiptext ul li {}
 
 .tooltip .tooltiptext::after {
     content: " ";

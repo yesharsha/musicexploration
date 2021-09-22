@@ -188,26 +188,27 @@
                     </div>
                     <div>
                         <span title="Turn on Tanpura Drone">TANPURA</span>
-                        <label class="switch" for="shrutiON">
+                        <!-- <label class="switch" for="shrutiON">
                             <input type="checkbox" id="shrutiON" name="shrutiON" >
                             <span class="slider round" title="Turn on Tanpura Drone"></span>
-                        </label>
+                        </label> -->
+                        <input type="range" id="tanpuraVolumeKnob" name="TanpuraVolume" class="input-knob" oninput="tanpuraVolume($(this), this.value)" value="0" min="0" max="1" step="0.1" data-diameter="32" data-src="images/knob70.png" data-sprites="100" />
                         <span title="Turn on swara assistance on the on-screen piano (in the Raga Detail page)">SWARA HELP</span>
                         <label class="switch">
                             <input type="checkbox" checked="checked" id="notesON" onclick="swarasHelpON()">
                             <span class="slider round" title="Turn on swara assistance on the on-screen piano (in the Raga Detail page)"></span>
                         </label>
                     </div>
-                    <div title="Enter tempo value in BPM. Min: 50 BPM, Max: 600 BPM">
+                    <div title="Enter tempo value between 50 and 600 BPM">
                         <span><label for="tempo">TEMPO</label></span>
                         <input type="number" name="tempo" id="tempo" value="150" min="10" max="999" step="1" onchange="time()" />
                     </div>
 
                 </div>
 
-                <div class="tips">
+                <!-- <div class="tips">
                     <p><i class="fas fa-info-circle fa-lg"></i> {{Tip}}</p>
-                </div>
+                </div> -->
             </div>
         </section>
 
