@@ -554,8 +554,8 @@
         },
         {
             "name": "Gunāvati",
-            "Arohanam": "S R₁ M₁ P D₂ S",
-            "Avarohanam": "S D₂ P M₁ R₁ S",
+            "Arohanam": "S R₁ M₁ P D₂ Ṡ",
+            "Avarohanam": "Ṡ D₂ P M₁ R₁ S",
             "janaka": "false",
             "janyaOf": 10
         },
@@ -1099,7 +1099,7 @@
             "janyaOf": 15
         },
         {
-            "name": "Pharaju ",
+            "name": "Pharaju",
             "Arohanam": "S G₃ M₁ P D₁ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₁ P M₁ G₃ R₁ S",
             "janaka": "false",
@@ -1520,7 +1520,7 @@
         },
         {
             "name": "Vasanthā",
-            "Arohanam": "S M₁ G₃ M₁ D₂ N₃ Ṡ",
+            "Arohanam": "S G₃ M₁ D₂ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₂ M₁ G₃ R₁ S",
             "janaka": "false",
             "janyaOf": 17
@@ -1624,7 +1624,7 @@
             "janyaOf": 20
         },
         {
-            "name": "Abheri ",
+            "name": "Abheri",
             "Arohanam": "S M₁ G₂ M₁ P P Ṡ",
             "Avarohanam": "Ṡ N₂ D₂ P M₁ G₂ R₂ S",
             "janaka": "false",
@@ -1834,8 +1834,8 @@
             "janyaOf": 20
         },
         {
-            "name": "Poornashađjam",
-            "Arohanam": "S R₂ G₂ M₁ N₂ N₂ S",
+            "name": "Poornashadjam",
+            "Arohanam": "S R₂ G₂ M₁ N₂ N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ P M₁ G₂ R₂ S",
             "janaka": "false",
             "janyaOf": 20
@@ -1912,8 +1912,8 @@
         },
         {
             "name": "Sutradhāri",
-            "Arohanam": "S R₂ M₁ P D₁ S",
-            "Avarohanam": "S D₁ P M₁ R₂ S",
+            "Arohanam": "S R₂ M₁ P D₁ Ṡ",
+            "Avarohanam": "Ṡ D₁ P M₁ R₂ S",
             "janaka": "false",
             "janyaOf": 20
         },
@@ -2002,7 +2002,7 @@
             "janyaOf": 21
         },
         {
-            "name": "Kadaram ",
+            "name": "Kadaram (Chandrakauns)",
             "Arohanam": "S G₂ M₁ D₁ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₁ M₁ G₂ S",
             "janaka": "false",
@@ -2191,7 +2191,7 @@
             "janyaOf": 22
         },
         {
-            "name": "Chittaranjani",
+            "name": "Chittaranjanii",
             "Arohanam": "S R₂ G₂ M₁ P D₂ N₂",
             "Avarohanam": "N₂ D₂ P M₁ G₂ R₂ S",
             "janaka": "false",
@@ -2499,13 +2499,6 @@
             "janyaOf": 22
         },
         {
-            "name": "Mishramanolayam",
-            "Arohanam": "S R₂ M₁ P D₁ Ṡ",
-            "Avarohanam": "Ṡ D₂ D₁ P M₁ R₂ S",
-            "janaka": "false",
-            "janyaOf": 22
-        },
-        {
             "name": "Mishrashivaranjani",
             "Arohanam": "S R₂ G₂ P D₂ Ṡ",
             "Avarohanam": "Ṡ D₂ P G₃ G₂ R₂ S",
@@ -2765,7 +2758,7 @@
             "janyaOf": 22
         },
         {
-            "name": "Suddha Hindolam ",
+            "name": "Suddha Hindolam (Varamu)",
             "Arohanam": "S G₂ M₁ D₂ N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ D₂ M₁ G₂ S",
             "janaka": "false",
@@ -2962,8 +2955,8 @@
         },
         {
             "name": "Tarangini",
-            "Arohanam": "S R₂ G₃ P D₁ N₂ D₁ SS R₂ G₃ P D₁ N₂ D₁ P D₁ S",
-            "Avarohanam": "S D₁ P M₁ G₃ R₂ SS D₁ P G₃ R₂ S G₃ M₁ R₂ G₃ S",
+            "Arohanam": "S R₂ G₃ P D₁ N₂ D₁ P D₁ Ṡ",
+            "Avarohanam": "Ṡ D₁ P M₁ G₃ R₂ S",
             "janaka": "false",
             "janyaOf": 26
         },
@@ -3353,7 +3346,7 @@
             "janyaOf": 28
         },
         {
-            "name": "Jog ",
+            "name": "Jog",
             "Arohanam": "S G₃ M₁ P N₃ Ṡ",
             "Avarohanam": "Ṡ N₂ P M₁ G₃ M₁ G₃ S G₂ S",
             "janaka": "false",
@@ -4385,13 +4378,6 @@
             "name": "Sāmanta",
             "Arohanam": "S R₂ G₃ M₁ P D₃ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₃ N₃ D₃ P M₁ G₃ R₂ S",
-            "janaka": "false",
-            "janyaOf": 30
-        },
-        {
-            "name": "Thilang",
-            "Arohanam": "S G₃ M₁ P N₃ Ṡ",
-            "Avarohanam": "Ṡ N₂ P M₁ G₃ S",
             "janaka": "false",
             "janyaOf": 30
         },
@@ -5670,7 +5656,7 @@
             "janyaOf": 56
         },
         {
-            "name": "Shanmukhi ",
+            "name": "Shanmukhi",
             "Arohanam": "S R₁ G₂ M₂ D₁ N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ D₁ M₂ G₂ R₁ S",
             "janaka": "false",
@@ -5691,7 +5677,7 @@
             "janyaOf": 56
         },
         {
-            "name": "Simhendramadhyamam",
+            "name": "Simhendramadhyamam (Sumadhyuti)",
             "Arohanam": "S R₂ G₂ M₂ P D₁ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₁ P M₂ G₂ R₂ S",
             "janaka": 57,
@@ -5740,7 +5726,7 @@
             "janyaOf": 57
         },
         {
-            "name": "Suddha",
+            "name": "Shuddha",
             "Arohanam": "S R₂ G₂ M₂ P N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ P M₂ G₂ R₂ S",
             "janaka": "false",
@@ -5979,7 +5965,7 @@
         },
         {
             "name": "Hamsanādam",
-            "Arohanam": "S R₂ M₂ P D₃ N₃ Ṡ ",
+            "Arohanam": "S R₂ M₂ P D₃ N₃ Ṡ",
             "Avarohanam": "Ṡ N₃ D₃ P M₂ R₂ S",
             "janaka": "false",
             "janyaOf": 60
@@ -6237,7 +6223,7 @@
             "janyaOf": 64
         },
         {
-            "name": "Nādhabrahma",
+            "name": "Nādabrahma",
             "Arohanam": "S P M₂ P D₂ N₂ Ṡ",
             "Avarohanam": "Ṡ N₂ D₂ P M₂ G₃ S",
             "janaka": "false",
