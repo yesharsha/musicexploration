@@ -12,6 +12,9 @@ ragaApp.config(function($routeProvider) {
 
     // route for the home page
         .when('/', {
+            controller: 'effectsController'
+        })
+        .when('/', {
             templateUrl: 'ragaHome.html',
             controller: 'mainController'
         })
@@ -44,10 +47,31 @@ ragaApp.config(function($routeProvider) {
             controller: 'ragaController'
         })
 });
+
+ragaApp.service('moorchanaService', function() {
+    //Set default value of moorchana to Mayamalava gowla
+    //  this.moorchana = ["S", "R₁", "G₃", "M₁", "P", "D₁", "N₃", "Ṡ", "Ṡ", "N₃", "D₁", "P", "M₁", "G₃", "R₁", "S"]
+});
+
+ragaApp.controller('effectsController', ['$rootScope', '$scope', 'moorchanaService', function($rootScope, $scope, moorchanaService) {
+    $scope.moorchanaService = moorchanaService;
+
+    // PLay button in the effects panel plays seelcted raga's mooorchana if home page or plays the phrasebook's phrase if in Raga Detail page
+    $scope.optionsPlay = function() {
+        if (window.location.href.includes('/ragaDetail/')) {
+            phraseBookPlay();
+        } else {
+            play(moorchanaService.moorchana, tempo);
+        }
+    }
+}]);
+
+//
 //
 // Maincontroller
-ragaApp.controller('mainController', function($scope, $http) {
+ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchanaService', function($rootScope, $scope, $http, moorchanaService) {
     let ragaDatabase = undefined;
+    $scope.moorchanaService = moorchanaService;
 
     function removeAccents(value) {
         return value.replace(/ā/g, 'a').replace(/ē/g, 'a').replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃");
@@ -74,7 +98,7 @@ ragaApp.controller('mainController', function($scope, $http) {
         $scope.EditorsPicks = ['Māyamālava Gowla', 'Hindolam', 'Chārukeshi', 'Shanmukhapriya', 'Kharaharapriya', 'Reethigowla', 'Natabhairavi', 'Vijayanāgari', 'Ghanta', 'Vanaspati'];
 
         // Moods
-        $scope.Meditative = ['Māyamālava Gowla', 'Shanmukhapriya', 'Sāveri', 'Malahari', 'Hindolam', 'Kalyāna Vasantam', 'Bindhumālini', 'Saraswathi', 'Ahir Bhairav'];
+        $scope.Meditative = ['Māyamālava Gowla', 'Revati', 'Shanmukhapriya', 'Sāveri', 'Malahari', 'Hindolam', 'Kalyāna Vasantam', 'Bindhumālini', 'Saraswathi', 'Ahir Bhairav'];
         $scope.Ecstatic = ['Kharaharapriya', 'Reethigowla', 'Anandabhairavi', 'Kānadā', 'Bhāgeshri', 'Miyan Malhār'];
         $scope.Mysterious = ['Nāsikabhooshhani', 'Vanaspati', 'Gānamoorti', 'Vāchaspathi', 'Ghanta', 'Kanakāmbari', 'Rāgachoodāmani'];
         $scope.Cinematic = ['Natabhairavi', 'Vijayanāgari', 'Chakravākam', 'Abheri', 'Darbāri Kānada', 'Sāramati', 'Shivaranjani', 'Shubhapanthuvarāli'];
@@ -91,14 +115,34 @@ ragaApp.controller('mainController', function($scope, $http) {
             $scope.RagaOfTheDay = randomRagas;
         }
 
-        // Display list of Melakartha Ragas in deifferent Chakras
+        // Display list of Melakartha Ragas in different Chakras
         {
-            let melakartas = []
+            let melakartas = [];
+            let oudava = [];
+            let shadava = [];
             for (let i = 0; i < ragaDatabase.length; i++) {
                 if (ragaDatabase[i].janyaOf == "false") {
                     melakartas.push(ragaDatabase[i].name);
                 }
+
+                // oudava shadava ragas
+                let moorchana_ = ragaDatabase[i].Arohanam + ragaDatabase[i].Avarohanam
+                const moorchana = [...new Set(moorchana_.split(" "))];
+
+                if (moorchana.length == 6 && ragaDatabase[i].Arohanam.split(" ").length == 6 && ragaDatabase[i].Avarohanam.split(" ").length == 6) {
+                    oudava.push(ragaDatabase[i].name);
+                }
+
+                if (moorchana.length == 7 && ragaDatabase[i].Arohanam.split(" ").length == 7 && ragaDatabase[i].Avarohanam.split(" ").length == 7) {
+                    shadava.push(ragaDatabase[i].name);
+                }
+
             }
+            $scope.OudavaShort = ['Karnātaka Shuddha Sāveri', 'Tatillatika', 'Revati', 'Vittalapriya', 'Chitthakarshani', 'Bhoopālam', 'Chandrikatodi', 'Kalāsāveri', 'Prabhupriya'];
+            $scope.ShadavaShort = ['Mādhavapriyā', 'Vāgeeshwari', 'Amrita Dhanyāsi', 'Divyamālati', 'Shuddha Seemantini', 'Shuddha Todi', 'Alankārapriya', 'Bhāgyashabari', 'Mātangakāmini'];
+            $scope.oudava = ['Karnātaka Shuddha Sāveri', 'Tatillatika', 'Revati', 'Vittalapriya', 'Chitthakarshani', 'Bhoopālam', 'Chandrikatodi', 'Kalāsāveri', 'Prabhupriya', 'Udayaravichandrika', 'Gunāvati', 'Sallapa', 'Sūryā', 'Deshyagowla', 'Kalyānakesari', 'Megharanjani', 'Revagupti', 'Rukhmāmbari', 'Tārakagowla', 'Vishārada', 'Mukundamālini', 'Valaji', 'Suddha Gowla', 'Bhārati', 'Hindolam', 'Kātyāyani', 'Kshanika', 'Malkosh', 'Sharadapriya', 'Sushama', 'Sutradhāri', 'Udayarāga', 'Bhānupriya', 'Kadaram', 'Priyadarshani', 'Sāmapriya', 'Shrothasvini', 'Vasanthā', 'Abhogi', 'Karnātaka Hindolam', 'Madhyamāvathi', 'Mahānandhi', 'Nāgavalli', 'Nirmalāngi', 'Ratipatipriya', 'Sārang', 'Sankrāndanapriyā', 'Shivapriyā', 'Shivaranjani', 'Suddha Dhanyāsi', 'Suddha Hindolam', 'Hrudkamali', 'Lavanthika', 'Rājathilaka', 'Madhulika', 'Vasanthi', 'Ambhojini', 'Bhoopāli', 'Deshkār', 'Guhamanohari', 'Jaithshree', 'Madhurakokila', 'Mohanam', 'Nādavalli', 'Nāgaswarāvali', 'Neela', 'Rāgavinodini', 'Sāvithri', 'Veenavadini', 'Dharmalakhi', 'Hamsadhwani', 'Niroshta', 'Rathnabhooshani', 'Suddha Sāveri', 'Tāndavam', 'Vedhāndhagamana', 'Niranjani', 'Vikhavathi', 'Gambheeranāttai', 'Poornapanchamam', 'Parpathi', 'Tāndavapriyā', 'Patalāmbari', 'Hemāngi', 'Samudrapriyā', 'Sumanasaranjani', 'Ānandavalli', 'Hemapriya', 'Kshemakari', 'Yāgini', 'Varada', 'Skandamanorama', 'Hrdhini', 'Pramodhini', 'Shilangi', 'Sunādavinodini', 'Vandanadhārini', 'Amritavarshini'];
+            $scope.shadava = ['Mādhavapriyā', 'Vāgeeshwari', 'Amrita Dhanyāsi', 'Divyamālati', 'Shuddha Seemantini', 'Shuddha Todi', 'Alankārapriya', 'Bhāgyashabari', 'Mātangakāmini', 'Vātee Vasantabhairavi', 'Kalindaja', 'Kuvalayabharanam', 'Shuddha Kāmbhoji', 'Bhāvini', 'Chandrachooda', 'Lalitā', 'Poornalalita', 'Sāmantadeepara', 'Bhujāngini', 'Chakranārāyani', 'Kokilā', 'Malayamārutam', 'Pravritti', 'Jeevantikā', 'Chittaranjani', 'Poornashadjam', 'Shree Navarasachandrika', 'Aymmukhan', 'Chandrika', 'Hamsavāhini', 'Vasanthamanohari', 'Chittaranjanii', 'Hamsa ābheri', 'Jatādhāri', 'Kalika', 'Madhyamarāvali', 'Omkāri', 'Pushpalathika', 'Shreeranjani', 'Vasantashree', 'Gayakamandini', 'Srirangapriya', 'Neelamani', 'Sarasānana', 'Chandrahasitham', 'Jana Sammodhini', 'Karnātaka Khamās', 'Vaishnavi', 'Ānandharoopa', 'Hamsavinodhini', 'Kedaram', 'Reetuvilāsa', 'Suranandini', 'Vilāsini', 'Damarugapriya', 'Desharanjani', 'Maghathi', 'Murali', 'Nāttai', 'Jālasugandhi', 'Chandrajyothi', 'Mahathi', 'Suvarnadeepakam', 'Bhavāni', 'Kanchanāvathi', 'Shekharachandrikā', 'Shreekānti', 'Vijayashree', 'Bhinnapauarali', 'Dharmini', 'Mandāri', 'Bhogavasantha', 'Kamalāptapriyā', 'Rasavinodini', 'Seemantinipriyā', 'Hamsānandi', 'Suddhakriyā', 'Sundarāngi', 'Gopikathilakam', 'Shanmukhi', 'Ghantana', 'Shuddha', 'Urmikā', 'Karmukhāvati', 'Vijayanāgari', 'Hamsanādam', 'Kanakakusumāvali', 'Shruthiranjani', 'Gopriya', 'Lalithāngi', 'Rathnakānthi', 'Raviswaroopini', 'Gurupriya', 'Mukthidāyini', 'Triveni', 'Vivāhapriyā', 'Kalyānadāyini', 'Kannadamaruva', 'Sāranga Tārangini'];
+
             $scope.Indu = melakartas.slice(0, 6);
             $scope.Netra = melakartas.slice(6, 12);
             $scope.Agni = melakartas.slice(12, 18);
@@ -111,6 +155,9 @@ ragaApp.controller('mainController', function($scope, $http) {
             $scope.Disi = melakartas.slice(54, 60);
             $scope.Rudra = melakartas.slice(60, 66);
             $scope.Aditya = melakartas.slice(66, 72);
+
+            $scope.Oudava = oudava;
+            $scope.Shadava = shadava;
             // $scope.ShuddhaMelakartas = melakartas.slice(0, 36);
             // $scope.PratiMelakartas = melakartas.slice(36, 72);
         }
@@ -128,23 +175,6 @@ ragaApp.controller('mainController', function($scope, $http) {
             }, 2000);
         });
     });
-
-    // // Random Beginner tips
-    // {
-    //     let tips = {
-    //         0: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
-    //         1: "Use Keyboard Shortcuts A, S, D, F, etc to play the on-screen keyboard",
-    //         2: "Use the SAVE button in the phrasebook to save your notes locally",
-    //         3: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
-    //         4: "To play a specific phrase, select the phrase by clicking on the gray header and press Play",
-    //         5: "Use the DRY/WET parameter to add delay to your sequence",
-    //         6: "Use the on-screen piano to enter notes into the phrasebook"
-    //     }
-
-    //     let random = Math.floor(Math.random() * (6));
-    //     $scope.Tip = tips[random];
-    // }
-
 
     //Display list of favourite ragas
     {
@@ -191,7 +221,7 @@ ragaApp.controller('mainController', function($scope, $http) {
         });
     }
 
-    //Melakarthas toggle functionality
+    //Melakartas toggle functionality
     {
         $('.chakra').on('click', function() {
             let className = '.' + $(this).attr('id');
@@ -209,9 +239,9 @@ ragaApp.controller('mainController', function($scope, $http) {
 
     //Raga Auditioning functionality
     {
-        $scope.ragaAudition = function(ragaName) {
+        //$scope.selected = 'Māyamālava Gowla';
 
-            console.log(ragaName);
+        $scope.ragaAudition = function(ragaName) {
 
             //Get Raga Arohanam Avarohanam and Moorchana phrase
             let raga = ragaDatabase.filter(function(raga) { return raga.name == ragaName });
@@ -223,7 +253,7 @@ ragaApp.controller('mainController', function($scope, $http) {
             avarohanam = avarohanam_.join(" ");
 
             let moorchana_ = arohanam_.concat(avarohanam_);
-            //play(moorchana_, tempo);
+
             swarasHelpClear();
             for (let i = 0; i < moorchana_.length; i++) {
                 switch (moorchana_[i]) {
@@ -248,11 +278,11 @@ ragaApp.controller('mainController', function($scope, $http) {
 
             $scope.selected = ragaName;
 
+            moorchanaService.moorchana = moorchana_;
         }
-
     }
 
-});
+}]);
 
 //ragaController
 ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
@@ -549,21 +579,21 @@ const keyBindings = {
 }
 
 //Declare all the sounds
-keyList[0] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/s.ogg', 'sounds/s.mp3'] } });
-keyList[1] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/r1.ogg', 'sounds/r1.mp3'] } });
-keyList[2] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/r2.ogg', 'sounds/r2.mp3'] } });
-keyList[3] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/g2.ogg', 'sounds/g2.mp3'] } });
-keyList[4] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/g3.ogg', 'sounds/g3.mp3'] } });
-keyList[5] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/m1.ogg', 'sounds/m1.mp3'] } });
-keyList[6] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/m2.ogg', 'sounds/m2.mp3'] } });
-keyList[7] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/p.ogg', 'sounds/p.mp3'] } });
-keyList[8] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d1.ogg', 'sounds/d1.mp3'] } });
-keyList[9] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d2.ogg', 'sounds/d2.mp3'] } });
-keyList[10] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n2.ogg', 'sounds/n2.mp3'] } });
-keyList[11] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n3.ogg', 'sounds/n3.mp3'] } });
-keyList[12] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/saHigh.ogg', 'sounds/saHigh.mp3'] } });
+keyList[0] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/s.mp3'] } });
+keyList[1] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/r1.mp3'] } });
+keyList[2] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/r2.mp3'] } });
+keyList[3] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/g2.mp3'] } });
+keyList[4] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/g3.mp3'] } });
+keyList[5] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/m1.mp3'] } });
+keyList[6] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/m2.mp3'] } });
+keyList[7] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/p.mp3'] } });
+keyList[8] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d1.mp3'] } });
+keyList[9] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d2.mp3'] } });
+keyList[10] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n2.mp3'] } });
+keyList[11] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n3.mp3'] } });
+keyList[12] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/saHigh.mp3'] } });
 keyList[13] = new Pizzicato.Sound({ source: 'wave', options: { frequency: 22000 } });
-const tanpura = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.ogg'] } });
+const tanpura = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.mp3'] } });
 
 //Set attack to 0.001 for all the notes so it sounds sharp
 for (i = 0; i < keyList.length; i++) {
@@ -599,7 +629,7 @@ var delay = new Pizzicato.Effects.Delay({
 });
 
 swarasGroup.addEffect(lowPassFilter);
-swarasGroup.addEffect(dubDelay)
+swarasGroup.addEffect(dubDelay);
 swarasGroup.volume = 0.3;
 
 tanpura.addEffect(delay);
@@ -673,12 +703,12 @@ function tanpuraVolume(obj, param) {
 
 // Presets - takes all the values as parameters and assigns these value to the Knob and the display text
 
-function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayTimeParam, dubDelayCutoffParam, dubDelayMixParam) {
+function preset(filterCutoffParam, dubDelayFeedbackParam, dubDelayTimeParam, dubDelayCutoffParam, dubDelayMixParam) {
     // Set the values for individual parameters
-    volume($('#volumeKnob'), volumeParam)
-    $('#volumeKnob').attr('value', volumeParam)
-    let elem = document.getElementById("volumeKnob"); // get existing input-knob element
-    volumeKnob.value = volumeParam;
+    // volume($('#volumeKnob'), volumeParam)
+    // $('#volumeKnob').attr('value', volumeParam)
+    // let elem = document.getElementById("volumeKnob"); // get existing input-knob element
+    // volumeKnob.value = volumeParam;
 
     filterCutoff($('#filterCutoffKnob'), filterCutoffParam);
     $('#filterCutoffKnob').attr('value', filterCutoffParam);
@@ -702,7 +732,7 @@ function preset(volumeParam, filterCutoffParam, dubDelayFeedbackParam, dubDelayT
 }
 
 //
-// On Screen Keyboard
+// Keyboard to piano bindings
 function keyBind() {
     for (const [key, value] of Object.entries(keyBindings)) {
         keyboardJS.bind(key, (e) => {
@@ -788,15 +818,6 @@ function timeline(sequence, repeat) {
         }
     }
     keyList[index].stop();
-
-    // //Function to place the swara sequence in the sequence window - temporarily disabled
-    // function displaySequence() {
-    //     var seq = sequence.slice(count - 9, count + 1).toString().replaceAll(",", "  ").replaceAll(/[0-9]/g, "&emsp;");
-    //     if (count > 8) {
-    //         $('#sequencePast').text(seq);
-    //     }
-    // }
-    // displaySequence()
 
     //Set a random volume - functionality disabled as the sound is getting choppy with this function.
     // function randomVolume() {
@@ -887,16 +908,12 @@ function randomizePlay() {
             randomSequence.push(random + 2);
         }
     }
-    console.log("Random sequence is: ")
-    console.log(randomSequence)
 
     //Mapping the random numbers with the moorchana to another array
     let randomSequenceNotes = [];
     for (let b = 0; b <= randomSequence.length - 1; b++) {
         randomSequenceNotes.push(moorchana[randomSequence[b]])
     }
-    console.log("Random sequence to be played is: ")
-    console.log(randomSequenceNotes)
 
     //Call the play() function to play the sequence
     play(randomSequenceNotes, tempo)
@@ -939,15 +956,6 @@ $(document).ready(function() {
     $('#presets ul li a').on('click', function() {
         $(this).css('background-color', '#ffe600');
         $(this).parent('li').siblings().children('a').css('background-color', '#ffffff');
-    });
-
-    // Tanpura toggle control
-    $('#shrutiON').on('click', function() {
-        if ($("#shrutiON").is(':checked')) {
-            shruti.play();
-        } else {
-            shruti.stop();
-        }
     });
 
     $('#newPiano p').mousedown(function() {
@@ -1058,7 +1066,6 @@ function phraseBookPlay() {
                     }
                     count++;
                 } else {
-                    console.log("Playing selected phrases")
                     $('#playPhrase').removeClass('active');
                 }
             });
@@ -1113,7 +1120,6 @@ function time() {
     if (!Number.isNaN(ms)) {
         tempo = ms;
     }
-    console.log(tempo)
 }
 time()
 
@@ -1168,3 +1174,16 @@ function fadeout(id) {
         $(id).removeClass('active');
     }, 1000);
 }
+
+$('#piano').on('click', function() {
+    if (!$(this).hasClass('active')) {
+        $('#pianoWrapper').addClass('active');
+        $('#screen').addClass('active');
+        $(this).addClass('active');
+
+    } else {
+        $('#pianoWrapper').removeClass('active');
+        $('#screen').removeClass('active');
+        $(this).removeClass('active');
+    }
+})

@@ -10,7 +10,7 @@
 <div>
     <h3>EDITOR'S PICKS</h3>
     <div class="ragasContainer">
-        <span class="ragaName" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga); active = true;" ng-repeat="raga in EditorsPicks"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+        <span class="ragaName" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in EditorsPicks"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
     </div>
 </div>
 <div>
@@ -172,11 +172,9 @@
         <span class="ragaName chakra4 selected" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Veda"><span class="number">{{Veda.indexOf(raga) + 19}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
         <span class="ragaName chakra5 selected" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Bana"><span class="number">{{Bana.indexOf(raga) + 25}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
         <span class="ragaName chakra6 " ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Rutu"><span class="number">{{Rutu.indexOf(raga) + 31}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
-        <!-- <span class="ragaName " ng-repeat="raga in ShuddhaMelakartas"><span class="number">{{ShuddhaMelakartas.indexOf(raga) + 1}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span> -->
     </div>
     <hr>
     <div class="ragasContainer">
-        <!-- <span class="ragaName " ng-repeat="raga in PratiMelakartas"><span class="number">{{PratiMelakartas.indexOf(raga) + 37}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span> -->
         <span class="ragaName chakra1 selected" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Rishi"><span class="number">{{Rishi.indexOf(raga) + 37}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
         <span class="ragaName chakra2 " ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Vasu"><span class="number">{{Vasu.indexOf(raga) + 43}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
         <span class="ragaName chakra3 " ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Brahma"><span class="number">{{Brahma.indexOf(raga) + 49}}</span><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
@@ -187,12 +185,36 @@
 </div>
 
 <div>
+    <h3>OUDAVA / PENTATONIC RAGAS</h3>
+    <div class="ragasContainer" ng-show="oudava">
+        <span class="ragaName" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in OudavaShort"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+    <div class="ragasContainer" ng-show="!oudava">
+        <span class="ragaName" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Oudava"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+    <span class="seeMore" ng-click="oudava = !oudava" ng-show="oudava">See Full list</span>
+    <span class="seeMore" ng-click="oudava = !oudava" ng-show="!oudava">See less</span>
+</div>
+
+<div>
+    <h3>SHADAVA / HEXATONIC RAGAS</h3>
+    <div class="ragasContainer" ng-show="shadava">
+        <span class="ragaName" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in ShadavaShort"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+    <div class="ragasContainer" ng-show="!shadava">
+        <span class="ragaName" ng-class="{ 'active' : selected === this.raga }" ng-click="ragaAudition(this.raga)" ng-repeat="raga in Shadava"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
+    </div>
+    <span class="seeMore" ng-click="shadava = !shadava" ng-show="shadava">See Full list</span>
+    <span class="seeMore" ng-click="shadava = !shadava" ng-show="!shadava">See less</span>
+</div>
+
+<div>
     <h3>FULL RAGA LIST </h3>
     <div>
         <div class="search">
-            <input type="text " id="search" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" ng-click="searchResults = !searchResults" />
+            <input type="text " id="search" placeholder="eg. 'Kanada' or 'S R2 G2' " val=" " ng-model="search" ng-click="searchResults = !searchResults ? !searchResults : searchResults" />
             <div class="searchNotes">
-                <div><b>Click search field to toggle results ON/OFF</b></div>
+                <div ng-click="searchResults = !searchResults">Click here to show/hide full list</div>
                 <span id="helpText">
                     1. Enter name of Raga. e.g. 'Kanada'. <br/> 
                     2. Enter swaras in ascending or descending order of appearance. e.g. 'S R2 G2'. <br/> 
