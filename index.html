@@ -48,6 +48,42 @@
     <meta name="twitter:site" content="@indianclassical.org">
     <script src="https://kit.fontawesome.com/37095eb785.js" crossorigin="anonymous"></script>
     <script src="js/input-knobs.js"></script>
+    <script>
+        ! function() {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize)
+                if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice.");
+                else {
+                    analytics.invoked = !0;
+                    analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware", "setAnonymousId", "addDestinationMiddleware"];
+                    analytics.factory = function(e) {
+                        return function() {
+                            var t = Array.prototype.slice.call(arguments);
+                            t.unshift(e);
+                            analytics.push(t);
+                            return analytics
+                        }
+                    };
+                    for (var e = 0; e < analytics.methods.length; e++) {
+                        var key = analytics.methods[e];
+                        analytics[key] = analytics.factory(key)
+                    }
+                    analytics.load = function(key, e) {
+                        var t = document.createElement("script");
+                        t.type = "text/javascript";
+                        t.async = !0;
+                        t.src = "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";
+                        var n = document.getElementsByTagName("script")[0];
+                        n.parentNode.insertBefore(t, n);
+                        analytics._loadOptions = e
+                    };
+                    analytics._writeKey = "EtHE3MwTZvhWobCMjEcX6jqH55kwhoUE";;
+                    analytics.SNIPPET_VERSION = "4.15.3";
+                    analytics.load("EtHE3MwTZvhWobCMjEcX6jqH55kwhoUE");
+                    analytics.page();
+                }
+        }();
+    </script>
 </head>
 
 <body>
@@ -98,7 +134,7 @@
         </header>
 
         <section class="control">
-            <div class="content" ng-controller="mainController">
+            <div class="content">
                 <!-- All content goes here -->
                 <div ng-view>
                 </div>
@@ -147,47 +183,53 @@
                 <div class="effects">
                     <div class="module">
                         <div title="Adjusts Master volume">
-                            <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" value="0.3" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <input type="range" id="volumeKnob" name="volume" class="input-knob" oninput="volume($(this), this.value)" onmouseup="analytics.track('Modified volume', { volume: this.value });" value="0.3" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png"
+                                data-sprites="100" />
                             <output class="knobValue">0.3</output>
                             <label for="volume">VOLUME</label>
                         </div>
                     </div>
                     <div class="module">
                         <div title="Adjusts filter cutoff of the sound (Lowpass filter)">
-                            <input type="range" id="filterCutoffKnob" name="filterCutoff" class="input-knob" oninput="filterCutoff($(this), this.value)" value="16000" min="0" max="16000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <input type="range" id="filterCutoffKnob" name="filterCutoff" class="input-knob" oninput="filterCutoff($(this), this.value)" onmouseup="analytics.track('Modified FX Parameter', { filterCutoff: this.value });" value="16000" min="0" max="16000" step="100"
+                                data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
                             <output class="knobValue">16 kHz</output>
                             <label for="filterCutoff">FLTR CUTOFF</label>
                         </div>
                     </div>
                     <div class="module">
                         <div title="Adjusts the Delay feedback on your sequence. Higher feedback builds up over time, exercise caution!">
-                            <input type="range" id="dubDelayFeedbackKnob" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback($(this), this.value)" value="0.7" min="0.00" max="0.8" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <input type="range" id="dubDelayFeedbackKnob" name="dubDelayFeedback" class="input-knob" oninput="dubDelayFeedback($(this), this.value)" onmouseup="analytics.track('Modified FX Parameter', { dubDelayFeedback: this.value });" value="0.7" min="0.00" max="0.8"
+                                step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
                             <output class="knobValue">0.7</output>
                             <label for="dubDelayFeedback">FEEDBACK</label>
                         </div>
                         <div title="Controls time of Delay ranging from 0 - 1 second">
-                            <input type="range" id="dubDelayTimeKnob" name="dubDelayTime" class="input-knob" oninput="dubDelayTime($(this), this.value)" value="0.6" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <input type="range" id="dubDelayTimeKnob" name="dubDelayTime" class="input-knob" oninput="dubDelayTime($(this), this.value)" onmouseup="analytics.track('Modified FX Parameter', { dubDelayTime: this.value });" value="0.6" min="0" max="1" step="0.01" data-diameter="60"
+                                data-src="images/knob70.png" data-sprites="100" />
                             <span class="knobValue">0.6</span>
                             <label for="dubDelayTime">DELAY TIME</label>
                         </div>
                         <div title="Adjusts the cutoff frequency of the Delay">
-                            <input type="range" id="dubDelayCutoffKnob" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff($(this), this.value)" value="3200" min="0" max="4000" step="100" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <input type="range" id="dubDelayCutoffKnob" name="dubDelayCutoff" class="input-knob" oninput="dubDelayCutoff($(this), this.value)" onmouseup="analytics.track('Modified FX Parameter', { dubDelayCutoff: this.value });" value="3200" min="0" max="4000" step="100"
+                                data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
                             <span class="knobValue">3.2 kHz</span>
                             <label for="dubDelayCutoff">CUTOFF</label>
                         </div>
                         <div title="Adjusts the amount of Delay on the sequence">
-                            <input type="range" id="dubDelayMixKnob" name="dubDelayMix" class="input-knob" oninput="dubDelayMix($(this), this.value)" value="0.10" min="0" max="1" step="0.01" data-diameter="60" data-src="images/knob70.png" data-sprites="100" />
+                            <input type="range" id="dubDelayMixKnob" name="dubDelayMix" class="input-knob" oninput="dubDelayMix($(this), this.value)" onmouseup="analytics.track('Modified FX Parameter', { dubDelayMix: this.value });" value="0.10" min="0" max="1" step="0.01" data-diameter="60"
+                                data-src="images/knob70.png" data-sprites="100" />
                             <span class="knobValue">0.1</span>
                             <label for="dubDelayMix">DRY/WET</label>
                         </div>
                     </div>
                     <div class="module" id="presets">
                         <ul>
-                            <li class="preset" onclick="preset(900, 0.75, 0.6, 3800, 1)"><button class="button" title="Obscure the sound by removing higher frequencies and adding a heavy atmospheric Delay feedback">FOGGY</button></li>
-                            <li class="preset" onclick="preset(3800, 0.75, 0.6, 3800, 0.8)" title="Preserve the sharpness of the sound while retaining a heavy atmospheric Delay feedback"><button class="button">MISTY</button></li>
-                            <li class="preset" onclick="preset(5600, 0.77, 0.15, 3700, 0.8)"><button class="button" title="Add a small Delay time, infusing a psychedelic effect into the sound.">SPARKLY</button></li>
-                            <li class="preset" onclick="preset(16000, 0.7, 0.6, 3200, 0.10)"><button class="button active" title="Add a small tinge of Delay feedback to the sound">BRIGHT</button></li>
-                            <li class=" preset " onclick="preset(16000, 0.7, 0.6, 4000, 0) "><button class="button" title="Turn off all effect parameters on the sound">OFF</button></li>
+                            <li class="preset" onclick="preset(900, 0.75, 0.6, 3800, 1); analytics.track('Clicked on preset', {preset: 'Foggy' });"><button class="button" title="Obscure the sound by removing higher frequencies and adding a heavy atmospheric Delay feedback">FOGGY</button></li>
+                            <li class="preset" onclick="preset(3800, 0.75, 0.6, 3800, 0.8); analytics.track('Clicked on preset', {preset: 'Misty' });" title="Preserve the sharpness of the sound while retaining a heavy atmospheric Delay feedback"><button class="button">MISTY</button></li>
+                            <li class="preset" onclick="preset(5600, 0.77, 0.15, 3700, 0.8); analytics.track('Clicked on preset', {preset: 'Sparkly' });"><button class="button" title="Add a small Delay time, infusing a psychedelic effect into the sound.">SPARKLY</button></li>
+                            <li class="preset" onclick="preset(16000, 0.7, 0.6, 3200, 0.10); analytics.track('Clicked on preset', {preset: 'Bright' });"><button class="button active" title="Add a small tinge of Delay feedback to the sound">BRIGHT</button></li>
+                            <li class=" preset " onclick="preset(16000, 0.7, 0.6, 4000, 0); analytics.track('Clicked on preset', {preset: 'Off' }); "><button class="button" title="Turn off all effect parameters on the sound">OFF</button></li>
                         </ul>
                     </div>
 
@@ -197,7 +239,7 @@
                         <button class="button" id="playPhrase" ng-click="optionsPlay()" title="Play highlighted Raga in Home page or play selected phrases in Raga detail page">
                             <i class="fas fa-play fa-sm"></i>PLAY
                         </button>
-                        <button id="stop" class="button" onclick="stop()" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+                        <button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
                     </div>
                     <div>
                         <span title="Turn on Tanpura Drone">TANPURA</span>
@@ -205,7 +247,8 @@
                             <input type="checkbox" id="shrutiON" name="shrutiON" >
                             <span class="slider round" title="Turn on Tanpura Drone"></span>
                         </label> -->
-                        <input type="range" id="tanpuraVolumeKnob" name="TanpuraVolume" class="input-knob" oninput="tanpuraVolume($(this), this.value)" value="0" min="0" max="1" step="0.1" data-diameter="32" data-src="images/knob70.png" data-sprites="100" />
+                        <input type="range" id="tanpuraVolumeKnob" name="TanpuraVolume" class="input-knob" oninput="tanpuraVolume($(this), this.value)" onmouseup="analytics.track('Modified Tanpura volume', { tanpuraVolume: this.value });" value="0" min="0" max="1" step="0.1"
+                            data-diameter="32" data-src="images/knob70.png" data-sprites="100" />
                         <span title="Turn on swara assistance on the on-screen piano (in the Raga Detail page)">SWARA HELP</span>
                         <label class="switch">
                             <input type="checkbox" checked="checked" id="notesON" onclick="swarasHelpON()">
@@ -214,7 +257,7 @@
                     </div>
                     <div title="Enter tempo value between 50 and 600 BPM">
                         <span><label for="tempo">TEMPO</label></span>
-                        <input type="number" name="tempo" id="tempo" value="150" min="10" max="999" step="1" onchange="time()" />
+                        <input type="number" name="tempo" id="tempo" value="150" min="10" max="999" step="1" onchange="time(); analytics.track('Changed Tempo', { tempo: this.value });" />
                     </div>
 
                 </div>
@@ -250,22 +293,6 @@
     <script src="https://cdn.rawgit.com/a8m/angular-filter/master/dist/angular-filter.js"></script>
     <script src="js/keyboard.min.js"></script>
     <script src="js/appScript.js"></script>
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-55006211-3', 'auto');
-        ga('send', 'pageview');
-    </script>
 </body>
 
 
