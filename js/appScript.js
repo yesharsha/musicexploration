@@ -284,8 +284,8 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     var buffer = $routeParams.name;
 
     // Track the name of the Raga
-    analytics.track('Entered detail page for: ' + buffer, {
-        title: buffer
+    analytics.track('Entered Raga detail page', {
+        raga: buffer
     });
 
     //Display list of all the ragas from the JSON file
