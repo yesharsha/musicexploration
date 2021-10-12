@@ -12,34 +12,11 @@ ragaApp.config(function($routeProvider) {
 
     // route for the home page
         .when('/', {
-            controller: 'effectsController'
-        })
-        .when('/', {
             templateUrl: 'ragaHome.html',
-            controller: 'mainController'
-        })
-        .when('/swara', {
-            templateUrl: 'swara.html',
-            controller: 'mainController'
-        })
-        .when('/raga', {
-            templateUrl: 'ragas.html',
             controller: 'mainController'
         })
         .when('/exercise', {
             templateUrl: 'exercises.html',
-            controller: 'mainController'
-        })
-        .when('/composition', {
-            templateUrl: 'composition.html',
-            controller: 'mainController'
-        })
-        .when('/outroduction', {
-            templateUrl: 'outroduction.html',
-            controller: 'mainController'
-        })
-        .when('/glossary', {
-            templateUrl: 'glossary.html',
             controller: 'mainController'
         })
         .when('/ragaDetail/:name', {
@@ -62,6 +39,9 @@ ragaApp.controller('effectsController', ['$rootScope', '$scope', 'moorchanaServi
             phraseBookPlay();
         } else {
             play(moorchanaService.moorchana, tempo);
+
+            //Track Phraseplay
+            analytics.track('Played moorchana', { sequence: moorchanaService.moorchana });
         }
     }
 }]);
@@ -70,6 +50,12 @@ ragaApp.controller('effectsController', ['$rootScope', '$scope', 'moorchanaServi
 //
 // Maincontroller
 ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchanaService', function($rootScope, $scope, $http, moorchanaService) {
+
+    // Track Homepage entry
+    analytics.track('Entered Homepage');
+
+    console.log("here");
+
     let ragaDatabase = undefined;
     $scope.moorchanaService = moorchanaService;
 
@@ -243,8 +229,15 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
 
         $scope.ragaAudition = function(ragaName) {
 
+            $(".ragaName a").click(function(e) {
+                e.stopPropagation();
+            });
+
             //Get Raga Arohanam Avarohanam and Moorchana phrase
             let raga = ragaDatabase.filter(function(raga) { return raga.name == ragaName });
+
+            // Track the name of the Auditioned Raga
+            analytics.track('Auditioned Raga', { raga: ragaName });
 
             let arohanam_ = raga[0].Arohanam.split(" ");
             arohanam = arohanam_.join(" ");
@@ -289,6 +282,11 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     //Get name of Raga
     $scope.name = $routeParams.name;
     var buffer = $routeParams.name;
+
+    // Track the name of the Raga
+    analytics.track('Entered detail page for: ' + buffer, {
+        title: buffer
+    });
 
     //Display list of all the ragas from the JSON file
     $http({
@@ -546,6 +544,17 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
         }
 
     });
+
+    // Splashscreen stuff
+    setTimeout(function() {
+        $('#splashscreen').hide();
+        $('.wrapper').show();
+
+        //initialize phrase scroll length as soon as page loads
+        $('.phrase').each(function() {
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    }, 2000);
 });
 
 //
@@ -696,8 +705,10 @@ function tanpuraVolume(obj, param) {
     tanpura.volume = parseFloat(param);
     if (param >= 0.1) {
         tanpura.play();
+        console.log('here')
     } else {
         tanpura.stop();
+        console.log('here--')
     }
 }
 
@@ -817,7 +828,13 @@ function timeline(sequence, repeat) {
             }
         }
     }
-    keyList[index].stop();
+    try {
+        keyList[index].stop();
+    } catch (error) {
+        console.log(error);
+        console.log('Execution stopped as an unknown swara was encountered.');
+    }
+
 
     //Set a random volume - functionality disabled as the sound is getting choppy with this function.
     // function randomVolume() {
@@ -870,12 +887,18 @@ function stop() {
 function arohanamPlay() {
     let arohanam = $('#arohanam').text().split(" ");
     play(arohanam, tempo);
+
+    //Track Arohanam
+    analytics.track('Played Arohanam', { sequence: arohanam });
 }
 
 //Avarohanam play
 function avarohanamPlay() {
     let avarohanam = $('#avarohanam').text().split(" ");
     play(avarohanam, tempo);
+
+    //Track Avarohanam
+    analytics.track('Played Avarohanam', { sequence: avarohanam });
 }
 
 //Randomize play
@@ -918,6 +941,9 @@ function randomizePlay() {
     //Call the play() function to play the sequence
     play(randomSequenceNotes, tempo)
 
+    //Track Random
+    analytics.track('Played Random Sequence', { sequence: randomSequenceNotes });
+
 }
 
 //All event listeners here
@@ -936,7 +962,10 @@ $(document).ready(function() {
     //Phasebook functionalities
     $(document).on('click', '#newPhrase', function() {
         $(this).parent().parent().append('<div class="phraseUnit"> <div class="phraseSelection"></div> <textarea class="phrase"></textarea></div>');
-        $(this).removeClass('active')
+        $(this).removeClass('active');
+
+        // Track new phrase
+        analytics.track('Added new phrase');
     });
 
     //Phrase selection button
@@ -1028,6 +1057,9 @@ function deletePhrase() {
     });
 
     fadeout('#deletePhrase');
+
+    // Track phrase delete
+    analytics.track('Deleted phrase');
 }
 
 function phraseBookPlay() {
@@ -1080,6 +1112,9 @@ function phraseBookPlay() {
         }
     }
 
+    //Track Phraseplay
+    analytics.track('Played phrase', { sequence: sequence });
+
 }
 
 // Phrasebook Save function using Local storage
@@ -1104,10 +1139,13 @@ function savePhrase() {
         $('#toastMessages').text('');
     }, 1000)
 
-    fadeout('#savePhrase')
+    fadeout('#savePhrase');
+
+    // Track save phrase
+    analytics.track('Saved Phrases');
 }
 
-// TODO - variable tempo
+// Variable tempo
 function time() {
     let bpm = parseInt($('#tempo').val());
     if (bpm > 600) {
@@ -1134,10 +1172,17 @@ function favourite() {
         window.localStorage.removeItem(key);
         $('#favourite').addClass('fav_false');
         $('#favourite').removeClass('fav_true');
+
+        //Track Unfavorited
+        analytics.track('Unfavorited', { raga: raga });
+
     } else {
         window.localStorage.setItem(key, 'fav_true');
         $('#favourite').addClass('fav_true');
         $('#favourite').removeClass('fav_false');
+
+        //Track Favorited
+        analytics.track('Favorited', { raga: raga });
     }
 }
 
