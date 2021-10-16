@@ -1528,6 +1528,9 @@ hr {
         margin: 20px;
         text-align: center;
     }
+    #piano svg {
+        display: none;
+    }
     .menu {
         display: none;
     }
@@ -1561,6 +1564,7 @@ hr {
     }
     .search input {
         width: 90%;
+        font-size: 1em;
     }
     footer p a {
         padding: 0px 5px;
@@ -1616,6 +1620,27 @@ hr {
     }
     .tablet {
         display: none;
+    }
+    .mood div {
+        font-size: 0.4em;
+    }
+    .controls {
+        display: none;
+    }
+    .phraseBook {
+        display: none;
+    }
+    .logo {
+        margin-left: 15px;
+    }
+    .title h1 {
+        font-size: 1.3em;
+    }
+    #favourite {
+        line-height: 1em;
+    }
+    .content h3 {
+        line-height: 1.4em;
     }
 }
 
