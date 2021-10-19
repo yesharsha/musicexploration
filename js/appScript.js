@@ -1,4 +1,4 @@
-// 10 AUG 2021
+// 7 AUG 2021
 // Harshavardhan Sreedhar
 //
 //
@@ -17,7 +17,11 @@ ragaApp.config(function($routeProvider) {
         })
         .when('/exercise', {
             templateUrl: 'exercises.html',
-            controller: 'mainController'
+            controller: 'ragaController'
+        })
+        .when('/learn', {
+            templateUrl: 'glossary.html',
+            controller: 'ragaController'
         })
         .when('/ragaDetail/:name', {
             templateUrl: 'ragaDetail.html',
@@ -27,7 +31,7 @@ ragaApp.config(function($routeProvider) {
 
 ragaApp.service('moorchanaService', function() {
     //Set default value of moorchana to Mayamalava gowla
-    //  this.moorchana = ["S", "R₁", "G₃", "M₁", "P", "D₁", "N₃", "Ṡ", "Ṡ", "N₃", "D₁", "P", "M₁", "G₃", "R₁", "S"]
+    this.moorchana = ["S", "R₁", "G₃", "M₁", "P", "D₁", "N₃", "Ṡ", "Ṡ", "N₃", "D₁", "P", "M₁", "G₃", "R₁", "S"]
 });
 
 ragaApp.controller('effectsController', ['$rootScope', '$scope', 'moorchanaService', function($rootScope, $scope, moorchanaService) {
@@ -35,7 +39,7 @@ ragaApp.controller('effectsController', ['$rootScope', '$scope', 'moorchanaServi
 
     // PLay button in the effects panel plays seelcted raga's mooorchana if home page or plays the phrasebook's phrase if in Raga Detail page
     $scope.optionsPlay = function() {
-        if (window.location.href.includes('/ragaDetail/')) {
+        if (window.location.href.includes('/ragaDetail/') || window.location.href.includes('/exercise')) {
             phraseBookPlay();
         } else {
             play(moorchanaService.moorchana, tempo);
@@ -53,8 +57,6 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
 
     // Track Homepage entry
     analytics.track('Entered Homepage');
-
-    console.log("here");
 
     let ragaDatabase = undefined;
     $scope.moorchanaService = moorchanaService;
@@ -225,7 +227,32 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
 
     //Raga Auditioning functionality
     {
-        //$scope.selected = 'Māyamālava Gowla';
+        $scope.selected = 'Māyamālava Gowla';
+
+        //Setting the piano to display default Swarasthanas for Māyamālava Gowla
+        {
+            let moorchana_ = ['S', 'R₁', 'G₃', 'M₁', 'P', 'D₁', 'N₃', 'Ṡ', 'Ṡ', 'N₃', 'D₁', 'P', 'M₁', 'G₃', 'R₁', 'S'];
+
+            for (let i = 0; i < moorchana_.length; i++) {
+                switch (moorchana_[i]) {
+                    case "G₁":
+                        moorchana_[i] = 'R₂';
+                        break;
+                    case "R₃":
+                        moorchana_[i] = 'G₂';
+                        break;
+                    case "N₁":
+                        moorchana_[i] = 'D₂';
+                        break;
+                    case "D₃":
+                        moorchana_[i] = 'N₂';
+                        break;
+                }
+
+                let id = "#" + moorchana_[i].toLowerCase() + "Key";
+                $(id).html("•").addClass('swaraHelpActive');
+            }
+        }
 
         $scope.ragaAudition = function(ragaName) {
 
@@ -246,6 +273,7 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
             avarohanam = avarohanam_.join(" ");
 
             let moorchana_ = arohanam_.concat(avarohanam_);
+            console.log(moorchana_);
 
             swarasHelpClear();
             for (let i = 0; i < moorchana_.length; i++) {
@@ -280,8 +308,8 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
 //ragaController
 ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
     //Get name of Raga
-    $scope.name = $routeParams.name;
-    var buffer = $routeParams.name;
+    $scope.name = $routeParams.name || 'Māyamālava Gowla';
+    var buffer = $routeParams.name || 'Māyamālava Gowla';
 
     // Track the name of the Raga
     analytics.track('Entered Raga detail page', {
@@ -503,6 +531,11 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 
                 //Save message
                 $('#toastMessages').text('Don\'t forget to save your changes.');
+
+                // Select this phrase as active
+                $(this).parent('.phraseUnit').addClass('active');
+                $(this).parent('.phraseUnit').siblings().removeClass('active');
+
             });
 
             // Using the keyboard to register notes in the phrasebook
@@ -555,6 +588,27 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
             this.style.height = (this.scrollHeight) + 'px';
         });
     }, 2000);
+
+    // Exercises functionality
+    {
+        $('.varisai').on('click', function() {
+            let varisai = '.' + $(this).attr('id');
+
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+
+            $(varisai).show();
+            $(varisai).addClass('active');
+
+            $(varisai).siblings('.phraseBook').hide();
+
+
+            $('.phrase').each(function() {
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+        });
+    }
 });
 
 //
@@ -705,10 +759,8 @@ function tanpuraVolume(obj, param) {
     tanpura.volume = parseFloat(param);
     if (param >= 0.1) {
         tanpura.play();
-        console.log('here')
     } else {
         tanpura.stop();
-        console.log('here--')
     }
 }
 
@@ -1073,7 +1125,7 @@ function phraseBookPlay() {
     } else {
 
         // If no phrase is highlighted, firstly, check how many phrases are selected
-        $('.phraseUnit').each(function() {
+        $('.phraseBook.active > .phraseUnit').each(function() {
             // Play selected items
             if ($(this).hasClass('active')) {
                 count++;
@@ -1082,7 +1134,7 @@ function phraseBookPlay() {
 
         // If one or more phrases are selected, play the selected items or play everything
         if (count > 0) {
-            $('.phraseUnit').each(function() {
+            $('.phraseBook.active > .phraseUnit').each(function() {
                 // Play selected items
                 if ($(this).hasClass('active')) {
                     let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("|", " ").split(" ");
@@ -1102,7 +1154,7 @@ function phraseBookPlay() {
                 }
             });
         } else {
-            $('.phraseUnit').each(function() {
+            $('.phraseBook.active > .phraseUnit').each(function() {
                 let phrase = $(this).children('.phrase').val().trim().replaceAll("\n", " ").replace(/\s\s+/g, ' ').replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("|", " ").split(" ");
                 sequence = sequence.concat(phrase);
                 if (sequence) {

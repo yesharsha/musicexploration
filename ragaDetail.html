@@ -38,14 +38,14 @@
 <div class="clearfix about" ng-show="!Janaka">
     <h3 class="collapsible" ng-click="about = !about">ABOUT THIS RAGA</h3>
     <p ng-show="!about">
-        {{name}} is a janya raga of the Melakartha <a href=" #ragaDetail/{{JanakaRaga}} ">{{JanakaRaga}}</a> in Govindhacharya's 72 Melakartha classification. Ragas similar to {{name}} are:
+        {{name}} is a janya raga of the Melakartha <a href=" #ragaDetail/{{JanakaRaga}} ">{{JanakaRaga}}</a> in Venkatamakhin/Govindhacharya's 72 Melakartha classification. Ragas similar to {{name}} are:
     </p>
     <div class="ragasContainer" ng-show="!about">
         <span class="ragaName " ng-repeat="raga in SimilarRagas"><a href=" #ragaDetail/{{raga}} ">{{raga}}</a></span>
     </div>
 </div>
 
-<div class="clearfix phraseBook">
+<div class="clearfix phraseBook active ragaDetail">
     <div class="phraseHeading">
         <h4>PHRASING NOTEBOOK <span>*</span></h4>
         <span id="toastMessages">

@@ -1,39 +1,843 @@
+<div class="breadcrumb">
+    <a href="#" onclick="swarasHelpClear()">
+        <i class="fas fa-home fa-sm"></i>HOME</a> \ EXERCISES
+</div>
+<div class="clearfix title">
+    <h1>EXERCISES</h1>
+</div>
 
-      <h2>Exercises</h2>
-      <h3>Instructions</h3>
-      <p>Step 1: Use the button to toggle the Shruti on and off. You should hear a drone in the background. The drone is not continuous
-	  as of now, please cooperate.</p>
-      <p>Step 2: Pick up a sequence of notes eg. S R2 G3 M1 P D2 N3 S' or S R2 G2 M1 P D2 N2 S'. Make sure you pick one from each
-      swara!</p>
-      <p>Step 3: Play the following exercises using the on-screen keyboard. These are a bunch of 8x8 rhythms. One note per beat.</p>
-      <p>Optional: Sing along with each swara. See footnote for tips on pronunciation.</p>
-      <p>Optional: Play the S, P and S' and spend time contemplating on these base notes.</p>
+<p>A series of fundamental exercises were structured by the 15th century Saint Purandara Dasa of Kshemarapura in Shivamogga, India. These basic lessons, called Svaravalis and Alankāras, are set to Raga Māyamālava Gowla.</p>
+<p>Click on the exercises below to open them in the Phrasebook. Select each (by clicking on the gray bar) to play.</p>
 
-      <h3 class="headingHighlight">1. Free flowing sequence</h3>
-      <p class="paraHighlight">S R G M P D N S' | <br> S' N D P M G R S ||</p>
-      <p class="paraHighlight">S R G M S R G M | <br> S R G M P D N S' ||<br>
-         S' N D P S' N D P | <br> S' N D P M G R S ||</p>
-      <p class="paraHighlight">S R G M P M G R | <br> S R G M P D N S' ||<br>
-         S' N D P M P D N | <br> S' N D P M G R2 S ||</p>
-      <p class="paraHighlight">S R G M P R G M | <br> S R G M P D N S' ||<br>
-         S' N D P M N D P | <br> S' N D P M G R2 S ||</p>
-      <p class="paraHighlight">S R G R G M P M | <br> S R G M P D N S' ||<br>
-         S' N D N D P M P | <br> S' N D P M G R2 S ||</p>
+<p class="varisai active" id="sarali">1. Sarali Varisai (Simple sequences)</p>
+<p class="varisai" id="janta">2. Janta Varisai (Twin sequences)</p>
+<p class="varisai" id="alankaram">3. Alankaram (Ornamentation)</p>
+<p class="varisai" id="dhatu">4. Dhatu Varisai</p>
 
-      <h3 class="headingHighlight">2. Twin sequence</h3>
-      <p class="paraHighlight">SS RR GG MM PP DD NN S'S' | <br> S'S' NN DD PP MM GG RR SS ||</p>
-      <p class="paraHighlight">SS RS SR SR  SS RR GG MM | <br> PP DP PD PD PP DD NN S'S' ||<br>
-        S'S' NS' S'N S'N S'S' NN DD PP | <br> MM GM MG MG MM GG RR SS ||</p>
-      <p class="paraHighlight">SS RR GG RR SS RR GG MM | <br> PP DD NN DD PP DD NN S'S' ||<br>
-         S'S' NN DD NN S'S' NN DD PP | <br> MM GG RR GG MM GG RR SS ||</p>
-      <p class="paraHighlight">SR GR RG MG SS RR GG MM | <br> PD ND DN S'N PP DD NN S'S' ||<br>
-         S'N DN ND PD S'S' NN DD PP | <br> MG RG GR SR MM GG RR SS ||</p>
-      <p>Congratulations. You're now capable of permuting and combining such Swaras on your own.</p>
-      <p class="searchterms">Want more? Search for these terms: <span><i>Sarali Swaras</i></span> <span><i>Janta Swaras</i></span>
-	  <span><i>Alankaram</i></span></p>
-	  
-	  <h3>Pronunciation</h3>
-	  <p>Click the following link for a video demonstration for speakers of all languages.</p><p> https://www.youtube.com/watch?v=ATgNq5PTuS4</p>
-	  
-	  <a href="#swara" class="button">SWARA</a>
-	  <a href="#raga" class="button">RAGA</a>
+<div class="clearfix phraseBook active sarali">
+    <div class="phraseHeading">
+        <h4>SARALI VARISAI</h4>
+        <span id="toastMessages">
+              
+         </span>
+        <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
+
+    </div>
+    <div class="phraseBookControl">
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button>
+        <button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+    </div>
+
+    <div class="phraseUnit">
+        <p>1</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>2</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ S R₁ S R₁ G₃ M₁
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ Ṡ N₃ Ṡ N₃ D₁ P 
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>3</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ S R₁ G₃ S R₁
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ Ṡ N₃ D₁ Ṡ N₃ 
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>4</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ S R₁ G₃ M₁
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P Ṡ N₃ D₁ P
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>5</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P - S R₁
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P M₁ - Ṡ N₃
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+      </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>6</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P D₁ S R₁
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P M₁ G₃ Ṡ N₃
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+      </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>7</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P D₁ N₃ -
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P M₁ G₃ R₁ -
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+   </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>8</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P M₁ G₃ R₁
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P M₁ P D₁ N₃
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+ </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>9</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P M₁ D₁ P
+S R₁ G₃ M₁ P D₁ N₃ Ṡ
+Ṡ N₃ D₁ P M₁ P G₃ M₁
+Ṡ N₃ D₁ P M₁ G₃ R₁ S 
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>10</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ P - G₃ M₁
+P - - - P - - -
+G₃ M₁ P D₁ N₃ D₁ P M₁ 
+G₃ M₁ P G₃ M₁ G₃ R₁ S 
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>11</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">Ṡ - N₃ D₁ N₃ - D₁ P 
+D₁ - P M₁ P - P - 
+G₃ M₁ P D₁ N₃ D₁ P M₁ 
+G₃ M₁ P G₃ M₁ G₃ R₁ S  
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>12</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">Ṡ Ṡ N₃ D₁ N₃ N₃ D₁ P 
+D₁ D₁ P M₁ P - P - 
+G₃ M₁ P D₁ N₃ D₁ P M₁ 
+G₃ M₁ P G₃ M₁ G₃ R₁ S  
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>13</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ R₁ G₃ - G₃ M₁ 
+P M₁ P - D₁ P D₁ - 
+M₁ P D₁ P D₁ N₃ D₁ P 
+M₁ P D₁ P M₁ G₃ R₁ S   
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>14</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase" readonly>S R₁ G₃ M₁ P - P - 
+D₁ D₁ P - M₁ M₁ P - 
+D₁ N₃ Ṡ - Ṡ N₃ D₁ P 
+Ṡ N₃ D₁ P M₁ G₃ R₁ S    
+</textarea>
+    </div>
+
+</div>
+
+
+<!-- Janta varisai -->
+
+<div class="clearfix phraseBook janta">
+    <div class="phraseHeading">
+        <h4>JANTA VARISAI</h4>
+        <span id="toastMessages">
+             
+        </span>
+        <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
+
+    </div>
+    <div class="phraseBookControl">
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button>
+        <button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+    </div>
+
+    <div class="phraseUnit">
+        <p>1</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S R₁ R₁ G₃ G₃ M₁ M₁ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+        </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>2</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S R₁ R₁ G₃ G₃ M₁ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P
+
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃
+
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃
+
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+        </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>3</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S R₁ R₁ G₃ G₃ R₁ R₁ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ R₁ G₃ G₃ M₁ M₁ G₃ G₃ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P
+
+G₃ G₃ M₁ M₁ P P M₁ M₁ 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ M₁ P P D₁ D₁ P P 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P P D₁ D₁ N₃ N₃ D₁ D₁ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ Ṡ N₃ N₃ D₁ D₁ N₃ N₃ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ D₁ D₁ P P D₁ D₁ 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ D₁ P P M₁ M₁ P P 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P P M₁ M₁ G₃ G₃ M₁ M₁ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ M₁ G₃ G₃ R₁ R₁ G₃ G₃ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+        </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>4</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S R₁ S S R₁ S R₁ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ R₁ G₃ R₁ R₁ G₃ R₁ G₃ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ G₃ M₁ G₃ G₃ M₁ G₃ M₁ 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ M₁ P M₁ M₁ P M₁ P 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P P D₁ P P D₁ P D₁ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ Ṡ N₃ Ṡ Ṡ N₃ Ṡ N₃ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ D₁ N₃ N₃ D₁ N₃ D₁ 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ D₁ P D₁ D₁ P D₁ P 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P P M₁ P P M₁ P M₁ P P 
+M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ M₁ G₃ M₁ M₁ G₃ M₁ G₃ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+        </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>5</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S R₁ R₁ G₃ S R₁ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ R₁ G₃ G₃ M₁ R₁ G₃ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ G₃ M₁ M₁ P G₃ M₁ P 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ M₁ P P D₁ M₁ P D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P P D₁ D₁ N₃ P D₁ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ Ṡ N₃ N₃ D₁ Ṡ N₃ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ D₁ D₁ P N₃ D₁ P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ D₁ P P M₁ D₁ P M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P P M₁ M₁ G₃ P M₁ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ M₁ G₃ G₃ R₁ M₁ G₃ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+     </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>6</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S - R₁ R₁ - G₃ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ R₁ - G₃ G₃ - M₁ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ G₃ - M₁ M₁ - P P 
+G₃ G₃ M₁ M₁ P P D₁ D₁
+
+M₁ M₁ - P P - D₁ D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃
+
+P P - D₁ D₁ - N₃ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ Ṡ - N₃ N₃ - D₁ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ - D₁ D₁ - P P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ D₁ - P P - M₁ M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P P - M₁ M₁ - G₃ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ M₁ - G₃ G₃ - R₁ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+     </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>7</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S - S R₁ - R₁ G₃ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ - R₁ G₃ - G₃ M₁ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ - G₃ M₁ - M₁ P P 
+G₃ G₃ M₁ M₁ P P D₁ D₁
+
+M₁ - M₁ P - P D₁ D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P - P D₁ - D₁ N₃ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ - Ṡ N₃ - N₃ D₁ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ - N₃ D₁ - D₁ P P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ - D₁ P - P M₁ M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P - P M₁ - M₁ G₃ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ - M₁ G₃ - G₃ R₁ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+  </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>8</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S S R₁ R₁ R₁ G₃ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ R₁ R₁ G₃ G₃ G₃ M₁ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ G₃ G₃ M₁ M₁ M₁ P P 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ M₁ M₁ P P P D₁ D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P P P D₁ D₁ D₁ N₃ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ Ṡ Ṡ N₃ N₃ N₃ D₁ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ N₃ D₁ D₁ D₁ P P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ D₁ D₁ P P P M₁ M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P P P M₁ M₁ M₁ G₃ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ M₁ M₁ G₃ G₃ G₃ R₁ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>9</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S - R₁ G₃ - S R₁ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ - G₃ M₁ - R₁ G₃ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ - M₁ P - G₃ M₁ P 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ - P D₁ - M₁ P D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P - D₁ N₃ - P D₁ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ - N₃ D₁ - Ṡ N₃ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ - D₁ P - N₃ D₁ P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ - P M₁ - D₁ P M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P - M₁ G₃ - P M₁ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ - G₃ R₁ - M₁ G₃ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>10</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ - G₃ - S R₁ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ G₃ - M₁ - R₁ G₃ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ M₁ - P - G₃ M₁ P 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ P - D₁ - M₁ P D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P D₁ - N₃ - P D₁ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ N₃ - D₁ - Ṡ N₃ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ D₁ - P - N₃ D₁ P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ P - M₁ - D₁ P M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P M₁ - G₃ - P M₁ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ G₃ - R₁ - M₁ G₃ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S  
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>11</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S - R₁ - G₃ S R₁ G₃ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ - G₃ - M₁ R₁ G₃ M₁ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ - M₁ - P G₃ M₁ P 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ - P - D₁ M₁ P D₁ 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P - D₁ - N₃ P D₁ N₃ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ - N₃ - D₁ Ṡ N₃ D₁ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ - D₁ - P N₃ D₁ P 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ - P - M₁ D₁ P M₁ 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P - M₁ - G₃ P M₁ G₃ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ - G₃ - R₁ M₁ G₃ R₁ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S   
+</textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>12</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S S M₁ M₁ G₃ G₃ R₁ R₁ 
+S S R₁ R₁ G₃ G₃ M₁ M₁ 
+
+R₁ R₁ P P M₁ M₁ G₃ G₃ 
+R₁ R₁ G₃ G₃ M₁ M₁ P P 
+
+G₃ G₃ D₁ D₁ P P M₁ M₁ 
+G₃ G₃ M₁ M₁ P P D₁ D₁ 
+
+M₁ M₁ N₃ N₃ D₁ D₁ P P 
+M₁ M₁ P P D₁ D₁ N₃ N₃ 
+
+P P Ṡ Ṡ N₃ N₃ D₁ D₁ 
+P P D₁ D₁ N₃ N₃ Ṡ Ṡ 
+
+Ṡ Ṡ P P D₁ D₁ N₃ N₃ 
+Ṡ Ṡ N₃ N₃ D₁ D₁ P P 
+
+N₃ N₃ M₁ M₁ P P D₁ D₁ 
+N₃ N₃ D₁ D₁ P P M₁ M₁ 
+
+D₁ D₁ G₃ G₃ M₁ M₁ P P 
+D₁ D₁ P P M₁ M₁ G₃ G₃ 
+
+P P R₁ R₁ G₃ G₃ M₁ M₁ 
+P P M₁ M₁ G₃ G₃ R₁ R₁ 
+
+M₁ M₁ S S R₁ R₁ G₃ G₃ 
+M₁ M₁ G₃ G₃ R₁ R₁ S S   
+</textarea>
+    </div>
+
+</div>
+
+<!-- Alankaram -->
+
+<div class="clearfix phraseBook alankaram">
+    <div class="phraseHeading">
+        <h4>ALANKARAM</h4>
+        <span id="toastMessages">
+              
+         </span>
+        <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
+
+    </div>
+    <div class="phraseBookControl">
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button>
+        <button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+    </div>
+
+    <div class="phraseUnit">
+        <p>1. Chatushra Jati Dhruva Talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ | G₃ R₁ |
+S R₁ G₃ R₁ | S R₁ G₃ M₁ ||
+            
+R₁ G₃ M₁ P | M₁ G₃ |
+R₁ G₃ M₁ G₃ | R₁ G₃ M₁ P ||
+            
+G₃ M₁ P D₁ | P M₁ |
+G₃ M₁ P M₁ | G₃ M₁ P D₁ ||
+            
+M₁ P D₁ N₃ | D₁ P |
+M₁ P D₁ P | M₁ P D₁ N₃ ||
+            
+P D₁ N₃ Ṡ | N₃ D₁ |
+P D₁ N₃ D₁ | P D₁ N₃ Ṡ 
+            
+Ṡ N₃ D₁ P | D₁ N₃ |
+Ṡ N₃ D₁ N₃ | Ṡ N₃ D₁ P ||
+            
+N₃ D₁ P M₁ | P D₁ |
+N₃ D₁ P D₁ | N₃ D₁ P M₁ ||
+            
+D₁ P M₁ G₃ | M₁ P |
+D₁ P M₁ P | D₁ P M₁ G₃ ||
+            
+P M₁ G₃ R₁ | G₃ M₁ |
+P M₁ G₃ M₁ | P M₁ G₃ R₁ ||
+            
+M₁ G₃ R₁ S | R₁ G₃ |
+M₁ G₃ R₁ G₃ | M₁ G₃ R₁ S ||
+             
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>2. Chatushra Jati Matya Talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ R₁ | S R₁ | S R₁ G₃ M₁ ||
+R₁ G₃ M₁ G₃ | R₁ G₃ | R₁ G₃ M₁ P ||
+            
+G₃ M₁ P M₁ | G₃ M₁ | G₃ M₁ P D₁ ||
+M₁ P D₁ P |M₁ P | M₁ P D₁ N₃ ||
+            
+P D₁ N₃ D₁ | P D₁ | P D₁ N₃ Ṡ ||
+Ṡ N₃ D₁ N₃ | Ṡ N₃ | Ṡ N₃ D₁ P ||
+            
+N₃ D₁ P D₁ | N₃ D₁ | N₃ D₁ P M₁ ||
+D₁ P M₁ P | D₁ P | D₁ P M₁ G₃ ||
+            
+P M₁ G₃ M₁ | P M₁ | P M₁ G₃ R₁ ||
+M₁ G₃ R₁ G₃ | M₁ G₃ | M₁ G₃ R₁ S || 
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>3. Chatushra Jati Rupaka Talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ | S R₁ G₃ M₁ ||
+R₁ G₃ |R₁ G₃ M₁ P ||
+            
+G₃ M₁ | G₃ M₁ P D₁ ||
+M₁ P | M₁ P D₁ N₃ ||
+            
+P D₁ | P D₁ N₃ Ṡ ||
+Ṡ N₃ | Ṡ N₃ D₁ P ||
+            
+N₃ D₁ | N₃ D₁ P M₁ ||
+D₁ P | D₁ P M₁ G₃ ||
+            
+P M₁ | P M₁ G₃ R₁ ||
+M₁ G₃ | M₁ G₃ R₁ S || 
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>4. Mishra Jati Jhampa talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ S R₁ S R₁ | G₃ | M₁ - ||
+
+R₁ G₃ M₁ R₁ G₃ R₁ G₃ | M₁ | P - ||
+            
+G₃ M₁ P G₃ M₁ G₃ M₁ | P | D₁ - ||
+            
+M₁ P D₁ M₁ P M₁ P | D₁ | N₃ - ||
+            
+P D₁ N₃ P D₁ P D₁ | N₃ | Ṡ - ||
+            
+Ṡ N₃ D₁ Ṡ N₃ Ṡ N₃ | D₁ | P - ||
+            
+N₃ D₁ P N₃ D₁ N₃ D₁ | P | M₁ - ||
+            
+D₁ P M₁ D₁ P D₁ P | M₁ | G₃ - ||
+            
+P M₁ G₃ P M₁ P M₁ | G₃ | R₁ - ||
+            
+M₁ G₃ R₁ M₁ G₃ M₁ G₃ | R₁ | S - ||  
+         </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>5. Thrisra Jati Triputa Talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ | S R₁ | G₃ M₁ ||
+
+R₁ G₃ M₁ | R₁ G₃ | M₁ P ||
+            
+G₃ M₁ P | G₃ M₁ | P D₁ ||
+            
+M₁ P D₁ | M₁ P  | D₁ N₃ ||
+            
+P D₁ N₃ | P D₁ | N₃ Ṡ ||
+            
+Ṡ N₃ D₁ | Ṡ N₃ | D₁ P ||
+            
+N₃ D₁ P | N₃ D₁ | P M₁ ||
+            
+D₁ P M₁ | D₁ P | M₁ G₃ ||
+            
+P M₁ G₃ | P M₁ | G₃ R₁ ||
+            
+M₁ G₃ R₁ | M₁ G₃ | R₁ S || 
+      </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>6. Khanda Jati Ata Talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ - G₃ - | S - R₁ G₃ - | M₁ - M₁ - ||
+
+R₁ G₃ - M₁ - | R₁ - G₃ M₁ - | P - P - ||
+            
+G₃ M₁ - P - | G₃ - M₁ P - | D₁ - D₁ - ||
+            
+M₁ P - D₁ - | M₁ - P D₁ - | N₃ - N₃ - ||
+            
+P D₁ - N₃ - | P - D₁ N₃ - | Ṡ - Ṡ - ||
+            
+Ṡ N₃ - D₁ - | Ṡ - N₃ D₁ - | P - P - ||
+            
+N₃ D₁ - P - | N₃ - D₁ P - | M₁ - M₁ - ||
+            
+D₁ P - M₁ - | D₁ - P M₁ - | G₃ - G₃ - ||
+            
+P M₁ - G₃ - | P - M₁ G₃ - | R₁ - R₁ - ||
+            
+M₁ G₃ - R₁ - | M₁ - G₃ R₁ - | S - S - || 
+      </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>7. Chatushra Jati Eka Talam</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ G₃ M₁ ||
+R₁ G₃ M₁ P ||
+            
+G₃ M₁ P D₁ ||
+M₁ P D₁ N₃ ||
+            
+P D₁ N₃ Ṡ ||
+Ṡ N₃ D₁ P ||
+            
+N₃ D₁ P M₁ ||
+D₁ P M₁ G₃ ||
+            
+P M₁ G₃ R₁ ||
+M₁ G₃ R₁ S || 
+   </textarea>
+    </div>
+
+</div>
+
+<!-- Dhatu Varisai -->
+
+<div class="clearfix phraseBook dhatu">
+    <div class="phraseHeading">
+        <h4>DHATU VARISAI</h4>
+        <span id="toastMessages">
+              
+         </span>
+        <span><i class="fas fa-expand resize" onclick="enlargePhraseBook()"></i></span>
+
+    </div>
+    <div class="phraseBookControl">
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button>
+        <button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+    </div>
+
+    <div class="phraseUnit">
+        <p>1</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S M₁ G₃ M₁ R₁ G₃ S R₁ 
+S G₃ R₁ G₃ S R₁ G₃ M₁ 
+            
+R₁ P M₁ P G₃ M₁ R₁ G₃ 
+R₁ M₁ G₃ M₁ R₁ G₃ M₁ P 
+            
+G₃ D₁ P D₁ M₁ P G₃ M₁ 
+G₃ P M₁ P G₃ M₁ P D₁ 
+            
+M₁ N₃ D₁ N₃ P D₁ M₁ P 
+M₁ D₁ P D₁ M₁ P D₁ N₃ 
+            
+P Ṡ N₃ Ṡ D₁ N₃ P D₁ 
+P N₃ D₁ N₃ P D₁ N₃ Ṡ 
+            
+Ṡ P D₁ P N₃ D₁ Ṡ N₃ 
+Ṡ D₁ N₃ D₁ Ṡ N₃ D₁ P 
+            
+N₃ M₁ P M₁ D₁ P N₃ D₁ 
+N₃ P D₁ P N₃ D₁ P M₁ 
+            
+D₁ G₃ M₁ G₃ P M₁ D₁ P 
+D₁ M₁ P M₁ D₁ P M₁ G₃ 
+            
+P R₁ G₃ R₁ M₁ G₃ P M₁ 
+P G₃ M₁ G₃ P M₁ G₃ R₁ 
+            
+M₁ S R₁ S G₃ R₁ M₁ G₃ 
+M₁ R₁ G₃ R₁ M₁ G₃ R₁ S 
+        </textarea>
+    </div>
+
+    <div class="phraseUnit">
+        <p>2</p>
+        <div class="phraseSelection" title="Click here to select this phrase. You can specifically play or delete selected phrases"></div>
+        <textarea class="phrase">S R₁ S G₃ R₁ G₃ R₁ M₁
+S M₁ G₃ R₁ S R₁ G₃ M₁ 
+
+R₁ G₃ R₁ M₁ G₃ M₁ G₃ P 
+R₁ P M₁ G₃ R₁ G₃ M₁ P 
+
+G₃ M₁ G₃ P M₁ P M₁ D₁ 
+G₃ D₁ P M₁ G₃ M₁ P D₁ 
+
+M₁ P M₁ D₁ P D₁ P N₃  
+M₁ N₃ D₁ P M₁ P D₁ N₃ 
+
+P D₁ P N₃ D₁ N₃ D₁ Ṡ
+P Ṡ N₃ D₁ P D₁ N₃ Ṡ 
+
+Ṡ N₃ Ṡ D₁ N₃ D₁ N₃ P 
+Ṡ P D₁ N₃ Ṡ N₃ D₁ P 
+
+N₃ D₁ N₃ P D₁ P D₁ M₁
+N₃ M₁ P D₁ N₃ D₁ P M₁ 
+
+D₁ P D₁ M₁ P M₁ P G₃  
+D₁ G₃ M₁ P D₁ P M₁ G₃ 
+
+P M₁ P G₃ M₁ G₃ M₁ R₁ 
+P R₁ G₃ M₁ P M₁ G₃ R₁ 
+
+M₁ G₃ M₁ R₁ G₃ R₁ G₃ S 
+M₁ S R₁ G₃ M₁ G₃ R₁ S 
+         </textarea>
+    </div>
