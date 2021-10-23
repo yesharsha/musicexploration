@@ -59,15 +59,15 @@
             Swaras are automatically resolved based on the Raga.
             <br>
             <br>
-            Typing S' converts to Ṡ (Higher octave).
+            Typing S ] converts to S̄ and [S converts to S̱ (Octave changes).
             </ul>
         </span></span>
 
     </div>
     <div class="phraseBookControl">
         <button class="button" id="newPhrase" title="Add a new phrase">+ NEW</button>
-        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button>
-        <button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');" title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
+        <button class="button" id="playPhrase" onclick="phraseBookPlay()" title="Play highlighted or selected phrases or play all phrases"><i class="fas fa-play fa-sm"></i>PLAY</button><button id="stop" class="button" onclick="stop(); analytics.track('Stopped playback');"
+            title="Stop playing all phrases."><i class="fas fa-stop fa-sm"></i>STOP</button>
         <button class="button" id="savePhrase" onclick="savePhrase()" title="Save all phrases to local Storage. Phrases will be available on page reload."><i class="far fa-save"></i>SAVE</button>
 
         <button class="button rightControl" id="deletePhrase" onclick="deletePhrase()" title="Delete selected phrases. Select phrase by clicking on gray bar."><i class="fas fa-backspace"></i>DEL</button>
@@ -91,6 +91,6 @@
     </div>
     <div class="phraseUnit">
         <div class="phraseSelection" title="Click here to select this phrase, You can specifically play or delete selected phrases"></div>
-        <textarea id="phrase" class="phrase" placeholder="Enter a phrase here, select the input box and use the play button to play your selections."></textarea>
+        <textarea id="phrase" class="phrase" placeholder="S ] → S̄      [S → S̱"></textarea>
     </div>
 </div>

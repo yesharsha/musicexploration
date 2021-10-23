@@ -31,7 +31,7 @@ ragaApp.config(function($routeProvider) {
 
 ragaApp.service('moorchanaService', function() {
     //Set default value of moorchana to Mayamalava gowla
-    this.moorchana = ["S", "R₁", "G₃", "M₁", "P", "D₁", "N₃", "Ṡ", "Ṡ", "N₃", "D₁", "P", "M₁", "G₃", "R₁", "S"]
+    this.moorchana = ["S", "R₁", "G₃", "M₁", "P", "D₁", "N₃", "S̄", "S̄", "N₃", "D₁", "P", "M₁", "G₃", "R₁", "S"]
 });
 
 ragaApp.controller('effectsController', ['$rootScope', '$scope', 'moorchanaService', function($rootScope, $scope, moorchanaService) {
@@ -231,7 +231,7 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
 
         //Setting the piano to display default Swarasthanas for Māyamālava Gowla
         {
-            let moorchana_ = ['S', 'R₁', 'G₃', 'M₁', 'P', 'D₁', 'N₃', 'Ṡ', 'Ṡ', 'N₃', 'D₁', 'P', 'M₁', 'G₃', 'R₁', 'S'];
+            let moorchana_ = ['S', 'R₁', 'G₃', 'M₁', 'P', 'D₁', 'N₃', 'S̄', 'S̄', 'N₃', 'D₁', 'P', 'M₁', 'G₃', 'R₁', 'S'];
 
             for (let i = 0; i < moorchana_.length; i++) {
                 switch (moorchana_[i]) {
@@ -249,7 +249,7 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
                         break;
                 }
 
-                let id = "#" + moorchana_[i].toLowerCase() + "Key";
+                let id = "#" + moorchana_[i] + "Key";
                 $(id).html("•").addClass('swaraHelpActive');
             }
         }
@@ -273,7 +273,6 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
             avarohanam = avarohanam_.join(" ");
 
             let moorchana_ = arohanam_.concat(avarohanam_);
-            console.log(moorchana_);
 
             swarasHelpClear();
             for (let i = 0; i < moorchana_.length; i++) {
@@ -292,7 +291,7 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
                         break;
                 }
 
-                let id = "#" + moorchana_[i].toLowerCase() + "Key";
+                let id = "#" + moorchana_[i] + "Key";
                 $(id).html("•").addClass('swaraHelpActive');
             }
             swarasHelpON();
@@ -464,7 +463,7 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                         break;
                 }
 
-                let id = "#" + moorchana_[i].toLowerCase() + "Key";
+                let id = "#" + moorchana_[i] + "Key";
                 $(id).html("•").addClass('swaraHelpActive');
             }
             swarasHelpON();
@@ -502,9 +501,55 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                         }
                     }
                 }
+                // N̄ D̄ P̄	M̄ Ḡ R̄ S̄
+                // Ṉ Ḏ P̱ M̱ G̱ Ṟ S̱
+                let phrase = $(this).val().toUpperCase();
+                let replacements = {
+                    '1': '₁',
+                    '2': '₂',
+                    '3': '₃',
+                    'S]': 'S̄',
+                    'S ]': 'S̄',
+                    'R₁ ]': 'R̄₁',
+                    'R₂ ]': 'R̄₂',
+                    'R₃ ]': 'R̄₃',
+                    'G₁ ]': 'Ḡ₁',
+                    'G₂ ]': 'Ḡ₂',
+                    'G₃ ]': 'Ḡ₃',
+                    'M₁ ]': 'M̄₁',
+                    'M₂ ]': 'M̄₂',
+                    'P]': 'P̄',
+                    'P ]': 'P̄',
+                    'D₁ ]': 'D̄₁',
+                    'D₂ ]': 'D̄₂',
+                    'D₃ ]': 'D̄₃',
+                    'N₁ ]': 'N̄₁',
+                    'N₂ ]': 'N̄₂',
+                    'N₃ ]': 'N̄₃',
+                    '[S': 'S̱',
+                    '[R₁': 'Ṟ₁',
+                    '[R₂': 'Ṟ₂',
+                    '[R₃': 'Ṟ₃',
+                    '[G₁': 'G̱₁',
+                    '[G₂': 'G̱₂',
+                    '[G₃': 'G̱₃',
+                    '[M₁': 'M̱₁',
+                    '[M₂': 'M̱₂',
+                    '[P': 'P̱',
+                    '[D₁': 'Ḏ₁',
+                    '[D₂': 'Ḏ₂',
+                    '[D₃': 'Ḏ₃',
+                    '[N₁': 'Ṉ₁',
+                    '[N₂': 'Ṉ₂',
+                    '[N₃': 'Ṉ₃',
+                }
+
+                for (const key in replacements) {
+                    phrase = phrase.replaceAll(key, replacements[key]);
+                }
 
                 //Resolving the input from 1 -> ₁ etc and preserving the cursor position
-                let phrase = $(this).val().replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("S'", "Ṡ").replaceAll("S '", "Ṡ").toUpperCase();
+                //let phrase = $(this).val().replaceAll("1", "₁").replaceAll("2", "₂").replaceAll("3", "₃").replaceAll("S'", "Ṡ").replaceAll("S '", "Ṡ").toUpperCase();
                 $(this).val(phrase);
 
                 $(this)[0].selectionStart = start;
@@ -512,7 +557,7 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 
                 // Automatic space
                 if (e.keyCode != 8) {
-                    if (['₁', '₂', '₃', '-', 'P', 'Ṡ', 'S'].includes(phrase.charAt(phrase.length - 1))) {
+                    if (['₁', '₂', '₃', '-', 'P', 'P̄', 'P¯', 'P̱', 'S̱', 'Ṡ', 'S̄', 'S'].includes(phrase.charAt(phrase.length - 1))) {
                         phrase = phrase + ' ';
                         $(this).val(phrase);
                     }
@@ -524,9 +569,11 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
                 this.style.height = (this.scrollHeight) + 'px';
 
                 // // Check the input with regular expression - TODO
-                // let re = /^S\s|R₁\s|R₂\s|R₃\s|G₁\s|G₂\s|G₃\s|M₁\s|M₂\s|P\s|D₁\s|D₂\s|D₃\s|N₁\s|N₂\s|N₃\s|Ṡ\s|-\s$/;
+                // let re = /[RGMDNN̄D̄M̄ḠR̄ṈḎM̱G̱Ṟ]+[₁₂₃]+[ ]\b|S |P̄ |P |P̱ |S̄ |S̄ |- |\s/;
                 // if (phrase.match(re)) {
-                //     console.log('This is a valid phrase');
+                //     $(this).css('background', '#efefef');
+                // } else {
+                //     $(this).css('background', '#ffc7c7');
                 // }
 
                 //Save message
@@ -621,47 +668,49 @@ ragaApp.controller('ragaController', function($scope, $routeParams, $http) {
 var interval;
 var count = 0;
 var tempo;
-const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
-const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
+// const keyList = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
+// const keyListPseudo = ['s', 'r₁', 'r₂', 'g₂', 'g₃', 'm₁', 'm₂', 'p', 'd₁', 'd₂', 'n₂', 'n₃', 'ṡ', '-'];
+
+const keyList = ['S̱', 'Ṟ₁', 'Ṟ₂', 'G̱₂', 'G̱₃', 'M̱₁', 'M̱₂', 'P̱', 'Ḏ₁', 'Ḏ₂', 'Ṉ₂', 'Ṉ₃', 'S', 'R₁', 'R₂', 'G₂', 'G₃', 'M₁', 'M₂', 'P', 'D₁', 'D₂', 'N₂', 'N₃', 'S̄', 'R̄₁', 'R̄₂', 'Ḡ₂', 'Ḡ₃', 'M̄₁', 'M̄₂', 'P̄', 'D̄₁', 'D̄₂', 'N̄₂', 'N̄₃', 'Ṡ', '-'];
+const keyListPseudo = ['S̱', 'Ṟ₁', 'Ṟ₂', 'G̱₂', 'G̱₃', 'M̱₁', 'M̱₂', 'P̱', 'Ḏ₁', 'Ḏ₂', 'Ṉ₂', 'Ṉ₃', 'S', 'R₁', 'R₂', 'G₂', 'G₃', 'M₁', 'M₂', 'P', 'D₁', 'D₂', 'N₂', 'N₃', 'S̄', 'R̄₁', 'R̄₂', 'Ḡ₂', 'Ḡ₃', 'M̄₁', 'M̄₂', 'P̄', 'D̄₁', 'D̄₂', 'N̄₂', 'N̄₃', 'Ṡ', '-'];
+
+
 
 //Keyboard bindings
 const keyBindings = {
-    'a': '#sKey',
-    'w': '#r₁Key',
-    's': '#r₂Key',
-    'e': '#g₂Key',
-    'd': '#g₃Key',
-    'f': '#m₁Key',
-    't': '#m₂Key',
-    'g': '#pKey',
-    'y': '#d₁Key',
-    'h': '#d₂Key',
-    'u': '#n₂Key',
-    'j': '#n₃Key',
-    'k': '#ṡKey'
+    'a': '#SKey',
+    'w': '#R₁Key',
+    's': '#R₂Key',
+    'e': '#G₂Key',
+    'd': '#G₃Key',
+    'f': '#M₁Key',
+    't': '#M₂Key',
+    'g': '#PKey',
+    'y': '#D₁Key',
+    'h': '#D₂Key',
+    'u': '#N₂Key',
+    'j': '#N₃Key',
+    'k': '#S̄Key'
 }
+
+// all sounds
+// N̄ D̄ P̄	M̄ Ḡ R̄ S̄
+// Ṉ Ḏ P̱ M̱ G̱ Ṟ S̱ 
+// S R G M P D N 
+// Ṡ
 
 //Declare all the sounds
-keyList[0] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/s.mp3'] } });
-keyList[1] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/r1.mp3'] } });
-keyList[2] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/r2.mp3'] } });
-keyList[3] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/g2.mp3'] } });
-keyList[4] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/g3.mp3'] } });
-keyList[5] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/m1.mp3'] } });
-keyList[6] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/m2.mp3'] } });
-keyList[7] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/p.mp3'] } });
-keyList[8] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d1.mp3'] } });
-keyList[9] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/d2.mp3'] } });
-keyList[10] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n2.mp3'] } });
-keyList[11] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/n3.mp3'] } });
-keyList[12] = new Pizzicato.Sound({ source: 'file', options: { path: ['sounds/saHigh.mp3'] } });
-keyList[13] = new Pizzicato.Sound({ source: 'wave', options: { frequency: 22000 } });
-const tanpura = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.mp3'] } });
+for (let i = 0; i < keyList.length - 1; i++) {
+    let sound = 'sounds/' + keyList[i].replace("₁", "1").replace("₂", "2").replace("₃", "3") + '.mp3';
+    keyList[i] = new Pizzicato.Sound({ source: 'file', options: { path: sound } });
 
-//Set attack to 0.001 for all the notes so it sounds sharp
-for (i = 0; i < keyList.length; i++) {
+    //Set attack to 0.001 for all the notes so it sounds sharp
     keyList[i].attack = 0.001;
 }
+
+keyList[37] = new Pizzicato.Sound({ source: 'wave', options: { frequency: 22000 } });
+const tanpura = new Pizzicato.Sound({ source: 'file', options: { loop: true, path: ['sounds/shruti.mp3'] } });
+
 
 //Create a group of all the notes
 swarasGroup = new Pizzicato.Group(keyList);
@@ -855,27 +904,45 @@ function timeline(sequence, repeat) {
 
     let index;
     for (z = 0; z < keyListPseudo.length; z++) {
-        if (sequence[count].toLowerCase() == keyListPseudo[z]) {
+        if (sequence[count].toUpperCase() == keyListPseudo[z]) {
             index = z;
         } else {
             switch (sequence[count]) {
-                case "G₁":
+                case "G̱₁":
                     index = 2;
                     break;
-                case "R₃":
+                case "Ṟ₃":
                     index = 3;
                     break;
-                case "N₁":
+                case "Ṉ₁":
                     index = 9;
                     break;
-                case "D₃":
+                case "Ḏ₃":
                     index = 10;
                     break;
-                case "Ṡ":
-                    index = 12;
+                case "G₁":
+                    index = 14;
                     break;
-                case "-":
-                    index = 13;
+                case "R₃":
+                    index = 15;
+                    break;
+                case "N₁":
+                    index = 21;
+                    break;
+                case "D₃":
+                    index = 22;
+                    break;
+                case "Ḡ₁":
+                    index = 26;
+                    break;
+                case "R̄₃":
+                    index = 27;
+                    break;
+                case "N̄₁":
+                    index = 33;
+                    break;
+                case "D̄₃":
+                    index = 34;
                     break;
             }
         }
@@ -899,16 +966,28 @@ function timeline(sequence, repeat) {
     // randomVolume();
 
     //Not triggering .play(), just simulating a mouseclick on the piano
-    var keyId = "#" + keyListPseudo[index] + "Key";
-    $(keyId).trigger("mousedown");
-    $(keyId).trigger("mouseup");
+    if (index > 11 && index < 25) {
+        var keyId = "#" + keyListPseudo[index] + "Key";
+        $(keyId).trigger("mousedown");
+        $(keyId).trigger("mouseup");
 
-    count++
-    if (count >= sequence.length) {
-        clearInterval(interval);
-        temp = '';
-        $('.controls .button').removeClass('active')
-        $('.phraseBookControl .button').removeClass('active')
+        count++
+        if (count >= sequence.length) {
+            clearInterval(interval);
+            temp = '';
+            $('.controls .button').removeClass('active')
+            $('.phraseBookControl .button').removeClass('active')
+        }
+    } else {
+        keyList[index].play();
+
+        count++
+        if (count >= sequence.length) {
+            clearInterval(interval);
+            temp = '';
+            $('.controls .button').removeClass('active')
+            $('.phraseBookControl .button').removeClass('active')
+        }
     }
 }
 
@@ -957,10 +1036,10 @@ function avarohanamPlay() {
 // Generates a sequence of 300 notes and pushes them and their next two notes to an array totalling 900 notes.
 function randomizePlay() {
     let arohanam = $('#arohanam').text().split(" ");
-    arohanam[arohanam.length - 1] = "Ṡ";
+    arohanam[arohanam.length - 1] = "S̄";
 
     let avarohanam = $('#avarohanam').text().split(" ");
-    avarohanam[0] = "Ṡ";
+    avarohanam[0] = "S̄";
     let shift = avarohanam.shift();
 
     let moorchana = arohanam.concat(avarohanam);
@@ -1044,7 +1123,7 @@ $(document).ready(function() {
         var key;
 
         for (i = 0; i < keyListPseudo.length; i++) {
-            if (keyName[0] == keyListPseudo[i]) {
+            if (keyName[0].toUpperCase() == keyListPseudo[i]) {
                 key = i;
 
             }
@@ -1196,6 +1275,46 @@ function savePhrase() {
     // Track save phrase
     analytics.track('Saved Phrases');
 }
+
+// Octave convertion functions
+// const keyList = ['S̱', 'Ṟ₁', 'Ṟ₂', 'G̱₂', 'G̱₃', 'M̱₁', 'M̱₂', 'P̱', 'Ḏ₁', 'Ḏ₂', 'Ṉ₂', 'Ṉ₃', 
+// 'S', 'R₁', 'R₂', 'G₂', 'G₃', 'M₁', 'M₂', 'P', 'D₁', 'D₂', 'N₂', 'N₃', 
+// 'S̄', 'R̄₁', 'R̄₂', 'Ḡ₂', 'Ḡ₃', 'M̄₁', 'M̄₂', 'P̄', 'D̄₁', 'D̄₂', 'N̄₂', 'N̄₃', 'Ṡ', '-'];
+
+function minusOne() {
+    let selection = window.getSelection().toString();
+    if (typeof window.getSelection != "undefined" && selection.length > 0) {
+
+        var isT = window.getSelection().containsNode(textarea, true);
+        if (isT) {
+            $(this).attr('id', 'highlighted');
+        }
+
+        let options = {
+            'S': 'S̱',
+            'S̄': 'S̱',
+            'R': 'Ṟ',
+            'R̄': 'Ṟ',
+            'G': 'G̱',
+            'Ḡ': 'G̱',
+            'M': 'M̱',
+            'M̄': 'M̱',
+            'P': 'P̱',
+            'P̄': 'P̱',
+            'D': 'Ḏ',
+            'D̄': 'Ḏ',
+            'N': 'Ṉ',
+            'N̄': 'Ṉ'
+        }
+
+        for (const key in options) {
+            selection = selection.replaceAll(key, options[key])
+        }
+
+        replaceSelectedText(selection);
+    }
+}
+
 
 // Variable tempo
 function time() {
