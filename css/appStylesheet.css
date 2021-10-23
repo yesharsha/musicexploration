@@ -633,19 +633,19 @@ input:checked+.slider:before {
 
 /*Black key margin offset */
 
-#g₂Key {
+#G₂Key {
     margin-left: 37px;
 }
 
-#m₂Key {
+#M₂Key {
     margin-left: 109px;
 }
 
-#d₁Key {
+#D₁Key {
     margin-left: 37px;
 }
 
-#n₂Key {
+#N₂Key {
     margin-left: 37px;
 }
 
@@ -1138,7 +1138,7 @@ b {
 
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #c5c5c5;
+    color: #a3a3a3;
     opacity: 1;
     font-size: 0.2!important;
     font-weight: 100;
