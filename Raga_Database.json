@@ -5439,13 +5439,6 @@
             "janyaOf": 53
         },
         {
-            "name": "Dvigāndhārabhooshani",
-            "Arohanam": "S R₁ G₂ G₃ G₂ P D₂ S̄",
-            "Avarohanam": "S̄ D₂ P G₂ G₃ G₂ R₁ S D₂ S",
-            "janaka": "false",
-            "janyaOf": 53
-        },
-        {
             "name": "Hamsānandi",
             "Arohanam": "S R₁ G₃ M₂ D₂ N₃ S̄",
             "Avarohanam": "S̄ N₃ D₂ M₂ G₃ R₁ S",
@@ -6176,7 +6169,7 @@
         {
             "name": "Dwigāndhārabhooshani",
             "Arohanam": "S R₁ G₂ G₃ G₂ P D₂ S̄",
-            "Avarohanam": "S̄ D₂ P G₂ G₃ G₂ R₁ S D₂ S",
+            "Avarohanam": "S̄ D₂ P G₂ G₃ G₂ R₁ S Ḏ₂ S",
             "janaka": "false",
             "janyaOf": 64
         },
