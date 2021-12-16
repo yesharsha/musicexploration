@@ -850,19 +850,18 @@ input:focus {
 
 .menu {
     float: right;
-    margin: 20px 40px 0px 40px;
-    letter-spacing: 1.07px;
+    margin: 25px 0px 0px 0px;
+    letter-spacing: 0.7em;
 }
 
 .menu ul li {
     float: left;
-    color: white;
+    color: #838383;
     margin-right: 20px;
 }
 
 .menu ul li:hover {
-    text-decoration: underline;
-    text-underline-offset: 7px;
+    color: #ffffff;
 }
 
 .menu ul li a {
