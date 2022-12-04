@@ -76,7 +76,7 @@ ragaApp.controller('mainController', ['$rootScope', '$scope', '$http', 'moorchan
 
     // Display list of all the ragas
     $http({
-        method: 'POST',
+        method: 'GET',
         url: 'Raga_Database.json'
     }).success(function(data, status) {
         $scope.ragaName = data.ragas;
